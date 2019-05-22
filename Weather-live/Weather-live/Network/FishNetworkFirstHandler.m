@@ -23,6 +23,12 @@
 #define weatherPath  @"/weather"
 #define waterPath  @"/water"
 
+#define acuu_locationkey_path @"/acuu/loctionkey"
+#define acuu_weather_apth @"/acuu/weather"
+#define acuu_cuurrent_apth @"/acuu/current"
+#define acuu_hourly_path @"/acuu/hourly"
+#define acuu_index_path @"/acuu/index"
+
 
 
 @implementation FishNetworkFirstHandler
@@ -324,6 +330,97 @@
                                             }];
     
 }
+
++ (void)acuuloctationKeyWithparamater:(NSDictionary *)paramaters
+                              success:(LBSuccessBlock)successBlock
+                               failed:(LBFailedBlock)failedBlock
+{
+    [FishNetworkBaseHandler sendGetRequestWithPath:acuu_locationkey_path
+                                         paramater:paramaters
+                                           success:^(NSURLResponse *response, id data) {
+                                               
+                                               successBlock(response,data);
+                                               
+                                           }
+                                            failed:^(NSError *error) {
+                                                failedBlock(error);
+                                            }];
+    
+}
+
+
++ (void)acuuWeatherWithparamater:(NSDictionary *)paramaters
+                         success:(LBSuccessBlock)successBlock
+                          failed:(LBFailedBlock)failedBlock
+{
+    [FishNetworkBaseHandler sendGetRequestWithPath:acuu_weather_apth
+                                         paramater:paramaters
+                                           success:^(NSURLResponse *response, id data) {
+                                               
+                                               successBlock(response,data);
+                                               
+                                           }
+                                            failed:^(NSError *error) {
+                                                failedBlock(error);
+                                            }];
+    
+}
+
++ (void)accuCurrentWithparamater:(NSDictionary *)paramaters
+                         success:(LBSuccessBlock)successBlock
+                          failed:(LBFailedBlock)failedBlock
+{
+    [FishNetworkBaseHandler sendGetRequestWithPath:acuu_cuurrent_apth
+                                         paramater:paramaters
+                                           success:^(NSURLResponse *response, id data) {
+                                               
+                                               successBlock(response,data);
+                                               
+                                           }
+                                            failed:^(NSError *error) {
+                                                failedBlock(error);
+                                            }];
+    
+}
+
++ (void)accuHourlyWithparamater:(NSDictionary *)paramaters
+                         success:(LBSuccessBlock)successBlock
+                          failed:(LBFailedBlock)failedBlock
+{
+    [FishNetworkBaseHandler sendGetRequestWithPath:acuu_hourly_path
+                                         paramater:paramaters
+                                           success:^(NSURLResponse *response, id data) {
+                                               
+                                               successBlock(response,data);
+                                               
+                                           }
+                                            failed:^(NSError *error) {
+                                                failedBlock(error);
+                                            }];
+    
+}
+
++ (void)accuIndexWithparamater:(NSDictionary *)paramaters
+                        success:(LBSuccessBlock)successBlock
+                         failed:(LBFailedBlock)failedBlock
+{
+    [FishNetworkBaseHandler sendGetRequestWithPath:acuu_index_path
+                                         paramater:paramaters
+                                           success:^(NSURLResponse *response, id data) {
+                                               
+                                               successBlock(response,data);
+                                               
+                                           }
+                                            failed:^(NSError *error) {
+                                                failedBlock(error);
+                                            }];
+    
+}
+
+
+
+
+
 
 
 

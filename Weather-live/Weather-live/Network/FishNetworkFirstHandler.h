@@ -78,4 +78,32 @@
                      failed:(LBFailedBlock)failedBlock;
 
 
+
++ (void)acuuloctationKeyWithparamater:(NSDictionary *)paramaters
+                              success:(LBSuccessBlock)successBlock
+                               failed:(LBFailedBlock)failedBlock;
+
+
++ (void)acuuWeatherWithparamater:(NSDictionary *)paramaters
+                         success:(LBSuccessBlock)successBlock
+                          failed:(LBFailedBlock)failedBlock;
+
++ (void)accuCurrentWithparamater:(NSDictionary *)paramaters
+                         success:(LBSuccessBlock)successBlock
+                          failed:(LBFailedBlock)failedBlock;
+
+
+
++ (void)accuHourlyWithparamater:(NSDictionary *)paramaters
+                        success:(LBSuccessBlock)successBlock
+                         failed:(LBFailedBlock)failedBlock;
+
++ (void)accuIndexWithparamater:(NSDictionary *)paramaters
+                       success:(LBSuccessBlock)successBlock
+                        failed:(LBFailedBlock)failedBlock;
+
+
+
+
+
 @end

@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy)NSDictionary *Sources;
 @property(nonatomic,copy)NSDictionary *DegreeDaySummary;
 @property(nonatomic,copy)NSString *Link;
-@property(nonatomic,copy)NSDictionary *AirAndPollen;
+@property(nonatomic,copy)NSArray *AirAndPollen;
 @property(nonatomic,copy)NSDictionary *HoursOfSun;
 @property(nonatomic,strong)STAcuuDayAndNightModel *Night;
 @property(nonatomic,copy)NSString *Date;

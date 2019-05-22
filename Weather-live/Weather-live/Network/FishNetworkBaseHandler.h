@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "FishNetwork.h"
 
 typedef void(^LBSuccessBlock)(NSURLResponse *response ,id data);
 

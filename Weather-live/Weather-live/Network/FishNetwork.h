@@ -20,6 +20,8 @@
 
 @property(nonatomic,copy)NSString *sysVersion;
 
++ (NSInteger)cacluteTotalWithLat:(NSString *)latitude lon:(NSString *)longtitude time:(NSInteger)timstamp;
+
 
 
 @end

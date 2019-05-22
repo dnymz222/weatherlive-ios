@@ -225,6 +225,13 @@
 		195B164C2293828D00C081AF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 195B164B2293828D00C081AF /* main.m */; };
 		195B16562293828E00C081AF /* Weather_liveTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 195B16552293828E00C081AF /* Weather_liveTests.m */; };
 		195B16612293828E00C081AF /* Weather_liveUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 195B16602293828E00C081AF /* Weather_liveUITests.m */; };
+		1962103C22953E5B005DF969 /* WLAccuCurrentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1962103B22953E5B005DF969 /* WLAccuCurrentModel.m */; };
+		1962103F22956A4B005DF969 /* WLAccuCurrentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1962103E22956A4B005DF969 /* WLAccuCurrentCell.m */; };
+		19621042229574D4005DF969 /* WLAccuNormalHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19621041229574D4005DF969 /* WLAccuNormalHeaderView.m */; };
+		1962104522957969005DF969 /* WLAccuHourlyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1962104422957969005DF969 /* WLAccuHourlyCell.m */; };
+		1962104822957A08005DF969 /* WLAcuuHourlyItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1962104722957A08005DF969 /* WLAcuuHourlyItemCell.m */; };
+		1962104B2295896C005DF969 /* WLAccuHourlyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1962104A2295896C005DF969 /* WLAccuHourlyModel.m */; };
+		19BDD4F42294DA4100FD90F7 /* STSolunarTidesHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BDD4F22294DA4100FD90F7 /* STSolunarTidesHandler.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -662,6 +669,20 @@
 		195B165C2293828E00C081AF /* Weather-liveUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Weather-liveUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		195B16602293828E00C081AF /* Weather_liveUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Weather_liveUITests.m; sourceTree = "<group>"; };
 		195B16622293828E00C081AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1962103A22953E5B005DF969 /* WLAccuCurrentModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLAccuCurrentModel.h; sourceTree = "<group>"; };
+		1962103B22953E5B005DF969 /* WLAccuCurrentModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLAccuCurrentModel.m; sourceTree = "<group>"; };
+		1962103D22956A4B005DF969 /* WLAccuCurrentCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLAccuCurrentCell.h; sourceTree = "<group>"; };
+		1962103E22956A4B005DF969 /* WLAccuCurrentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLAccuCurrentCell.m; sourceTree = "<group>"; };
+		19621040229574D4005DF969 /* WLAccuNormalHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLAccuNormalHeaderView.h; sourceTree = "<group>"; };
+		19621041229574D4005DF969 /* WLAccuNormalHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLAccuNormalHeaderView.m; sourceTree = "<group>"; };
+		1962104322957969005DF969 /* WLAccuHourlyCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLAccuHourlyCell.h; sourceTree = "<group>"; };
+		1962104422957969005DF969 /* WLAccuHourlyCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLAccuHourlyCell.m; sourceTree = "<group>"; };
+		1962104622957A08005DF969 /* WLAcuuHourlyItemCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLAcuuHourlyItemCell.h; sourceTree = "<group>"; };
+		1962104722957A08005DF969 /* WLAcuuHourlyItemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLAcuuHourlyItemCell.m; sourceTree = "<group>"; };
+		196210492295896C005DF969 /* WLAccuHourlyModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLAccuHourlyModel.h; sourceTree = "<group>"; };
+		1962104A2295896C005DF969 /* WLAccuHourlyModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLAccuHourlyModel.m; sourceTree = "<group>"; };
+		19BDD4F22294DA4100FD90F7 /* STSolunarTidesHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STSolunarTidesHandler.m; sourceTree = "<group>"; };
+		19BDD4F32294DA4100FD90F7 /* STSolunarTidesHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STSolunarTidesHandler.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -868,14 +889,14 @@
 		19590AC12293DCFD004EF1BD /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				19590AC22293DCFD004EF1BD /* LFCGzipUtility.m */,
-				19590AC32293DCFD004EF1BD /* FishNetwork.m */,
-				19590AC42293DCFD004EF1BD /* FishNetworkFirstHandler.h */,
-				19590AC52293DCFD004EF1BD /* FishNetworkBaseHandler.h */,
-				19590AC62293DCFD004EF1BD /* LFCGzipUtility.h */,
 				19590AC72293DCFD004EF1BD /* FishNetwork.h */,
+				19590AC32293DCFD004EF1BD /* FishNetwork.m */,
+				19590AC52293DCFD004EF1BD /* FishNetworkBaseHandler.h */,
 				19590AC82293DCFD004EF1BD /* FishNetworkBaseHandler.m */,
+				19590AC42293DCFD004EF1BD /* FishNetworkFirstHandler.h */,
 				19590AC92293DCFD004EF1BD /* FishNetworkFirstHandler.m */,
+				19590AC62293DCFD004EF1BD /* LFCGzipUtility.h */,
+				19590AC22293DCFD004EF1BD /* LFCGzipUtility.m */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1284,6 +1305,14 @@
 				19590CD3229439E8004EF1BD /* STAcuuWeatherFooterView.m */,
 				19590CD4229439E8004EF1BD /* STAcuuWeatherHeaderView.h */,
 				19590CD2229439E8004EF1BD /* STAcuuWeatherHeaderView.m */,
+				1962103D22956A4B005DF969 /* WLAccuCurrentCell.h */,
+				1962103E22956A4B005DF969 /* WLAccuCurrentCell.m */,
+				19621040229574D4005DF969 /* WLAccuNormalHeaderView.h */,
+				19621041229574D4005DF969 /* WLAccuNormalHeaderView.m */,
+				1962104322957969005DF969 /* WLAccuHourlyCell.h */,
+				1962104422957969005DF969 /* WLAccuHourlyCell.m */,
+				1962104622957A08005DF969 /* WLAcuuHourlyItemCell.h */,
+				1962104722957A08005DF969 /* WLAcuuHourlyItemCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1299,6 +1328,10 @@
 				19590CE622943C66004EF1BD /* STAcuuHeaderLineModel.m */,
 				19590CEA22943C66004EF1BD /* STAcuuWeatherDailyModel.h */,
 				19590CE722943C66004EF1BD /* STAcuuWeatherDailyModel.m */,
+				1962103A22953E5B005DF969 /* WLAccuCurrentModel.h */,
+				1962103B22953E5B005DF969 /* WLAccuCurrentModel.m */,
+				196210492295896C005DF969 /* WLAccuHourlyModel.h */,
+				1962104A2295896C005DF969 /* WLAccuHourlyModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1325,6 +1358,8 @@
 		19590C2C2293F44A004EF1BD /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				19BDD4F32294DA4100FD90F7 /* STSolunarTidesHandler.h */,
+				19BDD4F22294DA4100FD90F7 /* STSolunarTidesHandler.m */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1762,13 +1797,16 @@
 				19590BF02293DD1A004EF1BD /* UIImage+WebP.m in Sources */,
 				19590BC62293DD1A004EF1BD /* MJRefreshBackNormalFooter.m in Sources */,
 				19590C242293DF92004EF1BD /* WLTabBarController.m in Sources */,
+				1962104522957969005DF969 /* WLAccuHourlyCell.m in Sources */,
 				19590A7D2293A452004EF1BD /* FishDetailController.m in Sources */,
 				19590CC02294049C004EF1BD /* XPositiveNegativeBarContainerView.m in Sources */,
 				19590CAE2294049C004EF1BD /* CALayer+XLayerSelectHelper.m in Sources */,
 				19590CA72294049C004EF1BD /* XNormalLineChartConfiguration.m in Sources */,
 				19590A842293A452004EF1BD /* FishCouponItemModel.m in Sources */,
+				1962103C22953E5B005DF969 /* WLAccuCurrentModel.m in Sources */,
 				19590BD22293DD1A004EF1BD /* UIColor+HexString.m in Sources */,
 				19590BFF2293DD1A004EF1BD /* NSImage+WebCache.m in Sources */,
+				1962103F22956A4B005DF969 /* WLAccuCurrentCell.m in Sources */,
 				19590BBD2293DD1A004EF1BD /* FLAnimatedImageView.m in Sources */,
 				19590BF82293DD1A004EF1BD /* UIImage+MultiFormat.m in Sources */,
 				19590CAA2294049C004EF1BD /* XBarChartConfiguration.m in Sources */,
@@ -1784,10 +1822,12 @@
 				19590A8C2293A452004EF1BD /* FishImageListCell.m in Sources */,
 				19590BA82293DD1A004EF1BD /* PNPieChartDataItem.m in Sources */,
 				19590BCA2293DD1A004EF1BD /* MJRefreshNormalHeader.m in Sources */,
+				1962104B2295896C005DF969 /* WLAccuHourlyModel.m in Sources */,
 				19590BFA2293DD1A004EF1BD /* SDWebImagePrefetcher.m in Sources */,
 				195B164C2293828D00C081AF /* main.m in Sources */,
 				19590BC32293DD1A004EF1BD /* UIView+MJExtension.m in Sources */,
 				19590BCB2293DD1A004EF1BD /* MJRefreshStateHeader.m in Sources */,
+				19621042229574D4005DF969 /* WLAccuNormalHeaderView.m in Sources */,
 				19590A922293A452004EF1BD /* FishErrorTipView.m in Sources */,
 				19590BE52293DD1A004EF1BD /* SVRadialGradientLayer.m in Sources */,
 				19590CC72294049C004EF1BD /* XBarItem.m in Sources */,
@@ -1797,6 +1837,7 @@
 				19590BA92293DD1A004EF1BD /* PNChartLabel.m in Sources */,
 				19590CBD2294049C004EF1BD /* XLineChartView.m in Sources */,
 				19590BB12293DD1A004EF1BD /* PNLineChartDataItem.m in Sources */,
+				1962104822957A08005DF969 /* WLAcuuHourlyItemCell.m in Sources */,
 				19590BB02293DD1A004EF1BD /* PNLineChartData.m in Sources */,
 				19590BBE2293DD1A004EF1BD /* UIScrollView+MJRefresh.m in Sources */,
 				19590BE12293DD1A004EF1BD /* View+MASAdditions.m in Sources */,
@@ -1907,6 +1948,7 @@
 				19590A7F2293A452004EF1BD /* FishMuyinSubController.m in Sources */,
 				195B163E2293828C00C081AF /* AppDelegate.m in Sources */,
 				19590BD02293DD1A004EF1BD /* MJRefreshAutoFooter.m in Sources */,
+				19BDD4F42294DA4100FD90F7 /* STSolunarTidesHandler.m in Sources */,
 				19590BFD2293DD1A004EF1BD /* NSData+ImageContentType.m in Sources */,
 				19590CB02294049C004EF1BD /* UIGestureRecognizer+XGesHelper.m in Sources */,
 				19590CBA2294049C004EF1BD /* XAnimationLabel.m in Sources */,

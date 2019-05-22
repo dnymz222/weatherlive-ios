@@ -300,7 +300,7 @@
     NSDictionary *totoalliquid = weatherModel.TotalLiquid;
     self.intensityLabel.text = [NSString stringWithFormat:@"%@ %@",totoalliquid[@"Value"],totoalliquid[@"Unit"]];
 
-    self.timeLabel.text = isDay?@"Day":@"Night";
+    self.timeLabel.text = isDay?@"白天":@"夜晚";
     
     
 }

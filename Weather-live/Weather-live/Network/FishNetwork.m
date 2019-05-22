@@ -86,5 +86,17 @@ didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
     
 }
 
++ (NSInteger)cacluteTotalWithLat:(NSString *)latitude lon:(NSString *)longtitude time:(NSInteger)timstamp {
+    
+    NSInteger a1 =(NSInteger) ([latitude floatValue] *100 * [longtitude floatValue] *100);
+    
+    NSInteger a2 = (NSInteger)(pow(fabs([latitude floatValue]), 2.71828) + pow(fabs([longtitude floatValue]), 3.14159));
+    NSInteger a3 = (NSInteger)(pow(timstamp, 0.68619));
+    NSInteger total = a3 + a1 + a2 + arc4random() % 10;
+    
+    return total;
+}
+
+
 
 @end

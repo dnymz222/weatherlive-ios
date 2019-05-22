@@ -24,5 +24,8 @@
 #define requestWeatherDoneKey @"requestWeatherDoneKey"
 
 
+#define locationchangednoteKey @"locationchangednoteKey"
+
+
 
 #endif /* LBKeyMacro_h */
