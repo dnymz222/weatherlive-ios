@@ -34,4 +34,8 @@ typedef void(^LBFailedBlock)(NSError *error);
                              success:(LBSuccessBlock)successBlock
                               failed:(LBFailedBlock)failedBlock;
 
++ (void)requestAcuuIndexWithParamaters:(NSDictionary*)paramaters
+                               success:(LBSuccessBlock)successBlock
+                                failed:(LBFailedBlock)failedBlock;
+
 @end

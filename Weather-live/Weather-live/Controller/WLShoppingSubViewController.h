@@ -10,7 +10,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class FishCateModel;
+
 @interface WLShoppingSubViewController : UIViewController
+
+@property(nonatomic,assign)NSInteger index;
+
+- (void)configCateModel:(FishCateModel *)cate;
 
 @end
 

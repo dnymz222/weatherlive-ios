@@ -12,9 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface STLocationModel : NSObject
 
-//@property(nonatomic,assign)double longtitude;
-//@property(nonatomic,assign)double latitude;
-//@property(nonatomic,assign)double altitude;
 
 @property(nonatomic,strong)CLLocation *location;
 @property(nonatomic,copy)NSString *name;

@@ -44,7 +44,7 @@
 #if DEBUG
     request.timeoutInterval = 10;
 #else
-    request.timeoutInterval = 30;
+    request.timeoutInterval = 15;
 #endif
     
     
@@ -115,7 +115,7 @@
 #if DEBUG
     NSLog(@"urlstring:%@",urlString);
 #endif
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+   
     
     NSURL *url  = [NSURL  URLWithString:urlString];
     
@@ -142,7 +142,7 @@
     
     __block NSURLSessionDataTask *task  = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+   
         
         if (error) {
             failedBlock(error);
@@ -396,7 +396,91 @@
     
 }
 
-
++ (void)requestAcuuIndexWithParamaters:(NSDictionary*)paramaters
+                               success:(LBSuccessBlock)successBlock
+                                failed:(LBFailedBlock)failedBlock {
+    
+    //    NSString *appcode = @"03302ec93478463a9e1579abc4bc8f5b";
+    //    NSString *host = @"https://ali-weather.showapi.com";
+    //    NSString *path = @"/gps-to-weather";
+    NSString *method =  @"GET";
+    //    NSString *querys = @"?from=5&lat=40.242266&lng=116.2278&need3HourForcast=1&needAlarm=0&needHourData=1&needIndex=1&needMoreDay=1";
+    //    NSString *url = [NSString stringWithFormat:@"%@%@%@",  host,  path , querys];
+    //    NSString *bodys = @"";
+    
+    NSString *url = @"https://www.xunquan.shop/api/v3.0/acuu/index?";
+    NSArray *allkeys = [paramaters allKeys];
+    for (NSString *key in allkeys) {
+        NSString *vaylue = [paramaters valueForKey:key];
+        NSString *keyvalue = [NSString stringWithFormat:@"%@=%@&",key,vaylue];
+        url = [url stringByAppendingString:keyvalue];
+    }
+    
+    url = [url stringByAppendingString:@"version=1.0"];
+    
+    
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString: url]  cachePolicy:1  timeoutInterval:  30];
+    request.HTTPMethod  =  method;
+    //    [request addValue:  [NSString  stringWithFormat:@"APPCODE %@" ,  appcode]  forHTTPHeaderField:  @"Authorization"];
+    NSURLSession *requestSession = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    NSURLSessionDataTask *task = [requestSession dataTaskWithRequest:request
+                                                   completionHandler:^(NSData * _Nullable body , NSURLResponse * _Nullable response, NSError * _Nullable error) {
+                                                       if (error) {
+                                                           failedBlock(error);
+                                                       } else{
+                                                          //NSLog(@"Response object: %d" , body.length);
+                                                           NSData *uncompressdata = [LFCGzipUtility ungzipData:body];
+                                                           //                                                           NSLog(@"Response object unzip: %d" , uncompressdata.length);
+                                                           if (!uncompressdata) {
+                                                               NSError *readerror;
+                                                               NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:body options:NSJSONReadingAllowFragments error:&readerror];
+                                                               if (readerror) {
+                                                                   failedBlock(readerror);
+                                                               } else {
+                                                                   if ([dict isKindOfClass:[NSDictionary class ]]) {
+                                                                       successBlock(response,dict);
+                                                                   } else {
+                                                                       
+                                                                       NSString *message = [[NSString alloc] initWithData:uncompressdata encoding:NSUTF8StringEncoding];
+                                                                       NSError *resulterror = [NSError errorWithDomain:@"error" code:201 userInfo:@{@"message":message}];
+                                                                       failedBlock(resulterror);
+                                                                   }
+                                                               }
+                                                               
+                                                               //                                                               NSError *unziprror = [NSError errorWithDomain:@"error" code:203 userInfo:@{@"message":@"unzip"}];
+                                                               //                                                               failedBlock(unziprror);
+                                                               return ;
+                                                           }
+                                                           NSError *readerror;
+                                                           id object = [NSJSONSerialization JSONObjectWithData:uncompressdata options:NSJSONReadingAllowFragments error:&readerror];
+                                                           if (readerror) {
+                                                               failedBlock(readerror);
+                                                           } else {
+                                                               if ([object isKindOfClass:[NSArray class ]]) {
+                                                                   successBlock(response,object);
+                                                               } else {
+                                                                   
+                                                                   NSString *message = [[NSString alloc] initWithData:uncompressdata encoding:NSUTF8StringEncoding];
+                                                                   NSError *resulterror = [NSError errorWithDomain:@"error" code:201 userInfo:@{@"message":message}];
+                                                                   failedBlock(resulterror);
+                                                               }
+                                                           }
+                                                           
+                                                       }
+                                                       
+                                                       //                                                       NSString *bodyString = [[NSString alloc] initWithData:uncompressdata encoding:NSUTF8StringEncoding];
+                                                       
+                                                       
+                                                       //打印应答中的body
+                                                       //                                                       NSLog(@"Response body: %@" , bodyString);
+                                                   }];
+    
+    [task resume];
+    
+    
+    
+}
 
 
 

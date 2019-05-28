@@ -11,14 +11,37 @@
 
 @interface FishNetworkFirstHandler : NSObject
 
+
+
++ (void)xunquancateWithparamater:(NSDictionary *)paramaters
+                         success:(LBSuccessBlock)successBlock
+                          failed:(LBFailedBlock)failedBlock;
+
+
 + (void)fishcateWithparamater:(NSDictionary*)paramaters
                       success:(LBSuccessBlock)successBlock
                        failed:(LBFailedBlock)failedBlock;
 
-+ (void)lamacatCouponWithPath:(NSString *)urlpath
++ (void)xunquancatCouponWithPath:(NSString *)urlpath
                     paramater:(NSDictionary *)paramaters
                       success:(LBSuccessBlock)successBlock
                        failed:(LBFailedBlock)failedBlock;
+
++ (void)xunquanbannerWithparamater:(NSDictionary *)paramaters
+                           success:(LBSuccessBlock)successBlock
+                            failed:(LBFailedBlock)failedBlock;
+
++ (void)xunquansearchCheckWithparamater:(NSDictionary *)paramaters
+                                success:(LBSuccessBlock)successBlock
+                                 failed:(LBFailedBlock)failedBlock;
+
++ (void)xunquancolumnWithparamater:(NSDictionary *)paramaters
+                           success:(LBSuccessBlock)successBlock
+                            failed:(LBFailedBlock)failedBlock;
+
+
+
+
 
 
 //+ (void)lamacategoryWithparamater:(NSDictionary*)paramaters
@@ -99,6 +122,18 @@
                          failed:(LBFailedBlock)failedBlock;
 
 + (void)accuIndexWithparamater:(NSDictionary *)paramaters
+                       success:(LBSuccessBlock)successBlock
+                        failed:(LBFailedBlock)failedBlock;
+
++ (void)accuAlarmsWithparamater:(NSDictionary *)paramaters
+                        success:(LBSuccessBlock)successBlock
+                         failed:(LBFailedBlock)failedBlock;
+
++ (void)accuRadarWithparamater:(NSDictionary *)paramaters
+                       success:(LBSuccessBlock)successBlock
+                        failed:(LBFailedBlock)failedBlock;
+
++ (void)xinzhiAqiWithparamater:(NSDictionary *)paramaters
                        success:(LBSuccessBlock)successBlock
                         failed:(LBFailedBlock)failedBlock;
 

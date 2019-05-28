@@ -40,6 +40,7 @@ typedef NS_ENUM(NSInteger,FishWindDirection) {
 + (NSString *)directionDescriptionFromDirection:(FishWindDirection)direction;
 
 + (float)meterpersecondfromnileperhour:(float)mileh;
++ (float)meterpersecondfromkilometerhour:(float)kmh;
 
 @end
 

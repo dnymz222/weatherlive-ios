@@ -8,10 +8,13 @@
 
 #import "STAcuuWeatherFooterView.h"
 #import "Masonry.h"
+#import "ColorSizeMacro.h"
 
 @interface STAcuuWeatherFooterView ()
 
 @property(nonatomic,strong)UIButton *linkButton;
+
+@property(nonatomic,strong)UILabel *powerLabel;
 
 @end
 
@@ -23,10 +26,19 @@
     if (self) {
         
         [self.contentView addSubview:self.linkButton];
+        [self.contentView addSubview:self.powerLabel];
         
         [self.linkButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.center.equalTo(self.contentView);
-            make.width.equalTo(@212);
+            make.centerX.equalTo(self.contentView).offset(50);
+            make.centerY.equalTo(self.contentView);
+            make.width.equalTo(@198);
+            make.height.equalTo(@28);
+        }];
+        
+        [self.powerLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(self.linkButton.mas_left).offset(-5);
+            make.left.equalTo(self.contentView).offset(10);
+            make.centerY.equalTo(self.contentView);
             make.height.equalTo(@30);
         }];
 
@@ -43,6 +55,19 @@
         [_linkButton addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _linkButton;
+}
+
+- (UILabel *)powerLabel {
+    
+    if (!_powerLabel) {
+        _powerLabel = [[UILabel alloc] init];
+        _powerLabel.textAlignment = NSTextAlignmentRight;
+        _powerLabel.font = [UIFont systemFontOfSize:18.f];
+        _powerLabel.textColor = UIColorFromRGB(0x666666);
+        _powerLabel.text = @"Powered by";
+    }
+    
+    return _powerLabel;
 }
 
 

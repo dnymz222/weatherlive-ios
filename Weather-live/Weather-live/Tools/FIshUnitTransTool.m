@@ -109,4 +109,13 @@
 }
 
 
++ (float)meterpersecondfromkilometerhour:(float)kmh {
+    
+    float meters = kmh *1000;
+    
+    return meters/3600.f;
+    
+}
+
+
 @end

@@ -10,6 +10,7 @@
 #import "ColorSizeMacro.h"
 #import "Masonry.h"
 #import "WLAccuCurrentModel.h"
+#import "FIshUnitTransTool.h"
 
 @interface WLAccuCurrentCell ()
 
@@ -24,6 +25,8 @@
 @property(nonatomic,strong)UIImageView *windIconView;
 @property(nonatomic,strong)UILabel *windLabel;
 
+@property(nonatomic,strong)UILabel *dewLabel;
+
 
 
 
@@ -37,6 +40,8 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        
         [self.contentView addSubview:self.weathertextLabel];
         [self.contentView addSubview:self.iconView];
         [self.contentView addSubview:self.tempratureLabel];
@@ -47,6 +52,7 @@
 //        [self.contentView addSubview:self.pressureTrendView];
         [self.contentView addSubview:self.windIconView];
         [self.contentView addSubview:self.windLabel];
+        [self.contentView addSubview:self.dewLabel];
         
         [self.weathertextLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.contentView).offset(10);
@@ -71,7 +77,7 @@
         
         [self.pricipeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.iconView.mas_right).offset(60);
-            make.top.equalTo(self.contentView).offset(5);
+            make.top.equalTo(self.contentView).offset(3);
             make.width.equalTo(@160);
             make.height.equalTo(@20);
             
@@ -79,7 +85,7 @@
         
         [self.uvindexLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.pricipeLabel);
-            make.top.equalTo(self.pricipeLabel.mas_bottom).offset(10);
+            make.top.equalTo(self.pricipeLabel.mas_bottom).offset(6);
             make.width.equalTo(@160);
             make.height.equalTo(@20);
             
@@ -87,7 +93,7 @@
         
         [self.humilityLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.pricipeLabel);
-            make.top.equalTo(self.uvindexLabel.mas_bottom).offset(10);
+            make.top.equalTo(self.uvindexLabel.mas_bottom).offset(6);
             make.width.equalTo(@120);
             make.height.equalTo(@20);
             
@@ -95,17 +101,17 @@
         
         [self.pressureLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.pricipeLabel);
-            make.top.equalTo(self.humilityLabel.mas_bottom).offset(10);
-            make.width.equalTo(@120);
+            make.top.equalTo(self.humilityLabel.mas_bottom).offset(6);
+            make.width.equalTo(@160);
             make.height.equalTo(@20);
             
         }];
         
         [self.windIconView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.pricipeLabel);
-            make.top.equalTo(self.pressureLabel.mas_bottom).offset(10);
-            make.width.equalTo(@20);
-            make.height.equalTo(@20);
+            make.top.equalTo(self.pressureLabel.mas_bottom).offset(8.5);
+            make.width.equalTo(@15);
+            make.height.equalTo(@15);
             
         }];
         
@@ -115,6 +121,13 @@
             make.width.equalTo(@160);
             make.height.equalTo(@20);
             
+        }];
+        
+        [self.dewLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.pricipeLabel);
+            make.top.equalTo(self.windLabel.mas_bottom).offset(6);
+            make.width.equalTo(@160);
+            make.height.equalTo(@20);
         }];
         
         
@@ -266,6 +279,21 @@
 }
 
 
+
+- (UILabel *)dewLabel {
+    
+    if (!_dewLabel) {
+        _dewLabel = [[UILabel alloc] init];
+        _dewLabel.textAlignment = NSTextAlignmentLeft;
+        _dewLabel.font = [UIFont systemFontOfSize:14.f];
+        _dewLabel.textColor = UIColorFromRGB(0x666666);
+    }
+    
+    return _dewLabel;
+    
+}
+
+
 - (void)configCurrentModel:(WLAccuCurrentModel *)model {
     
     
@@ -275,19 +303,47 @@
     
     NSDictionary *temparature = model.Temperature;
     NSDictionary *tempmetric = [temparature valueForKey:@"Metric"];
-    self.tempratureLabel.text = [NSString stringWithFormat:@"%@°C",tempmetric[@"Value"]];
+    self.tempratureLabel.text = [NSString stringWithFormat:@"%0.1f°C",[tempmetric[@"Value"] floatValue]];
     
-    NSDictionary *pricipedic = model.Precip1hr;
-    NSDictionary *pricipemetricDict = [pricipedic valueForKey:@"Metric"];
+//    NSDictionary *pricipedic = model.Precip1hr;
+//    NSDictionary *pricipemetricDict = [pricipedic valueForKey:@"Metric"];
     
-    self.pricipeLabel.text = [NSString stringWithFormat:@"小时内降雨量:%@%@",pricipemetricDict[@"Value"],@"毫米"];
+    NSDictionary *realfeelTempdict = model.RealFeelTemperature;
+    NSDictionary *relafelltempmetric = [realfeelTempdict valueForKey:@"Metric"];
+    
+    self.pricipeLabel.text =[NSString stringWithFormat:@"体感温度:%0.1f°C",[relafelltempmetric[@"Value"] floatValue]] ;
     
     self.humilityLabel.text = [NSString stringWithFormat:@"湿度:%d%@",model.RelativeHumidity,@"%"];
     
     NSDictionary *presuureDict = model.Pressure;
     NSDictionary *pressureMetricDict = [presuureDict valueForKey:@"Metric"];
     
-    self.pressureLabel.text = [NSString stringWithFormat:@"大气压:%@hpa",pressureMetricDict[@"Value"]];
+    NSDictionary *PressureTendencyDict = model.PressureTendency;
+    NSDictionary *attrsDict = @{NSFontAttributeName:[UIFont systemFontOfSize:14.f],
+                                NSForegroundColorAttributeName:UIColorFromRGB(0x666666)
+                                };
+    NSString *pressureString = [NSString stringWithFormat:@"大气压:%@ hpa",pressureMetricDict[@"Value"]];
+    NSMutableAttributedString *attrs = [[NSMutableAttributedString alloc] initWithString:pressureString attributes:attrsDict];
+    NSString *code = [PressureTendencyDict valueForKey:@"Code"];
+    if ([code isEqualToString:@"R"]) {
+        
+        NSTextAttachment *textattachment = [[NSTextAttachment alloc] init];
+        UIImage *image = [UIImage imageNamed:@"pressureasend"];
+        textattachment.image = image;
+        textattachment.bounds = CGRectMake(0, 0, 15, 15);
+        NSAttributedString *attachAttrs = [NSAttributedString attributedStringWithAttachment:textattachment];
+        [attrs appendAttributedString:attachAttrs];
+        
+    } else if([code isEqualToString:@"F"]){
+        NSTextAttachment *textattachment = [[NSTextAttachment alloc] init];
+        UIImage *image = [UIImage imageNamed:@"pressuredesend"];
+        textattachment.image = image;
+        textattachment.bounds = CGRectMake(0, 0, 15, 15);
+        NSAttributedString *attachAttrs = [NSAttributedString attributedStringWithAttachment:textattachment];
+        [attrs appendAttributedString:attachAttrs];
+    }
+    
+    self.pressureLabel.attributedText = attrs;
     
     
     NSDictionary *windDict = model.Wind;
@@ -299,11 +355,17 @@
     
     float radians = (degree-45)/180.0*M_PI;
     self.windIconView.transform = CGAffineTransformMakeRotation(radians);
-    self.windLabel.text= [NSString stringWithFormat:@"%@ %@%@",direction,windSpeedMetricDict[@"Value"],windSpeedMetricDict[@"Unit"]];
+    float windmerterperhour = [FIshUnitTransTool meterpersecondfromkilometerhour:[windSpeedMetricDict[@"Value"] floatValue]];
+    
+    
+    
+    self.windLabel.text= [NSString stringWithFormat:@"%@ %0.1f米/秒",direction,windmerterperhour,windSpeedMetricDict[@"Unit"]];
     
     self.uvindexLabel.text = [NSString stringWithFormat:@"紫外线指数:%d",model.UVIndex];
     
-    
+    NSDictionary *dewpoint = model.DewPoint;
+    NSDictionary *dewpointmetric = [dewpoint valueForKey:@"Metric"];
+    self.dewLabel.text = [NSString stringWithFormat:@"露点：%0.1f°C",[dewpointmetric[@"Value"] floatValue]];
     
     
     

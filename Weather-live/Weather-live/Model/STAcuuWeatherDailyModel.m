@@ -10,6 +10,7 @@
 #import "YYModel.h"
 
 
+
 @implementation STAcuuWeatherDailyModel
 
 + (nullable NSDictionary<NSString *, id> *)modelContainerPropertyGenericClass {

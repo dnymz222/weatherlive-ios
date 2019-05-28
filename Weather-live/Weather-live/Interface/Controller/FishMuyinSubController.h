@@ -8,20 +8,19 @@
 
 #import "WMPageController.h"
 
-typedef NS_ENUM(NSInteger,LBMuyinSubSectionType) {
-//    LBMuyinSubSectionTypeBanner,
-//    LBMuyinSubSectionTypeCate,
-    FishMuyinSubSectionTypeItem,
-};
 
 @interface FishMuyinSubController : UIViewController
 
 @property(nonatomic,copy)NSString *url;
 
-@property(nonatomic,assign)BOOL first;
+//@property(nonatomic,assign)BOOL first;
 
 //@property(nonatomic,copy)NSArray *cateItemArray;
 //@property(nonatomic,copy)NSArray *bannerArray;
+
+@property(nonatomic,assign)NSInteger index;
+
+
 
 - (void)reloadData;
 

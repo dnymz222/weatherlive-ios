@@ -10,6 +10,7 @@
 #import "ColorSizeMacro.h"
 #import "Masonry.h"
 #import "STAcuuWeatherDailyModel.h"
+#import "FIshUnitTransTool.h"
 
 @interface STAcuuWeatherHeaderView ()
 
@@ -21,7 +22,10 @@
 @property(nonatomic,strong)UILabel *sunriseLabel;
 @property(nonatomic,strong)UIImageView *sunsetIconView;
 @property(nonatomic,strong)UILabel *sunsetLabel;
-@property(nonatomic,strong)UILabel *pollenLabel;
+@property(nonatomic,strong)UIImageView *moonphaseView;
+@property(nonatomic,strong)UILabel *moonphaseLabel;
+@property(nonatomic,copy)NSDictionary *moonphaseDict;
+
 //@property(nonatomic,strong)UIImageView *moonRiseIconView;
 //@property(nonatomic,strong)UILabel *moonRiseLabel;
 //@property(nonatomic,strong)UIImageView *moonSetIconView;
@@ -47,7 +51,8 @@
         [self.contentView addSubview:self.sunriseLabel];
         [self.contentView addSubview:self.sunsetIconView];
         [self.contentView addSubview:self.sunsetLabel   ];
-        [self.contentView addSubview:self.pollenLabel];
+        [self.contentView addSubview:self.moonphaseView];
+        [self.contentView addSubview:self.moonphaseLabel];
         
 //        [self.contentView addSubview:self.moonRiseIconView];
 //        [self.contentView addSubview:self.moonRiseLabel];
@@ -88,7 +93,7 @@
         [self.sunriseLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.sunriseIconView.mas_right).offset(5);
             make.centerY.equalTo(self.sunriseIconView);
-            make.width.equalTo(@80);
+            make.width.equalTo(@60);
             make.height.equalTo(@20);
         }];
         
@@ -103,26 +108,40 @@
         [self.sunsetLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.sunsetIconView.mas_right).offset(5);
             make.centerY.equalTo(self.sunriseIconView);
-            make.width.equalTo(@80);
+            make.width.equalTo(@60);
             make.height.equalTo(@20);
         }];
         
-        [self.pollenLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.sunsetLabel.mas_right).offset(20);
+       
+        
+        
+        
+        [self.moonphaseLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(self.contentView).offset(-8);
             make.centerY.equalTo(self.sunriseIconView);
-            make.width.equalTo(@160);
+            make.width.equalTo(@110);
             make.height.equalTo(@20);
+        }];
+        
+        [self.moonphaseView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(self.moonphaseLabel.mas_left).offset(-5);
+            make.centerY.equalTo(self.sunriseIconView).offset(-2);
+            make.width.equalTo(@30);
+            make.height.equalTo(@30);
         }];
         
         
         
-        
-        
-        
-        
-        
-        
-        
+        self.moonphaseDict  =@{@"Last":@"下弦月",
+                               @"WaningCrescent":@"残月",
+                               @"New":@"新月",
+                               @"WaxingCrescent":@"峨眉月",
+                               @"First":@"上弦月",
+                               @"WaxingGibbous":@"盈凸月",
+                               @"Full":@"满月",
+                               @"WaningGibbous":@"亏凸月"
+                               
+                               };
         
         
 //        
@@ -260,16 +279,29 @@
     
 }
 
-- (UILabel *)pollenLabel {
+- (UILabel *)moonphaseLabel {
     
-    if (!_pollenLabel) {
-        _pollenLabel = [[UILabel alloc] init];
-        _pollenLabel.textColor = UIColorFromRGB(0x666666);
-        _pollenLabel.font = [UIFont systemFontOfSize:14.f];
-        _pollenLabel.textAlignment = NSTextAlignmentLeft;
+    if (!_moonphaseLabel) {
+        _moonphaseLabel = [[UILabel alloc] init];
+        _moonphaseLabel.textColor = UIColorFromRGB(0x666666);
+        _moonphaseLabel.font = [UIFont systemFontOfSize:14.f];
+        _moonphaseLabel.textAlignment = NSTextAlignmentLeft;
     }
     
-    return _pollenLabel;
+    return _moonphaseLabel;
+    
+}
+
+- (UIImageView *)moonphaseView {
+    if (!_moonphaseView) {
+        _moonphaseView = [[UIImageView alloc] init];
+        _moonphaseView.contentMode = UIViewContentModeScaleAspectFill;
+        _moonphaseView.layer.cornerRadius = 4.f;
+        _moonphaseView.layer.masksToBounds = YES;
+        
+    }
+    
+    return _moonphaseView;
     
 }
 
@@ -354,7 +386,11 @@
     NSDictionary *maxtemperatureDict = [model.Temperature valueForKey:@"Maximum"];
     NSDictionary *mintemperatureDict = [model.Temperature  valueForKey:@"Minimum"];
     
-    self.tempratureLabel.text = [NSString stringWithFormat:@"%@ %@-%@ %@",mintemperatureDict[@"Value"],mintemperatureDict[@"Unit"],maxtemperatureDict[@"Value"],maxtemperatureDict[@"Unit"]];
+    float mintemprature = [FIshUnitTransTool nieshitransfromhuashi:[mintemperatureDict[@"Value"] floatValue]];
+    float maxtemprature = [FIshUnitTransTool nieshitransfromhuashi:[maxtemperatureDict[@"Value"] floatValue]];
+    
+    
+    self.tempratureLabel.text = [NSString stringWithFormat:@"%0.1f°C-%0.1f°C",mintemprature,maxtemprature];
     
     NSDictionary *sundict = model.Sun;
     
@@ -376,22 +412,27 @@
         self.sunsetLabel.text =@"无";
     }
     
-    NSArray *airpollen = model.AirAndPollen;
+//    NSArray *airpollen = model.AirAndPollen;
     
-    NSPredicate *prdicate = [NSPredicate predicateWithFormat:@"CategoryValue=%d",5];
+//    NSPredicate *prdicate = [NSPredicate predicateWithFormat:@"CategoryValue=%d",5];
     
-    NSArray *pollen = [airpollen filteredArrayUsingPredicate:prdicate];
-    if (pollen && pollen.count) {
-        NSDictionary *pollendict = [pollen firstObject];
-        
-        self.pollenLabel.text = [NSString stringWithFormat:@"紫外线指数:%@(%@)",pollendict[@"Value"],pollendict[@"Category"]];
-    } else {
-        self.pollenLabel.text = @"";
-    }
+//    NSArray *pollen = [airpollen filteredArrayUsingPredicate:prdicate];
+//    if (pollen && pollen.count) {
+//        NSDictionary *pollendict = [pollen firstObject];
+//
+//        self.moonphaseLabel.text = [NSString stringWithFormat:@"紫外线指数:%@(%@)",pollendict[@"Value"],pollendict[@"Category"]];
+//    } else {
+//        self.moonphaseLabel.text = @"";
+//    }
     
     
     
-//    NSDictionary *moonDict = model.Moon;
+    NSDictionary *moonDict = model.Moon;
+    
+    NSInteger age = [[moonDict valueForKey:@"Age"] integerValue];
+    [_moonphaseView setImage:[UIImage imageNamed:[NSString stringWithFormat:@"moon%02d",age]]];
+    NSString *moonphase =[moonDict valueForKey:@"Phase"];
+    _moonphaseLabel.text =[NSString stringWithFormat:@"%@(月龄:%d天)",[self.moonphaseDict valueForKey:moonphase],age];
 //
 //    NSString *moonrise = [moonDict valueForKey:@"Rise"];
 //    if (moonrise  && [moonrise isKindOfClass:[NSString class]]) {

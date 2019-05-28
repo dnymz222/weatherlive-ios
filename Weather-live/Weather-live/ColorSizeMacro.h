@@ -26,6 +26,9 @@ CGSizeEqualToSize(CGSizeMake(1242, 2688), [[UIScreen mainScreen] currentMode].si
 #define kScreenWidth     [[UIScreen mainScreen]bounds].size.width
 
 
+#define loctionkeygetkey  @"loctionkeygetkey"
+
+
 #define Themecolor 0x448eee
 
 

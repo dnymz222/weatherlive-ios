@@ -11,6 +11,7 @@
 #import "WLAccuHourlyModel.h"
 #import "Masonry.h"
 
+
 @interface WLAccuHourlyCell ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
 
@@ -111,8 +112,16 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    return CGSizeMake(60, 100);
+    return CGSizeMake(80, 100);
     
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+    return 0;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+    return 0;
 }
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -142,8 +151,8 @@
     CGFloat height = self.frame.size.height;
     
     self.scrollView.frame = CGRectMake(0, 0, width, height);
-    self.scrollView.contentSize = CGSizeMake(12*60, height);
-    self.collectionView.frame = CGRectMake(0, 0, 12*60, height);
+    self.scrollView.contentSize = CGSizeMake(24*80, height);
+    self.collectionView.frame = CGRectMake(0, 0, 24*80, height);
 }
 
 

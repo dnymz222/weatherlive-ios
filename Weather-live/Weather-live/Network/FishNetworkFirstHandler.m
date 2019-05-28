@@ -10,8 +10,9 @@
 
 
 #define xunquanlamaCatPath @"/fish/cate"
+#define xunquancatepath @"/xunquan/cate"
 #define lamacatePath @"/lama/cate"
-#define configPath @"/xunquan/new/config"
+#define configPath @"/xunquan/config"
 #define searchCheckPath @"/lama/search/check"
 #define searchHintPath @"/xunquan/search/hint"
 #define lamasearchPath @"/lama/search"
@@ -19,6 +20,9 @@
 #define lamaconfigPath  @"/lama/new/item/config"
 #define lamaratePath @"/xunquan/detail/rate"
 #define lamaimagetranspath @"/xunquan/image/trans"
+#define xunquanbannerpath @"/xunquan/banner"
+#define xunquansearchcheckpath @"/xunquan/search/check"
+#define xunquancolumnpath @"/xunquan/column"
 
 #define weatherPath  @"/weather"
 #define waterPath  @"/water"
@@ -28,6 +32,9 @@
 #define acuu_cuurrent_apth @"/acuu/current"
 #define acuu_hourly_path @"/acuu/hourly"
 #define acuu_index_path @"/acuu/index"
+#define acuu_alarms_path @"/acuu/alarms"
+#define acuu_radar_path @"/acuu/radar"
+#define xinzhi_aqi_path @"/xinzhi/aqi"
 
 
 
@@ -54,7 +61,75 @@
     
 }
 
-+ (void)lamacatCouponWithPath:(NSString *)urlpath
+
++ (void)xunquancateWithparamater:(NSDictionary *)paramaters
+                      success:(LBSuccessBlock)successBlock
+                       failed:(LBFailedBlock)failedBlock
+{
+    
+    [FishNetworkBaseHandler sendGetRequestWithPath:xunquancatepath
+                                         paramater:paramaters
+                                           success:^(NSURLResponse *response, id data) {
+                                               successBlock(response,data);
+                                               
+                                           }
+                                            failed:^(NSError *error) {
+                                                
+                                                failedBlock(error);
+                                            }];
+    
+    
+    
+}
+
++ (void)xunquanbannerWithparamater:(NSDictionary *)paramaters
+                         success:(LBSuccessBlock)successBlock
+                          failed:(LBFailedBlock)failedBlock
+{
+    
+    [FishNetworkBaseHandler sendGetRequestWithPath:xunquanbannerpath
+                                         paramater:paramaters
+                                           success:^(NSURLResponse *response, id data) {
+                                               successBlock(response,data);
+                                               
+                                           }
+                                            failed:^(NSError *error) {
+                                                
+                                                failedBlock(error);
+                                            }];
+    
+    
+    
+}
+
+
++ (void)xunquancolumnWithparamater:(NSDictionary *)paramaters
+                           success:(LBSuccessBlock)successBlock
+                            failed:(LBFailedBlock)failedBlock
+{
+    
+    [FishNetworkBaseHandler sendGetRequestWithPath:xunquancolumnpath
+                                         paramater:paramaters
+                                           success:^(NSURLResponse *response, id data) {
+                                               successBlock(response,data);
+                                               
+                                           }
+                                            failed:^(NSError *error) {
+                                                
+                                                failedBlock(error);
+                                            }];
+    
+    
+    
+}
+
+
+
+
+
+
+
++ (void)xunquancatCouponWithPath:(NSString *)urlpath
                     paramater:(NSDictionary *)paramaters
                       success:(LBSuccessBlock)successBlock
                        failed:(LBFailedBlock)failedBlock
@@ -76,6 +151,23 @@
     
 }
 
++ (void)xunquansearchCheckWithparamater:(NSDictionary *)paramaters
+                         success:(LBSuccessBlock)successBlock
+                          failed:(LBFailedBlock)failedBlock
+{
+    
+    [FishNetworkBaseHandler sendGetRequestWithPath:xunquansearchcheckpath
+                                         paramater:paramaters
+                                           success:^(NSURLResponse *response, id data) {
+                                               successBlock(response,data);
+                                               
+                                           }
+                                            failed:^(NSError *error) {
+                                                
+                                                failedBlock(error);
+                                            }];
+    
+}
 
 //+ (void)lamacateBabyWithPath:(NSString *)urlpath
 //                    paramater:(NSDictionary *)paramaters
@@ -416,6 +508,62 @@
                                             }];
     
 }
+
++ (void)accuAlarmsWithparamater:(NSDictionary *)paramaters
+                       success:(LBSuccessBlock)successBlock
+                        failed:(LBFailedBlock)failedBlock
+{
+    [FishNetworkBaseHandler sendGetRequestWithPath:acuu_alarms_path
+                                         paramater:paramaters
+                                           success:^(NSURLResponse *response, id data) {
+                                               
+                                               successBlock(response,data);
+                                               
+                                           }
+                                            failed:^(NSError *error) {
+                                                failedBlock(error);
+                                            }];
+    
+}
+
+
++ (void)accuRadarWithparamater:(NSDictionary *)paramaters
+                        success:(LBSuccessBlock)successBlock
+                         failed:(LBFailedBlock)failedBlock
+{
+    [FishNetworkBaseHandler sendGetRequestWithPath:acuu_radar_path
+                                         paramater:paramaters
+                                           success:^(NSURLResponse *response, id data) {
+                                               
+                                               successBlock(response,data);
+                                               
+                                           }
+                                            failed:^(NSError *error) {
+                                                failedBlock(error);
+                                            }];
+    
+}
+
++ (void)xinzhiAqiWithparamater:(NSDictionary *)paramaters
+                       success:(LBSuccessBlock)successBlock
+                        failed:(LBFailedBlock)failedBlock
+{
+    [FishNetworkBaseHandler sendGetRequestWithPath:xinzhi_aqi_path
+                                         paramater:paramaters
+                                           success:^(NSURLResponse *response, id data) {
+                                               
+                                               successBlock(response,data);
+                                               
+                                           }
+                                            failed:^(NSError *error) {
+                                                failedBlock(error);
+                                            }];
+    
+}
+
+
+
+
 
 
 

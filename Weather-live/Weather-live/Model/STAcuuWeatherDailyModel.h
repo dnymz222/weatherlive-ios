@@ -30,6 +30,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy)NSString *MobileLink;
 @property(nonatomic,strong)STAcuuDayAndNightModel *Day;
 
+@property(nonatomic,assign)float windSpedd;
+@property(nonatomic,assign)float sheshitemperature;
+@property(nonatomic,assign)float intensity;
+
+
+
+
 
 
 

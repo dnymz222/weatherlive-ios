@@ -20,6 +20,8 @@
 #define longtitudekey @"longtitudekey"
 #define altitudekey @"altitudekey"
 #define refreshkey  @"refreshkey"
+#define locationkey @"locationkey"
+#define localizenamekey @"localizenamekey"
 
 #define requestWeatherDoneKey @"requestWeatherDoneKey"
 

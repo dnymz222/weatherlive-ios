@@ -7,30 +7,39 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		19590A7B2293A452004EF1BD /* FishAliUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 19590A482293A452004EF1BD /* FishAliUser.m */; };
-		19590A7C2293A452004EF1BD /* FishSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19590A4A2293A452004EF1BD /* FishSearchController.m */; };
-		19590A7D2293A452004EF1BD /* FishDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19590A4B2293A452004EF1BD /* FishDetailController.m */; };
-		19590A7E2293A452004EF1BD /* FishAliWebController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19590A4C2293A452004EF1BD /* FishAliWebController.m */; };
+		19117B30229A420C0076166D /* WXPErrorTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19117B2F229A420C0076166D /* WXPErrorTipView.m */; };
+		19117B35229AB6440076166D /* WLTaobaoCouponCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19117B34229AB6440076166D /* WLTaobaoCouponCell.m */; };
+		1911CB992298C489004AB62E /* WLAccuLocationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1911CB982298C489004AB62E /* WLAccuLocationModel.m */; };
+		1911CB9C2298CC68004AB62E /* WLAccuRadarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1911CB9B2298CC68004AB62E /* WLAccuRadarCell.m */; };
+		1911CB9F2298D09B004AB62E /* WLAccuuRadarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1911CB9E2298D09B004AB62E /* WLAccuuRadarModel.m */; };
+		1911CBA222993917004AB62E /* FishMapSelectPositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1911CBA122993916004AB62E /* FishMapSelectPositionViewController.m */; };
+		1915D418229B6D6200ACB9F1 /* WXPFloat.m in Sources */ = {isa = PBXBuildFile; fileRef = 1915D417229B6D6200ACB9F1 /* WXPFloat.m */; };
+		1915D41B229B7F0600ACB9F1 /* LBBannerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1915D419229B7F0600ACB9F1 /* LBBannerCell.m */; };
+		1915D41E229B7F2300ACB9F1 /* LBImagItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1915D41C229B7F2300ACB9F1 /* LBImagItemCell.m */; };
+		1915D421229B82A200ACB9F1 /* WLXunquanBannerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1915D420229B82A200ACB9F1 /* WLXunquanBannerModel.m */; };
+		1915D424229BDB6300ACB9F1 /* NSObject+WL.m in Sources */ = {isa = PBXBuildFile; fileRef = 1915D423229BDB6300ACB9F1 /* NSObject+WL.m */; };
+		1922E0D4229631FE001712EC /* WLAccuIndexModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1922E0D3229631FE001712EC /* WLAccuIndexModel.m */; };
+		1922E0D7229633F1001712EC /* WLAccuIndexDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1922E0D6229633F1001712EC /* WLAccuIndexDetailCell.m */; };
+		1922E0D922963649001712EC /* AccuIndex.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1922E0D822963649001712EC /* AccuIndex.plist */; };
+		1922E0DC22963DC4001712EC /* WLAccuIndexGroupModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1922E0DB22963DC4001712EC /* WLAccuIndexGroupModel.m */; };
+		19234A5D229CE15B00217D9A /* WLJSWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19234A5C229CE15B00217D9A /* WLJSWebViewController.m */; };
+		19234A60229D06EA00217D9A /* UIColor+WXP.m in Sources */ = {isa = PBXBuildFile; fileRef = 19234A5F229D06EA00217D9A /* UIColor+WXP.m */; };
+		19234A63229D091E00217D9A /* WLXunquanConfigModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 19234A62229D091E00217D9A /* WLXunquanConfigModel.m */; };
+		19234A66229D103400217D9A /* WLScanResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19234A65229D103400217D9A /* WLScanResultViewController.m */; };
+		19234A69229D21CD00217D9A /* WLXunquanColumnModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 19234A68229D21CD00217D9A /* WLXunquanColumnModel.m */; };
+		19234A6C229D271B00217D9A /* WLXunquanColumnCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19234A6B229D271B00217D9A /* WLXunquanColumnCell.m */; };
+		19234A72229D2A1400217D9A /* UIView+WL.m in Sources */ = {isa = PBXBuildFile; fileRef = 19234A71229D2A1400217D9A /* UIView+WL.m */; };
+		19234A75229D308300217D9A /* WLXunquanCloumnItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19234A74229D308300217D9A /* WLXunquanCloumnItemCell.m */; };
+		19234A78229D58CF00217D9A /* WLItemShoppingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19234A77229D58CF00217D9A /* WLItemShoppingViewController.m */; };
+		19234A7B229D622100217D9A /* NSNull+WL.m in Sources */ = {isa = PBXBuildFile; fileRef = 19234A7A229D622100217D9A /* NSNull+WL.m */; };
+		19590A7C2293A452004EF1BD /* WLAliSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19590A4A2293A452004EF1BD /* WLAliSearchController.m */; };
+		19590A7E2293A452004EF1BD /* WLAliWebController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19590A4C2293A452004EF1BD /* WLAliWebController.m */; };
 		19590A7F2293A452004EF1BD /* FishMuyinSubController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19590A4D2293A452004EF1BD /* FishMuyinSubController.m */; };
-		19590A802293A452004EF1BD /* FishAliSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19590A4E2293A452004EF1BD /* FishAliSettingController.m */; };
-		19590A812293A452004EF1BD /* FishImageItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 19590A562293A452004EF1BD /* FishImageItemModel.m */; };
-		19590A822293A452004EF1BD /* FishSellerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 19590A572293A452004EF1BD /* FishSellerModel.m */; };
-		19590A832293A452004EF1BD /* FishDetailItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 19590A582293A452004EF1BD /* FishDetailItemModel.m */; };
 		19590A842293A452004EF1BD /* FishCouponItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 19590A592293A452004EF1BD /* FishCouponItemModel.m */; };
 		19590A852293A452004EF1BD /* FishCateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 19590A5A2293A452004EF1BD /* FishCateModel.m */; };
 		19590A862293A452004EF1BD /* FishCouponCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19590A612293A452004EF1BD /* FishCouponCollectionViewCell.m */; };
-		19590A872293A452004EF1BD /* FishCouponDetailBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19590A622293A452004EF1BD /* FishCouponDetailBottomView.m */; };
 		19590A882293A452004EF1BD /* WXPSortItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19590A642293A452004EF1BD /* WXPSortItemView.m */; };
-		19590A892293A452004EF1BD /* FishSearchHistoryHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 19590A662293A452004EF1BD /* FishSearchHistoryHeader.m */; };
-		19590A8A2293A452004EF1BD /* FishDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19590A692293A452004EF1BD /* FishDetailHeaderView.m */; };
-		19590A8B2293A452004EF1BD /* FishDetailTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19590A6B2293A452004EF1BD /* FishDetailTitleCell.m */; };
-		19590A8C2293A452004EF1BD /* FishImageListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19590A6D2293A452004EF1BD /* FishImageListCell.m */; };
-		19590A8D2293A452004EF1BD /* FishImagItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19590A702293A452004EF1BD /* FishImagItemCell.m */; };
-		19590A8E2293A452004EF1BD /* FishDetailImageHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19590A732293A452004EF1BD /* FishDetailImageHeaderView.m */; };
-		19590A8F2293A452004EF1BD /* FishDetailShopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19590A742293A452004EF1BD /* FishDetailShopCell.m */; };
 		19590A902293A452004EF1BD /* WXPSortHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19590A752293A452004EF1BD /* WXPSortHeaderView.m */; };
-		19590A912293A452004EF1BD /* FishSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19590A782293A452004EF1BD /* FishSettingCell.m */; };
-		19590A922293A452004EF1BD /* FishErrorTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19590A7A2293A452004EF1BD /* FishErrorTipView.m */; };
 		19590A952293ABAC004EF1BD /* yw_1222.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 19590A942293ABAC004EF1BD /* yw_1222.jpg */; };
 		19590AAD2293DCDC004EF1BD /* AlibabaAuthSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 19590A982293DCDC004EF1BD /* AlibabaAuthSDK.bundle */; };
 		19590AAE2293DCDC004EF1BD /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 19590A992293DCDC004EF1BD /* AlipaySDK.bundle */; };
@@ -231,7 +240,14 @@
 		1962104522957969005DF969 /* WLAccuHourlyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1962104422957969005DF969 /* WLAccuHourlyCell.m */; };
 		1962104822957A08005DF969 /* WLAcuuHourlyItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1962104722957A08005DF969 /* WLAcuuHourlyItemCell.m */; };
 		1962104B2295896C005DF969 /* WLAccuHourlyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1962104A2295896C005DF969 /* WLAccuHourlyModel.m */; };
-		19BDD4F42294DA4100FD90F7 /* STSolunarTidesHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BDD4F22294DA4100FD90F7 /* STSolunarTidesHandler.m */; };
+		19806AF422982D2B0060D400 /* WLDayWeatherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19806AF322982D2B0060D400 /* WLDayWeatherViewController.m */; };
+		19806AF7229837910060D400 /* WLAccuAlarmsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 19806AF6229837910060D400 /* WLAccuAlarmsModel.m */; };
+		19806AFA22983A520060D400 /* WLAccuAlarmsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19806AF922983A520060D400 /* WLAccuAlarmsCell.m */; };
+		19AC446422969C530047A850 /* WLIndexSubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19AC446322969C530047A850 /* WLIndexSubViewController.m */; };
+		19AC44672296DA340047A850 /* LineProcessView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19AC44662296DA340047A850 /* LineProcessView.m */; };
+		19C6E83C229943A6003A1D86 /* WLWeatherLocationHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C6E83B229943A6003A1D86 /* WLWeatherLocationHandler.m */; };
+		19C6E83F22994C28003A1D86 /* WLXinzhiAqiModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C6E83E22994C28003A1D86 /* WLXinzhiAqiModel.m */; };
+		19C6E842229951D7003A1D86 /* WLXinzhiAqiCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C6E841229951D7003A1D86 /* WLXinzhiAqiCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -252,54 +268,71 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		19590A472293A452004EF1BD /* FishAliUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FishAliUser.h; sourceTree = "<group>"; };
-		19590A482293A452004EF1BD /* FishAliUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FishAliUser.m; sourceTree = "<group>"; };
-		19590A4A2293A452004EF1BD /* FishSearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FishSearchController.m; sourceTree = "<group>"; };
-		19590A4B2293A452004EF1BD /* FishDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FishDetailController.m; sourceTree = "<group>"; };
-		19590A4C2293A452004EF1BD /* FishAliWebController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FishAliWebController.m; sourceTree = "<group>"; };
+		19117B2E229A420C0076166D /* WXPErrorTipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXPErrorTipView.h; sourceTree = "<group>"; };
+		19117B2F229A420C0076166D /* WXPErrorTipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXPErrorTipView.m; sourceTree = "<group>"; };
+		19117B31229AA6F20076166D /* WLAliWebController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLAliWebController.h; sourceTree = "<group>"; };
+		19117B32229AA7570076166D /* WLAliSearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLAliSearchController.h; sourceTree = "<group>"; };
+		19117B33229AB6440076166D /* WLTaobaoCouponCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLTaobaoCouponCell.h; sourceTree = "<group>"; };
+		19117B34229AB6440076166D /* WLTaobaoCouponCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLTaobaoCouponCell.m; sourceTree = "<group>"; };
+		1911CB972298C489004AB62E /* WLAccuLocationModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLAccuLocationModel.h; sourceTree = "<group>"; };
+		1911CB982298C489004AB62E /* WLAccuLocationModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLAccuLocationModel.m; sourceTree = "<group>"; };
+		1911CB9A2298CC68004AB62E /* WLAccuRadarCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLAccuRadarCell.h; sourceTree = "<group>"; };
+		1911CB9B2298CC68004AB62E /* WLAccuRadarCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLAccuRadarCell.m; sourceTree = "<group>"; };
+		1911CB9D2298D09B004AB62E /* WLAccuuRadarModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLAccuuRadarModel.h; sourceTree = "<group>"; };
+		1911CB9E2298D09B004AB62E /* WLAccuuRadarModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLAccuuRadarModel.m; sourceTree = "<group>"; };
+		1911CBA022993916004AB62E /* FishMapSelectPositionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FishMapSelectPositionViewController.h; sourceTree = "<group>"; };
+		1911CBA122993916004AB62E /* FishMapSelectPositionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FishMapSelectPositionViewController.m; sourceTree = "<group>"; };
+		1915D416229B6D6200ACB9F1 /* WXPFloat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXPFloat.h; sourceTree = "<group>"; };
+		1915D417229B6D6200ACB9F1 /* WXPFloat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXPFloat.m; sourceTree = "<group>"; };
+		1915D419229B7F0600ACB9F1 /* LBBannerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBBannerCell.m; sourceTree = "<group>"; };
+		1915D41A229B7F0600ACB9F1 /* LBBannerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBBannerCell.h; sourceTree = "<group>"; };
+		1915D41C229B7F2300ACB9F1 /* LBImagItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBImagItemCell.m; sourceTree = "<group>"; };
+		1915D41D229B7F2300ACB9F1 /* LBImagItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBImagItemCell.h; sourceTree = "<group>"; };
+		1915D41F229B82A200ACB9F1 /* WLXunquanBannerModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLXunquanBannerModel.h; sourceTree = "<group>"; };
+		1915D420229B82A200ACB9F1 /* WLXunquanBannerModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLXunquanBannerModel.m; sourceTree = "<group>"; };
+		1915D422229BDB6300ACB9F1 /* NSObject+WL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+WL.h"; sourceTree = "<group>"; };
+		1915D423229BDB6300ACB9F1 /* NSObject+WL.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+WL.m"; sourceTree = "<group>"; };
+		1922E0D2229631FE001712EC /* WLAccuIndexModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLAccuIndexModel.h; sourceTree = "<group>"; };
+		1922E0D3229631FE001712EC /* WLAccuIndexModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLAccuIndexModel.m; sourceTree = "<group>"; };
+		1922E0D5229633F1001712EC /* WLAccuIndexDetailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLAccuIndexDetailCell.h; sourceTree = "<group>"; };
+		1922E0D6229633F1001712EC /* WLAccuIndexDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLAccuIndexDetailCell.m; sourceTree = "<group>"; };
+		1922E0D822963649001712EC /* AccuIndex.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AccuIndex.plist; sourceTree = "<group>"; };
+		1922E0DA22963DC4001712EC /* WLAccuIndexGroupModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLAccuIndexGroupModel.h; sourceTree = "<group>"; };
+		1922E0DB22963DC4001712EC /* WLAccuIndexGroupModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLAccuIndexGroupModel.m; sourceTree = "<group>"; };
+		19234A5B229CE15B00217D9A /* WLJSWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLJSWebViewController.h; sourceTree = "<group>"; };
+		19234A5C229CE15B00217D9A /* WLJSWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLJSWebViewController.m; sourceTree = "<group>"; };
+		19234A5E229D06E900217D9A /* UIColor+WXP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+WXP.h"; sourceTree = "<group>"; };
+		19234A5F229D06EA00217D9A /* UIColor+WXP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+WXP.m"; sourceTree = "<group>"; };
+		19234A61229D091E00217D9A /* WLXunquanConfigModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLXunquanConfigModel.h; sourceTree = "<group>"; };
+		19234A62229D091E00217D9A /* WLXunquanConfigModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLXunquanConfigModel.m; sourceTree = "<group>"; };
+		19234A64229D103400217D9A /* WLScanResultViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLScanResultViewController.h; sourceTree = "<group>"; };
+		19234A65229D103400217D9A /* WLScanResultViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLScanResultViewController.m; sourceTree = "<group>"; };
+		19234A67229D21CD00217D9A /* WLXunquanColumnModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLXunquanColumnModel.h; sourceTree = "<group>"; };
+		19234A68229D21CD00217D9A /* WLXunquanColumnModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLXunquanColumnModel.m; sourceTree = "<group>"; };
+		19234A6A229D271B00217D9A /* WLXunquanColumnCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLXunquanColumnCell.h; sourceTree = "<group>"; };
+		19234A6B229D271B00217D9A /* WLXunquanColumnCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLXunquanColumnCell.m; sourceTree = "<group>"; };
+		19234A70229D2A1400217D9A /* UIView+WL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+WL.h"; sourceTree = "<group>"; };
+		19234A71229D2A1400217D9A /* UIView+WL.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+WL.m"; sourceTree = "<group>"; };
+		19234A73229D308300217D9A /* WLXunquanCloumnItemCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLXunquanCloumnItemCell.h; sourceTree = "<group>"; };
+		19234A74229D308300217D9A /* WLXunquanCloumnItemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLXunquanCloumnItemCell.m; sourceTree = "<group>"; };
+		19234A76229D58CF00217D9A /* WLItemShoppingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLItemShoppingViewController.h; sourceTree = "<group>"; };
+		19234A77229D58CF00217D9A /* WLItemShoppingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLItemShoppingViewController.m; sourceTree = "<group>"; };
+		19234A79229D622100217D9A /* NSNull+WL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSNull+WL.h"; sourceTree = "<group>"; };
+		19234A7A229D622100217D9A /* NSNull+WL.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSNull+WL.m"; sourceTree = "<group>"; };
+		19590A4A2293A452004EF1BD /* WLAliSearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLAliSearchController.m; sourceTree = "<group>"; };
+		19590A4C2293A452004EF1BD /* WLAliWebController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLAliWebController.m; sourceTree = "<group>"; };
 		19590A4D2293A452004EF1BD /* FishMuyinSubController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FishMuyinSubController.m; sourceTree = "<group>"; };
-		19590A4E2293A452004EF1BD /* FishAliSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FishAliSettingController.m; sourceTree = "<group>"; };
-		19590A4F2293A452004EF1BD /* FishSearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FishSearchController.h; sourceTree = "<group>"; };
-		19590A502293A452004EF1BD /* FishDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FishDetailController.h; sourceTree = "<group>"; };
 		19590A512293A452004EF1BD /* FishMuyinSubController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FishMuyinSubController.h; sourceTree = "<group>"; };
-		19590A522293A452004EF1BD /* FishAliWebController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FishAliWebController.h; sourceTree = "<group>"; };
-		19590A532293A452004EF1BD /* FishAliSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FishAliSettingController.h; sourceTree = "<group>"; };
 		19590A552293A452004EF1BD /* FishCateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FishCateModel.h; sourceTree = "<group>"; };
-		19590A562293A452004EF1BD /* FishImageItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FishImageItemModel.m; sourceTree = "<group>"; };
-		19590A572293A452004EF1BD /* FishSellerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FishSellerModel.m; sourceTree = "<group>"; };
-		19590A582293A452004EF1BD /* FishDetailItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FishDetailItemModel.m; sourceTree = "<group>"; };
 		19590A592293A452004EF1BD /* FishCouponItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FishCouponItemModel.m; sourceTree = "<group>"; };
 		19590A5A2293A452004EF1BD /* FishCateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FishCateModel.m; sourceTree = "<group>"; };
-		19590A5B2293A452004EF1BD /* FishImageItemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FishImageItemModel.h; sourceTree = "<group>"; };
 		19590A5C2293A452004EF1BD /* FishCouponItemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FishCouponItemModel.h; sourceTree = "<group>"; };
-		19590A5D2293A452004EF1BD /* FishDetailItemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FishDetailItemModel.h; sourceTree = "<group>"; };
-		19590A5E2293A452004EF1BD /* FishSellerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FishSellerModel.h; sourceTree = "<group>"; };
 		19590A602293A452004EF1BD /* WXPSortHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXPSortHeaderView.h; sourceTree = "<group>"; };
 		19590A612293A452004EF1BD /* FishCouponCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FishCouponCollectionViewCell.m; sourceTree = "<group>"; };
-		19590A622293A452004EF1BD /* FishCouponDetailBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FishCouponDetailBottomView.m; sourceTree = "<group>"; };
-		19590A632293A452004EF1BD /* FishSettingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FishSettingCell.h; sourceTree = "<group>"; };
 		19590A642293A452004EF1BD /* WXPSortItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXPSortItemView.m; sourceTree = "<group>"; };
-		19590A652293A452004EF1BD /* FishErrorTipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FishErrorTipView.h; sourceTree = "<group>"; };
-		19590A662293A452004EF1BD /* FishSearchHistoryHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FishSearchHistoryHeader.m; sourceTree = "<group>"; };
 		19590A672293A452004EF1BD /* FishCouponCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FishCouponCollectionViewCell.h; sourceTree = "<group>"; };
-		19590A692293A452004EF1BD /* FishDetailHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FishDetailHeaderView.m; sourceTree = "<group>"; };
-		19590A6A2293A452004EF1BD /* FishImagItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FishImagItemCell.h; sourceTree = "<group>"; };
-		19590A6B2293A452004EF1BD /* FishDetailTitleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FishDetailTitleCell.m; sourceTree = "<group>"; };
-		19590A6C2293A452004EF1BD /* FishDetailImageHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FishDetailImageHeaderView.h; sourceTree = "<group>"; };
-		19590A6D2293A452004EF1BD /* FishImageListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FishImageListCell.m; sourceTree = "<group>"; };
-		19590A6E2293A452004EF1BD /* FishDetailShopCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FishDetailShopCell.h; sourceTree = "<group>"; };
-		19590A6F2293A452004EF1BD /* FishDetailTitleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FishDetailTitleCell.h; sourceTree = "<group>"; };
-		19590A702293A452004EF1BD /* FishImagItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FishImagItemCell.m; sourceTree = "<group>"; };
-		19590A712293A452004EF1BD /* FishDetailHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FishDetailHeaderView.h; sourceTree = "<group>"; };
-		19590A722293A452004EF1BD /* FishImageListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FishImageListCell.h; sourceTree = "<group>"; };
-		19590A732293A452004EF1BD /* FishDetailImageHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FishDetailImageHeaderView.m; sourceTree = "<group>"; };
-		19590A742293A452004EF1BD /* FishDetailShopCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FishDetailShopCell.m; sourceTree = "<group>"; };
 		19590A752293A452004EF1BD /* WXPSortHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXPSortHeaderView.m; sourceTree = "<group>"; };
-		19590A762293A452004EF1BD /* FishCouponDetailBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FishCouponDetailBottomView.h; sourceTree = "<group>"; };
 		19590A772293A452004EF1BD /* WXPSortItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXPSortItemView.h; sourceTree = "<group>"; };
-		19590A782293A452004EF1BD /* FishSettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FishSettingCell.m; sourceTree = "<group>"; };
-		19590A792293A452004EF1BD /* FishSearchHistoryHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FishSearchHistoryHeader.h; sourceTree = "<group>"; };
-		19590A7A2293A452004EF1BD /* FishErrorTipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FishErrorTipView.m; sourceTree = "<group>"; };
 		19590A942293ABAC004EF1BD /* yw_1222.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = yw_1222.jpg; sourceTree = "<group>"; };
 		19590A982293DCDC004EF1BD /* AlibabaAuthSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlibabaAuthSDK.bundle; sourceTree = "<group>"; };
 		19590A992293DCDC004EF1BD /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
@@ -681,8 +714,22 @@
 		1962104722957A08005DF969 /* WLAcuuHourlyItemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLAcuuHourlyItemCell.m; sourceTree = "<group>"; };
 		196210492295896C005DF969 /* WLAccuHourlyModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLAccuHourlyModel.h; sourceTree = "<group>"; };
 		1962104A2295896C005DF969 /* WLAccuHourlyModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLAccuHourlyModel.m; sourceTree = "<group>"; };
-		19BDD4F22294DA4100FD90F7 /* STSolunarTidesHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STSolunarTidesHandler.m; sourceTree = "<group>"; };
-		19BDD4F32294DA4100FD90F7 /* STSolunarTidesHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STSolunarTidesHandler.h; sourceTree = "<group>"; };
+		19806AF222982D2B0060D400 /* WLDayWeatherViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLDayWeatherViewController.h; sourceTree = "<group>"; };
+		19806AF322982D2B0060D400 /* WLDayWeatherViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLDayWeatherViewController.m; sourceTree = "<group>"; };
+		19806AF5229837910060D400 /* WLAccuAlarmsModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLAccuAlarmsModel.h; sourceTree = "<group>"; };
+		19806AF6229837910060D400 /* WLAccuAlarmsModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLAccuAlarmsModel.m; sourceTree = "<group>"; };
+		19806AF822983A520060D400 /* WLAccuAlarmsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLAccuAlarmsCell.h; sourceTree = "<group>"; };
+		19806AF922983A520060D400 /* WLAccuAlarmsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLAccuAlarmsCell.m; sourceTree = "<group>"; };
+		19AC446222969C530047A850 /* WLIndexSubViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLIndexSubViewController.h; sourceTree = "<group>"; };
+		19AC446322969C530047A850 /* WLIndexSubViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLIndexSubViewController.m; sourceTree = "<group>"; };
+		19AC44652296DA340047A850 /* LineProcessView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineProcessView.h; sourceTree = "<group>"; };
+		19AC44662296DA340047A850 /* LineProcessView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineProcessView.m; sourceTree = "<group>"; };
+		19C6E83A229943A6003A1D86 /* WLWeatherLocationHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLWeatherLocationHandler.h; sourceTree = "<group>"; };
+		19C6E83B229943A6003A1D86 /* WLWeatherLocationHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLWeatherLocationHandler.m; sourceTree = "<group>"; };
+		19C6E83D22994C28003A1D86 /* WLXinzhiAqiModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLXinzhiAqiModel.h; sourceTree = "<group>"; };
+		19C6E83E22994C28003A1D86 /* WLXinzhiAqiModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLXinzhiAqiModel.m; sourceTree = "<group>"; };
+		19C6E840229951D7003A1D86 /* WLXinzhiAqiCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLXinzhiAqiCell.h; sourceTree = "<group>"; };
+		19C6E841229951D7003A1D86 /* WLXinzhiAqiCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLXinzhiAqiCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -743,7 +790,6 @@
 		19590A452293A452004EF1BD /* Interface */ = {
 			isa = PBXGroup;
 			children = (
-				19590A462293A452004EF1BD /* ViewModel */,
 				19590A492293A452004EF1BD /* Controller */,
 				19590A542293A452004EF1BD /* Model */,
 				19590A5F2293A452004EF1BD /* View */,
@@ -751,28 +797,15 @@
 			path = Interface;
 			sourceTree = "<group>";
 		};
-		19590A462293A452004EF1BD /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				19590A472293A452004EF1BD /* FishAliUser.h */,
-				19590A482293A452004EF1BD /* FishAliUser.m */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
 		19590A492293A452004EF1BD /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				19590A4A2293A452004EF1BD /* FishSearchController.m */,
-				19590A4B2293A452004EF1BD /* FishDetailController.m */,
-				19590A4C2293A452004EF1BD /* FishAliWebController.m */,
-				19590A4D2293A452004EF1BD /* FishMuyinSubController.m */,
-				19590A4E2293A452004EF1BD /* FishAliSettingController.m */,
-				19590A4F2293A452004EF1BD /* FishSearchController.h */,
-				19590A502293A452004EF1BD /* FishDetailController.h */,
+				19117B32229AA7570076166D /* WLAliSearchController.h */,
+				19117B31229AA6F20076166D /* WLAliWebController.h */,
+				19590A4C2293A452004EF1BD /* WLAliWebController.m */,
 				19590A512293A452004EF1BD /* FishMuyinSubController.h */,
-				19590A522293A452004EF1BD /* FishAliWebController.h */,
-				19590A532293A452004EF1BD /* FishAliSettingController.h */,
+				19590A4D2293A452004EF1BD /* FishMuyinSubController.m */,
+				19590A4A2293A452004EF1BD /* WLAliSearchController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -781,15 +814,9 @@
 			isa = PBXGroup;
 			children = (
 				19590A552293A452004EF1BD /* FishCateModel.h */,
-				19590A562293A452004EF1BD /* FishImageItemModel.m */,
-				19590A572293A452004EF1BD /* FishSellerModel.m */,
-				19590A582293A452004EF1BD /* FishDetailItemModel.m */,
 				19590A592293A452004EF1BD /* FishCouponItemModel.m */,
 				19590A5A2293A452004EF1BD /* FishCateModel.m */,
-				19590A5B2293A452004EF1BD /* FishImageItemModel.h */,
 				19590A5C2293A452004EF1BD /* FishCouponItemModel.h */,
-				19590A5D2293A452004EF1BD /* FishDetailItemModel.h */,
-				19590A5E2293A452004EF1BD /* FishSellerModel.h */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -799,46 +826,19 @@
 			children = (
 				19590A602293A452004EF1BD /* WXPSortHeaderView.h */,
 				19590A612293A452004EF1BD /* FishCouponCollectionViewCell.m */,
-				19590A622293A452004EF1BD /* FishCouponDetailBottomView.m */,
-				19590A632293A452004EF1BD /* FishSettingCell.h */,
 				19590A642293A452004EF1BD /* WXPSortItemView.m */,
-				19590A652293A452004EF1BD /* FishErrorTipView.h */,
-				19590A662293A452004EF1BD /* FishSearchHistoryHeader.m */,
 				19590A672293A452004EF1BD /* FishCouponCollectionViewCell.h */,
-				19590A682293A452004EF1BD /* Detail */,
 				19590A752293A452004EF1BD /* WXPSortHeaderView.m */,
-				19590A762293A452004EF1BD /* FishCouponDetailBottomView.h */,
 				19590A772293A452004EF1BD /* WXPSortItemView.h */,
-				19590A782293A452004EF1BD /* FishSettingCell.m */,
-				19590A792293A452004EF1BD /* FishSearchHistoryHeader.h */,
-				19590A7A2293A452004EF1BD /* FishErrorTipView.m */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		19590A682293A452004EF1BD /* Detail */ = {
-			isa = PBXGroup;
-			children = (
-				19590A692293A452004EF1BD /* FishDetailHeaderView.m */,
-				19590A6A2293A452004EF1BD /* FishImagItemCell.h */,
-				19590A6B2293A452004EF1BD /* FishDetailTitleCell.m */,
-				19590A6C2293A452004EF1BD /* FishDetailImageHeaderView.h */,
-				19590A6D2293A452004EF1BD /* FishImageListCell.m */,
-				19590A6E2293A452004EF1BD /* FishDetailShopCell.h */,
-				19590A6F2293A452004EF1BD /* FishDetailTitleCell.h */,
-				19590A702293A452004EF1BD /* FishImagItemCell.m */,
-				19590A712293A452004EF1BD /* FishDetailHeaderView.h */,
-				19590A722293A452004EF1BD /* FishImageListCell.h */,
-				19590A732293A452004EF1BD /* FishDetailImageHeaderView.m */,
-				19590A742293A452004EF1BD /* FishDetailShopCell.m */,
-			);
-			path = Detail;
 			sourceTree = "<group>";
 		};
 		19590A932293ABA3004EF1BD /* Surpportfile */ = {
 			isa = PBXGroup;
 			children = (
 				19590A942293ABAC004EF1BD /* yw_1222.jpg */,
+				1922E0D822963649001712EC /* AccuIndex.plist */,
 			);
 			path = Surpportfile;
 			sourceTree = "<group>";
@@ -904,6 +904,10 @@
 		19590ACE2293DD1A004EF1BD /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				19234A5E229D06E900217D9A /* UIColor+WXP.h */,
+				19234A5F229D06EA00217D9A /* UIColor+WXP.m */,
+				1915D416229B6D6200ACB9F1 /* WXPFloat.h */,
+				1915D417229B6D6200ACB9F1 /* WXPFloat.m */,
 				19590CCD2294336C004EF1BD /* LSYViewPagerVC.h */,
 				19590CCE2294336C004EF1BD /* LSYViewPagerVC.m */,
 				19590C3F2294049B004EF1BD /* Colours */,
@@ -923,6 +927,12 @@
 				19590B742293DD1A004EF1BD /* FIshUnitTransTool.m */,
 				19590B752293DD1A004EF1BD /* TYCyclePagerView */,
 				19590B7C2293DD1A004EF1BD /* SDWebImage */,
+				1915D422229BDB6300ACB9F1 /* NSObject+WL.h */,
+				1915D423229BDB6300ACB9F1 /* NSObject+WL.m */,
+				19234A70229D2A1400217D9A /* UIView+WL.h */,
+				19234A71229D2A1400217D9A /* UIView+WL.m */,
+				19234A79229D622100217D9A /* NSNull+WL.h */,
+				19234A7A229D622100217D9A /* NSNull+WL.m */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -1299,6 +1309,8 @@
 		19590C292293F449004EF1BD /* View */ = {
 			isa = PBXGroup;
 			children = (
+				19AC44652296DA340047A850 /* LineProcessView.h */,
+				19AC44662296DA340047A850 /* LineProcessView.m */,
 				19590CD0229439E7004EF1BD /* STAcuuWeatherDailyCell.h */,
 				19590CD5229439E8004EF1BD /* STAcuuWeatherDailyCell.m */,
 				19590CD1229439E8004EF1BD /* STAcuuWeatherFooterView.h */,
@@ -1313,6 +1325,26 @@
 				1962104422957969005DF969 /* WLAccuHourlyCell.m */,
 				1962104622957A08005DF969 /* WLAcuuHourlyItemCell.h */,
 				1962104722957A08005DF969 /* WLAcuuHourlyItemCell.m */,
+				1922E0D5229633F1001712EC /* WLAccuIndexDetailCell.h */,
+				1922E0D6229633F1001712EC /* WLAccuIndexDetailCell.m */,
+				19806AF822983A520060D400 /* WLAccuAlarmsCell.h */,
+				19806AF922983A520060D400 /* WLAccuAlarmsCell.m */,
+				1911CB9A2298CC68004AB62E /* WLAccuRadarCell.h */,
+				1911CB9B2298CC68004AB62E /* WLAccuRadarCell.m */,
+				19C6E840229951D7003A1D86 /* WLXinzhiAqiCell.h */,
+				19C6E841229951D7003A1D86 /* WLXinzhiAqiCell.m */,
+				19117B2E229A420C0076166D /* WXPErrorTipView.h */,
+				19117B2F229A420C0076166D /* WXPErrorTipView.m */,
+				19117B33229AB6440076166D /* WLTaobaoCouponCell.h */,
+				19117B34229AB6440076166D /* WLTaobaoCouponCell.m */,
+				1915D41A229B7F0600ACB9F1 /* LBBannerCell.h */,
+				1915D419229B7F0600ACB9F1 /* LBBannerCell.m */,
+				1915D41D229B7F2300ACB9F1 /* LBImagItemCell.h */,
+				1915D41C229B7F2300ACB9F1 /* LBImagItemCell.m */,
+				19234A6A229D271B00217D9A /* WLXunquanColumnCell.h */,
+				19234A6B229D271B00217D9A /* WLXunquanColumnCell.m */,
+				19234A73229D308300217D9A /* WLXunquanCloumnItemCell.h */,
+				19234A74229D308300217D9A /* WLXunquanCloumnItemCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1332,6 +1364,24 @@
 				1962103B22953E5B005DF969 /* WLAccuCurrentModel.m */,
 				196210492295896C005DF969 /* WLAccuHourlyModel.h */,
 				1962104A2295896C005DF969 /* WLAccuHourlyModel.m */,
+				1922E0D2229631FE001712EC /* WLAccuIndexModel.h */,
+				1922E0D3229631FE001712EC /* WLAccuIndexModel.m */,
+				1922E0DA22963DC4001712EC /* WLAccuIndexGroupModel.h */,
+				1922E0DB22963DC4001712EC /* WLAccuIndexGroupModel.m */,
+				19806AF5229837910060D400 /* WLAccuAlarmsModel.h */,
+				19806AF6229837910060D400 /* WLAccuAlarmsModel.m */,
+				1911CB972298C489004AB62E /* WLAccuLocationModel.h */,
+				1911CB982298C489004AB62E /* WLAccuLocationModel.m */,
+				1911CB9D2298D09B004AB62E /* WLAccuuRadarModel.h */,
+				1911CB9E2298D09B004AB62E /* WLAccuuRadarModel.m */,
+				19C6E83D22994C28003A1D86 /* WLXinzhiAqiModel.h */,
+				19C6E83E22994C28003A1D86 /* WLXinzhiAqiModel.m */,
+				1915D41F229B82A200ACB9F1 /* WLXunquanBannerModel.h */,
+				1915D420229B82A200ACB9F1 /* WLXunquanBannerModel.m */,
+				19234A61229D091E00217D9A /* WLXunquanConfigModel.h */,
+				19234A62229D091E00217D9A /* WLXunquanConfigModel.m */,
+				19234A67229D21CD00217D9A /* WLXunquanColumnModel.h */,
+				19234A68229D21CD00217D9A /* WLXunquanColumnModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1351,6 +1401,18 @@
 				19590C3A2293F577004EF1BD /* WLMineViewController.m */,
 				19590C3C2293F651004EF1BD /* WLShoppingSubViewController.h */,
 				19590C3D2293F651004EF1BD /* WLShoppingSubViewController.m */,
+				19AC446222969C530047A850 /* WLIndexSubViewController.h */,
+				19AC446322969C530047A850 /* WLIndexSubViewController.m */,
+				19806AF222982D2B0060D400 /* WLDayWeatherViewController.h */,
+				19806AF322982D2B0060D400 /* WLDayWeatherViewController.m */,
+				1911CBA022993916004AB62E /* FishMapSelectPositionViewController.h */,
+				1911CBA122993916004AB62E /* FishMapSelectPositionViewController.m */,
+				19234A5B229CE15B00217D9A /* WLJSWebViewController.h */,
+				19234A5C229CE15B00217D9A /* WLJSWebViewController.m */,
+				19234A64229D103400217D9A /* WLScanResultViewController.h */,
+				19234A65229D103400217D9A /* WLScanResultViewController.m */,
+				19234A76229D58CF00217D9A /* WLItemShoppingViewController.h */,
+				19234A77229D58CF00217D9A /* WLItemShoppingViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1358,8 +1420,8 @@
 		19590C2C2293F44A004EF1BD /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				19BDD4F32294DA4100FD90F7 /* STSolunarTidesHandler.h */,
-				19BDD4F22294DA4100FD90F7 /* STSolunarTidesHandler.m */,
+				19C6E83A229943A6003A1D86 /* WLWeatherLocationHandler.h */,
+				19C6E83B229943A6003A1D86 /* WLWeatherLocationHandler.m */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1738,6 +1800,7 @@
 			files = (
 				19590AAE2293DCDC004EF1BD /* AlipaySDK.bundle in Resources */,
 				19590AB02293DCDC004EF1BD /* NBResource.bundle in Resources */,
+				1922E0D922963649001712EC /* AccuIndex.plist in Resources */,
 				19590A952293ABAC004EF1BD /* yw_1222.jpg in Resources */,
 				19590AAF2293DCDC004EF1BD /* ALPLinkPartnerSDK.bundle in Resources */,
 				19590AAD2293DCDC004EF1BD /* AlibabaAuthSDK.bundle in Resources */,
@@ -1770,13 +1833,12 @@
 			files = (
 				19590CC82294049C004EF1BD /* XPieItem.m in Sources */,
 				19590BCC2293DD1A004EF1BD /* MJRefreshGifHeader.m in Sources */,
-				19590A822293A452004EF1BD /* FishSellerModel.m in Sources */,
+				19234A69229D21CD00217D9A /* WLXunquanColumnModel.m in Sources */,
 				19590C3E2293F651004EF1BD /* WLShoppingSubViewController.m in Sources */,
 				19590CBF2294049C004EF1BD /* XStackAreaLineContainerView.m in Sources */,
 				19590CA82294049C004EF1BD /* XStackAreaLineChartConfiguration.m in Sources */,
 				19590CC42294049C004EF1BD /* XBarChartView.m in Sources */,
-				19590A892293A452004EF1BD /* FishSearchHistoryHeader.m in Sources */,
-				19590A7C2293A452004EF1BD /* FishSearchController.m in Sources */,
+				19590A7C2293A452004EF1BD /* WLAliSearchController.m in Sources */,
 				19590CA92294049C004EF1BD /* XLineChartConfiguration.m in Sources */,
 				195B16412293828C00C081AF /* ViewController.m in Sources */,
 				19590BED2293DD1A004EF1BD /* TYPageControl.m in Sources */,
@@ -1789,7 +1851,6 @@
 				19590CAF2294049C004EF1BD /* CAShapeLayer+XLayerHelper.m in Sources */,
 				19590A882293A452004EF1BD /* WXPSortItemView.m in Sources */,
 				19590BC92293DD1A004EF1BD /* MJRefreshAutoNormalFooter.m in Sources */,
-				19590A8A2293A452004EF1BD /* FishDetailHeaderView.m in Sources */,
 				19590BFE2293DD1A004EF1BD /* UIImageView+WebCache.m in Sources */,
 				19590BB52293DD1A004EF1BD /* PNScatterChartData.m in Sources */,
 				19590ACC2293DCFD004EF1BD /* FishNetworkBaseHandler.m in Sources */,
@@ -1798,7 +1859,9 @@
 				19590BC62293DD1A004EF1BD /* MJRefreshBackNormalFooter.m in Sources */,
 				19590C242293DF92004EF1BD /* WLTabBarController.m in Sources */,
 				1962104522957969005DF969 /* WLAccuHourlyCell.m in Sources */,
-				19590A7D2293A452004EF1BD /* FishDetailController.m in Sources */,
+				1922E0DC22963DC4001712EC /* WLAccuIndexGroupModel.m in Sources */,
+				19234A78229D58CF00217D9A /* WLItemShoppingViewController.m in Sources */,
+				19806AF422982D2B0060D400 /* WLDayWeatherViewController.m in Sources */,
 				19590CC02294049C004EF1BD /* XPositiveNegativeBarContainerView.m in Sources */,
 				19590CAE2294049C004EF1BD /* CALayer+XLayerSelectHelper.m in Sources */,
 				19590CA72294049C004EF1BD /* XNormalLineChartConfiguration.m in Sources */,
@@ -1806,6 +1869,7 @@
 				1962103C22953E5B005DF969 /* WLAccuCurrentModel.m in Sources */,
 				19590BD22293DD1A004EF1BD /* UIColor+HexString.m in Sources */,
 				19590BFF2293DD1A004EF1BD /* NSImage+WebCache.m in Sources */,
+				19234A5D229CE15B00217D9A /* WLJSWebViewController.m in Sources */,
 				1962103F22956A4B005DF969 /* WLAccuCurrentCell.m in Sources */,
 				19590BBD2293DD1A004EF1BD /* FLAnimatedImageView.m in Sources */,
 				19590BF82293DD1A004EF1BD /* UIImage+MultiFormat.m in Sources */,
@@ -1814,12 +1878,13 @@
 				19590BEB2293DD1A004EF1BD /* YYClassInfo.m in Sources */,
 				19590CEB22943C67004EF1BD /* STAcuuHeaderLineModel.m in Sources */,
 				19590C382293F55E004EF1BD /* WLCartViewController.m in Sources */,
+				19C6E83F22994C28003A1D86 /* WLXinzhiAqiModel.m in Sources */,
+				1915D421229B82A200ACB9F1 /* WLXunquanBannerModel.m in Sources */,
 				19590CB52294049C004EF1BD /* XJYNumberLabelDecoration.m in Sources */,
 				19590BA72293DD1A004EF1BD /* FishAliHandler.m in Sources */,
 				19590CA62294049C004EF1BD /* XAreaLineChartConfiguration.m in Sources */,
 				19590A862293A452004EF1BD /* FishCouponCollectionViewCell.m in Sources */,
 				19590CA32294049C004EF1BD /* Colours.m in Sources */,
-				19590A8C2293A452004EF1BD /* FishImageListCell.m in Sources */,
 				19590BA82293DD1A004EF1BD /* PNPieChartDataItem.m in Sources */,
 				19590BCA2293DD1A004EF1BD /* MJRefreshNormalHeader.m in Sources */,
 				1962104B2295896C005DF969 /* WLAccuHourlyModel.m in Sources */,
@@ -1828,38 +1893,47 @@
 				19590BC32293DD1A004EF1BD /* UIView+MJExtension.m in Sources */,
 				19590BCB2293DD1A004EF1BD /* MJRefreshStateHeader.m in Sources */,
 				19621042229574D4005DF969 /* WLAccuNormalHeaderView.m in Sources */,
-				19590A922293A452004EF1BD /* FishErrorTipView.m in Sources */,
 				19590BE52293DD1A004EF1BD /* SVRadialGradientLayer.m in Sources */,
+				1915D418229B6D6200ACB9F1 /* WXPFloat.m in Sources */,
 				19590CC72294049C004EF1BD /* XBarItem.m in Sources */,
 				19590BB72293DD1A004EF1BD /* UICountingLabel.m in Sources */,
 				19590BBC2293DD1A004EF1BD /* FLAnimatedImage.m in Sources */,
 				19590BEF2293DD1A004EF1BD /* TYCyclePagerTransformLayout.m in Sources */,
 				19590BA92293DD1A004EF1BD /* PNChartLabel.m in Sources */,
 				19590CBD2294049C004EF1BD /* XLineChartView.m in Sources */,
+				1911CBA222993917004AB62E /* FishMapSelectPositionViewController.m in Sources */,
 				19590BB12293DD1A004EF1BD /* PNLineChartDataItem.m in Sources */,
 				1962104822957A08005DF969 /* WLAcuuHourlyItemCell.m in Sources */,
+				19234A75229D308300217D9A /* WLXunquanCloumnItemCell.m in Sources */,
 				19590BB02293DD1A004EF1BD /* PNLineChartData.m in Sources */,
 				19590BBE2293DD1A004EF1BD /* UIScrollView+MJRefresh.m in Sources */,
 				19590BE12293DD1A004EF1BD /* View+MASAdditions.m in Sources */,
+				19AC44672296DA340047A850 /* LineProcessView.m in Sources */,
+				19C6E83C229943A6003A1D86 /* WLWeatherLocationHandler.m in Sources */,
 				19590CC32294049C004EF1BD /* XLineContainerView.m in Sources */,
 				19590BBF2293DD1A004EF1BD /* MJRefreshConst.m in Sources */,
 				19590C2F2293F4C6004EF1BD /* WLWeatherViewController.m in Sources */,
 				19590BBA2293DD1A004EF1BD /* NSString+MD5.m in Sources */,
+				1922E0D7229633F1001712EC /* WLAccuIndexDetailCell.m in Sources */,
 				19590BB42293DD1A004EF1BD /* PNColor.m in Sources */,
 				19590CB62294049C004EF1BD /* XCycleView.m in Sources */,
 				19590BC12293DD1A004EF1BD /* UIScrollView+MJExtension.m in Sources */,
 				19590BD92293DD1A004EF1BD /* WMMenuView.m in Sources */,
 				19590CCA2294049C004EF1BD /* XNotificationBridge.m in Sources */,
 				19590BE32293DD1A004EF1BD /* MASViewConstraint.m in Sources */,
+				19AC446422969C530047A850 /* WLIndexSubViewController.m in Sources */,
+				1911CB9C2298CC68004AB62E /* WLAccuRadarCell.m in Sources */,
 				19590CCC2294049C004EF1BD /* CAKeyframeAnimation+AHEasing.m in Sources */,
 				19590CED22943C67004EF1BD /* STAcuuDayAndNightModel.m in Sources */,
 				19590BEE2293DD1A004EF1BD /* TYCyclePagerView.m in Sources */,
 				19590C272293E0D3004EF1BD /* WLNavigationController.m in Sources */,
 				19590C012293DD1A004EF1BD /* UIView+WebCacheOperation.m in Sources */,
 				19590A902293A452004EF1BD /* WXPSortHeaderView.m in Sources */,
+				19234A66229D103400217D9A /* WLScanResultViewController.m in Sources */,
 				19590CAD2294049C004EF1BD /* XRandomNumerHelper.m in Sources */,
 				19590CC52294049C004EF1BD /* OrdinateView.m in Sources */,
 				19590BF12293DD1A004EF1BD /* MKAnnotationView+WebCache.m in Sources */,
+				19117B30229A420C0076166D /* WXPErrorTipView.m in Sources */,
 				19590A852293A452004EF1BD /* FishCateModel.m in Sources */,
 				19590BEA2293DD1A004EF1BD /* NSObject+YYModel.m in Sources */,
 				19590BDF2293DD1A004EF1BD /* MASLayoutConstraint.m in Sources */,
@@ -1867,19 +1941,18 @@
 				19590BD82293DD1A004EF1BD /* WMScrollView.m in Sources */,
 				19590BB22293DD1A004EF1BD /* PNPieChart.m in Sources */,
 				19590BEC2293DD1A004EF1BD /* FIshUnitTransTool.m in Sources */,
-				19590A872293A452004EF1BD /* FishCouponDetailBottomView.m in Sources */,
 				19590BF22293DD1A004EF1BD /* SDWebImageManager.m in Sources */,
 				19590BB82293DD1A004EF1BD /* PNScatterChart.m in Sources */,
 				19590BDD2293DD1A004EF1BD /* MASCompositeConstraint.m in Sources */,
-				19590A832293A452004EF1BD /* FishDetailItemModel.m in Sources */,
-				19590A8F2293A452004EF1BD /* FishDetailShopCell.m in Sources */,
 				19590BF62293DD1A004EF1BD /* SDWebImageDownloader.m in Sources */,
 				19590BDE2293DD1A004EF1BD /* MASConstraintMaker.m in Sources */,
 				19590BD52293DD1A004EF1BD /* WMPageController.m in Sources */,
 				19590BDA2293DD1A004EF1BD /* WMProgressView.m in Sources */,
+				1915D41E229B7F2300ACB9F1 /* LBImagItemCell.m in Sources */,
 				19590BF42293DD1A004EF1BD /* UIImageView+HighlightedWebCache.m in Sources */,
 				19590CBE2294049C004EF1BD /* XPieChart.m in Sources */,
 				19590ACB2293DCFD004EF1BD /* FishNetwork.m in Sources */,
+				19234A63229D091E00217D9A /* WLXunquanConfigModel.m in Sources */,
 				19590CB22294049C004EF1BD /* XAnimationPath.m in Sources */,
 				19590BBB2293DD1A004EF1BD /* NSNull+LB.m in Sources */,
 				19590C002293DD1A004EF1BD /* SDImageCacheConfig.m in Sources */,
@@ -1889,21 +1962,27 @@
 				19590CBB2294049C004EF1BD /* XPositiveNegativeBarChart.m in Sources */,
 				19590C3B2293F577004EF1BD /* WLMineViewController.m in Sources */,
 				19590BE82293DD1A004EF1BD /* SVIndefiniteAnimatedView.m in Sources */,
-				19590A802293A452004EF1BD /* FishAliSettingController.m in Sources */,
 				19590CB42294049C004EF1BD /* XAnimator.m in Sources */,
 				19590BE62293DD1A004EF1BD /* SVProgressAnimatedView.m in Sources */,
 				19590BCE2293DD1A004EF1BD /* MJRefreshHeader.m in Sources */,
 				19590ACA2293DCFD004EF1BD /* LFCGzipUtility.m in Sources */,
-				19590A7E2293A452004EF1BD /* FishAliWebController.m in Sources */,
+				19117B35229AB6440076166D /* WLTaobaoCouponCell.m in Sources */,
+				19590A7E2293A452004EF1BD /* WLAliWebController.m in Sources */,
+				1915D41B229B7F0600ACB9F1 /* LBBannerCell.m in Sources */,
 				19590BCD2293DD1A004EF1BD /* MJRefreshFooter.m in Sources */,
 				19590BD72293DD1A004EF1BD /* WMMenuItem.m in Sources */,
 				19590CA52294049C004EF1BD /* XBaseChartConfiguration.m in Sources */,
 				19590BF52293DD1A004EF1BD /* FLAnimatedImageView+WebCache.m in Sources */,
 				19590CAB2294049C004EF1BD /* XPointDetect.m in Sources */,
 				19590BE02293DD1A004EF1BD /* NSArray+MASAdditions.m in Sources */,
+				19234A7B229D622100217D9A /* NSNull+WL.m in Sources */,
+				19806AFA22983A520060D400 /* WLAccuAlarmsCell.m in Sources */,
 				19590BD62293DD1A004EF1BD /* UIViewController+WMPageController.m in Sources */,
 				19590ACD2293DCFD004EF1BD /* FishNetworkFirstHandler.m in Sources */,
+				1922E0D4229631FE001712EC /* WLAccuIndexModel.m in Sources */,
 				19590CB32294049C004EF1BD /* XAnimation.m in Sources */,
+				19C6E842229951D7003A1D86 /* WLXinzhiAqiCell.m in Sources */,
+				1915D424229BDB6300ACB9F1 /* NSObject+WL.m in Sources */,
 				19590CB82294049C004EF1BD /* XPositiveNegativeBarChartView.m in Sources */,
 				19590BC72293DD1A004EF1BD /* MJRefreshAutoStateFooter.m in Sources */,
 				19590CAC2294049C004EF1BD /* XAuxiliaryCalculationHelper.m in Sources */,
@@ -1913,13 +1992,14 @@
 				19590CC62294049C004EF1BD /* XLineChart.m in Sources */,
 				19590BB32293DD1A004EF1BD /* PNRadarChart.m in Sources */,
 				19590BAF2293DD1A004EF1BD /* PNCircleChart.m in Sources */,
-				19590A8B2293A452004EF1BD /* FishDetailTitleCell.m in Sources */,
+				1911CB992298C489004AB62E /* WLAccuLocationModel.m in Sources */,
 				19590CCF2294336D004EF1BD /* LSYViewPagerVC.m in Sources */,
 				19590BC22293DD1A004EF1BD /* NSBundle+MJRefresh.m in Sources */,
 				19590BF92293DD1A004EF1BD /* SDWebImageCompat.m in Sources */,
 				19590BF72293DD1A004EF1BD /* UIImage+GIF.m in Sources */,
 				19590BAE2293DD1A004EF1BD /* PNLineChart.m in Sources */,
 				19590BAB2293DD1A004EF1BD /* PNRadarChartDataItem.m in Sources */,
+				19806AF7229837910060D400 /* WLAccuAlarmsModel.m in Sources */,
 				19590BB62293DD1A004EF1BD /* PNBar.m in Sources */,
 				19590CD7229439E8004EF1BD /* STAcuuWeatherFooterView.m in Sources */,
 				19590BB92293DD1A004EF1BD /* NSString+LB.m in Sources */,
@@ -1928,11 +2008,12 @@
 				19590BAD2293DD1A004EF1BD /* PNBarChart.m in Sources */,
 				19590BD42293DD1A004EF1BD /* UIView+Toast.m in Sources */,
 				19590BC82293DD1A004EF1BD /* MJRefreshAutoGifFooter.m in Sources */,
-				19590A8E2293A452004EF1BD /* FishDetailImageHeaderView.m in Sources */,
 				19590BC52293DD1A004EF1BD /* MJRefreshBackStateFooter.m in Sources */,
 				19590BDC2293DD1A004EF1BD /* ViewController+MASAdditions.m in Sources */,
 				19590BF32293DD1A004EF1BD /* SDWebImageDecoder.m in Sources */,
+				19234A6C229D271B00217D9A /* WLXunquanColumnCell.m in Sources */,
 				19590BD32293DD1A004EF1BD /* FishToast.m in Sources */,
+				19234A60229D06EA00217D9A /* UIColor+WXP.m in Sources */,
 				19590CE422943A94004EF1BD /* STLocationModel.m in Sources */,
 				19590CB92294049C004EF1BD /* XAreaLineContainerView.m in Sources */,
 				19590C022293DD1A004EF1BD /* UIView+WebCache.m in Sources */,
@@ -1940,19 +2021,16 @@
 				19590CBC2294049C004EF1BD /* XAbscissaView.m in Sources */,
 				19590C322293F4DE004EF1BD /* WLIndexViewController.m in Sources */,
 				19590CC22294049C004EF1BD /* XBarContainerView.m in Sources */,
+				19234A72229D2A1400217D9A /* UIView+WL.m in Sources */,
 				19590CC92294049C004EF1BD /* XLineChartItem.m in Sources */,
-				19590A812293A452004EF1BD /* FishImageItemModel.m in Sources */,
-				19590A8D2293A452004EF1BD /* FishImagItemCell.m in Sources */,
-				19590A912293A452004EF1BD /* FishSettingCell.m in Sources */,
 				19590BFB2293DD1A004EF1BD /* SDImageCache.m in Sources */,
 				19590A7F2293A452004EF1BD /* FishMuyinSubController.m in Sources */,
 				195B163E2293828C00C081AF /* AppDelegate.m in Sources */,
+				1911CB9F2298D09B004AB62E /* WLAccuuRadarModel.m in Sources */,
 				19590BD02293DD1A004EF1BD /* MJRefreshAutoFooter.m in Sources */,
-				19BDD4F42294DA4100FD90F7 /* STSolunarTidesHandler.m in Sources */,
 				19590BFD2293DD1A004EF1BD /* NSData+ImageContentType.m in Sources */,
 				19590CB02294049C004EF1BD /* UIGestureRecognizer+XGesHelper.m in Sources */,
 				19590CBA2294049C004EF1BD /* XAnimationLabel.m in Sources */,
-				19590A7B2293A452004EF1BD /* FishAliUser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

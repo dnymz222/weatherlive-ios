@@ -8,8 +8,9 @@
 
 #import "FishAliHandler.h"
 #import "LBKeyMacro.h"
-#import "FishAliUser.h"
-#import "FishAliWebController.h"
+#import "WLAliWebController.h"
+#import "WLJSWebViewController.h"
+
 //#import "LBCartScanController.h"
 
 @implementation FishAliHandler
@@ -72,13 +73,13 @@
     showParam.linkKey = @"taobao_scheme";
     
     //   showParam.backUrl=[NSString stringWithFormat:@"tbopen%@:https://h5.m.taobao.com",@"23467543"];
-    showParam.backUrl =@"tbopen23610358";
+    showParam.backUrl =@"tbopen27442851";
     AlibcTradeTaokeParams *taoKeParams=[[AlibcTradeTaokeParams alloc] init];
     taoKeParams.pid = PidString ; //
-    if ([FishAliUser shareInstance].openTaobao) {
-        taoKeParams.adzoneId = @"27520650431";
-        taoKeParams.extParams = @{@"taokeAppkey":@"24863180"};
-    }
+//    if ([WLAliUser shareInstance].openTaobao) {
+//        taoKeParams.adzoneId = @"27520650431";
+//        taoKeParams.extParams = @{@"taokeAppkey":@"24863180"};
+//    }
     
     
     
@@ -122,22 +123,7 @@
     
     
     
-    if ((![FishAliUser shareInstance].openTaobao) ) {
-        
-        showParam.openType = AlibcOpenTypeH5;
-        FishAliWebController *webController = [[FishAliWebController alloc] init];
-        [controller.navigationController pushViewController:webController animated:YES];
-        [[AlibcTradeSDK sharedInstance].tradeService show:controller webView:webController.webView page:page showParams:showParam taoKeParams:taoKeParams trackParam:nil tradeProcessSuccessCallback:^(AlibcTradeResult * _Nullable result) {
-            
-        } tradeProcessFailedCallback:^(NSError * _Nullable error) {
-            
-        }];
-        
-        
-        
-        
-        
-    } else {
+  
         [[AlibcTradeSDK sharedInstance].tradeService
          show:controller
          page:page
@@ -157,9 +143,109 @@
              
          }];
         
-    }
+ 
     
 }
+
++ (void)jsWebOpenMyCartWithViewController:(UIViewController*)controller
+                                  success:(tradeSuccessCallback)successblock
+                                   failed:(tradeFailedCallback)failedblock
+{
+    
+    [FishAliHandler viewController:controller
+            openJSWeControllerByString:nil
+                              pageType:FishAliPageTypeMyCartsPage
+                               success:^(AlibcTradeResult *result) {
+                                   
+                                   successblock(result);
+                               }
+                                failed:^(NSError *error) {
+                                    failedblock(error);
+                                    
+                                }];
+    
+    
+    
+}
+
++ (void)viewController:(UIViewController *)controller
+openJSWeControllerByString:(NSString *)string
+              pageType:(LBAliPageType)pageType
+               success:(tradeSuccessCallback)successblock
+                failed:(tradeFailedCallback)failedblock
+{
+    
+    
+    AlibcTradeShowParams* showParam = [[AlibcTradeShowParams alloc] init];
+    showParam.openType = AlibcOpenTypeNative;
+    showParam.isNeedPush= YES;
+    showParam.linkKey = @"taobao_scheme";
+    
+    //   showParam.backUrl=[NSString stringWithFormat:@"tbopen%@:https://h5.m.taobao.com",@"23467543"];
+    showParam.backUrl =@"tbopen27442851";
+    AlibcTradeTaokeParams *taoKeParams=[[AlibcTradeTaokeParams alloc] init];
+    taoKeParams.pid = PidString;
+  
+    
+    
+    //
+    id<AlibcTradePage> page ;
+    
+    
+    switch (pageType) {
+        case FishAliPageTypeItemDetailPage:
+            page = [AlibcTradePageFactory itemDetailPage:string];
+            break;
+            
+        case FishAliPageTypeAddCartPage:
+            page =[ AlibcTradePageFactory addCartPage:string];
+            
+            break;
+            
+        case FishAliPageTypePage:
+            //string = [string stringByAppendingString:@"&nowake=1"];
+            page =[AlibcTradePageFactory page:string];
+            break;
+            
+        case FishAliPageTypeShopPage:
+            page =[AlibcTradePageFactory shopPage:string];
+            break;
+            
+        case FishAliPageTypeMyOrdersPage:
+            page =[AlibcTradePageFactory myOrdersPage:0 isAllOrder:YES];
+            //             openTabaoIgnore = YES;
+            break;
+            
+            
+        case FishAliPageTypeMyCartsPage:
+            page = [AlibcTradePageFactory myCartsPage];
+            //             openTabaoIgnore = YES;
+            break;
+            
+        default:
+            break;
+    }
+    
+    
+    
+    
+    showParam.openType = AlibcOpenTypeH5;
+    WLJSWebViewController*webController = (WLJSWebViewController*)controller;
+    
+    [[AlibcTradeSDK sharedInstance].tradeService show:controller webView:webController.webView page:page showParams:showParam taoKeParams:taoKeParams trackParam:nil tradeProcessSuccessCallback:^(AlibcTradeResult * _Nullable result) {
+        
+    } tradeProcessFailedCallback:^(NSError * _Nullable error) {
+        
+    }];
+    
+    
+    
+    
+    
+    
+    
+}
+
 
 
 
@@ -306,10 +392,10 @@
     [FishAliHandler viewController:controller openWithString:nil
                               pageType:FishAliPageTypeMyOrdersPage
                                success:^(AlibcTradeResult * _Nullable result) {
-                                   
+                                   successblock(result);
                                }
                                 failed:^(NSError * _Nullable error) {
-                                    
+                                    failedblock(error);
                                 }];
     
     

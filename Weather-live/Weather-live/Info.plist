@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>天气与生活</string>
+	<string>天气预报</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -75,7 +75,7 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>钓鱼天气需要访问你的位置信息，获取经纬度请求天气和计算出日出日落月出月落时间，获取海拔计算出标准大气压</string>
+	<string>天气预报需要访问你的位置信息，获取经纬度请求天气数据</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

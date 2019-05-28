@@ -170,7 +170,7 @@
     
     if (!_couponButton) {
         _couponButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        UIImage *image = [UIImage imageNamed:@"coupon_bg"];
+        UIImage *image = [UIImage imageNamed:@"bg_coupon"];
         [_couponButton setBackgroundImage:image forState:UIControlStateNormal];
         _couponButton.userInteractionEnabled = NO;
     }
@@ -185,25 +185,30 @@
 //
 //        model.hasReplace = YES;
 //    }
+    
+    
 //
+    if (![model.pict_url hasPrefix:@"http"] ) {
+        model.pict_url = [@"https:" stringByAppendingString:model.pict_url];
+    }
     NSString *picurl  = [model.pict_url stringByAppendingString:@"_400x400"];
     
     [_iconView sd_setImageWithURL:[NSURL URLWithString:picurl]];
-    _titleLable.text = model.short_title;
+    _titleLable.text = model.short_title.length? model.short_title:model.title;
     NSString *string = [NSString stringWithFormat:@"%zd元券", model.coupon_amount];
     
     NSAttributedString *couponAttrs = [[NSAttributedString alloc] initWithString:string attributes:_couponAttrsDict];
     [_couponButton setAttributedTitle:couponAttrs forState:UIControlStateNormal];
     
     _priceLable.text = [NSString stringWithFormat:@"￥%0.2f",[model.zk_final_price floatValue] - model.coupon_amount];
-    if ([@"0" isEqualToString: model.volume]) {
+    if (!model.volume) {
         self.sellLabel.text = @"";
     } else {
-        self.sellLabel.text = [NSString stringWithFormat:@"月销 %@",model.volume];
+        self.sellLabel.text = [NSString stringWithFormat:@"月销 %d",model.volume];
     }
     
     self.shopLabel.text = model.shop_title;
-    
+   
 }
 
 

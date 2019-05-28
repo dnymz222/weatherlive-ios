@@ -57,6 +57,12 @@ typedef void(^tradeFailedCallback)(NSError *error);
                                failed:(tradeFailedCallback)failedblock;
 
 
++ (void)jsWebOpenMyCartWithViewController:(UIViewController*)controller
+                                  success:(tradeSuccessCallback)successblock
+                                   failed:(tradeFailedCallback)failedblock;
+
+
+
 
 
 

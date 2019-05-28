@@ -10,6 +10,7 @@
 #import "WLTabBarController.h"
 #import "UMMobClick/MobClick.h"
 #import <AlibcTradeSDK/AlibcTradeSDK.h>
+#import "WLWeatherLocationHandler.h"
 
 
 #define umengkey @"5ce3cb9a4ca357102a000562"
@@ -76,6 +77,10 @@
 
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
+    
+//    NSLog(@"entrbackground");
+//
+//    [WLWeatherLocationHandler sharehanlder].becomeActive = NO;
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
@@ -87,6 +92,11 @@
 
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
+    
+//    NSLog(@"becomeactive");
+//
+//    [WLWeatherLocationHandler sharehanlder].becomeActive = YES;
+    
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 

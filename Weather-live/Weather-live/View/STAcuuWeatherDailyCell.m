@@ -10,6 +10,7 @@
 #import "STAcuuWeatherDailyModel.h"
 #import "Masonry.h"
 #import "ColorSizeMacro.h"
+#import "FIshUnitTransTool.h"
 
 
 
@@ -83,7 +84,7 @@
         }];
         
         [self.cloudCoverIconView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(self.contentView).offset(-92);
+            make.right.equalTo(self.contentView).offset(-72);
             make.centerY.equalTo(self.iconView);
             make.width.equalTo(@20);
             make.height.equalTo(@20);
@@ -92,7 +93,7 @@
         [self.cloudCoverLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(self.contentView).offset(-10);
             make.centerY.equalTo(self.iconView);
-            make.width.equalTo(@80);
+            make.width.equalTo(@60);
             make.height.equalTo(@20);
         }];
         
@@ -125,7 +126,7 @@
         
         [self.itensityIconView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(self.windIconView);
-            make.right.equalTo(self.contentView).offset(-92);
+            make.right.equalTo(self.contentView).offset(-72);
             make.width.equalTo(@20);
             make.height.equalTo(@20);
         }];
@@ -133,7 +134,7 @@
         [self.intensityLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(self.windIconView);
             make.right.equalTo(self.contentView).offset(-10);
-            make.width.equalTo(@80);
+            make.width.equalTo(@60);
             make.height.equalTo(@20);
         }];
         
@@ -223,6 +224,7 @@
         _windLabel = [[UILabel alloc] init];
         _windLabel.textAlignment =  NSTextAlignmentLeft;
         _windLabel.textColor = UIColorFromRGB(0x666666);
+        _windLabel.font = [UIFont systemFontOfSize:14.f];
     }
     
     return _windLabel;
@@ -283,22 +285,29 @@
     [self.iconView setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%02d",weatherModel.Icon]]];
     self.phraseLabel.text = weatherModel.LongPhrase;
     self.cloudCoverLabel.text = [NSString stringWithFormat:@"%d%@",weatherModel.CloudCover,@"%"];
+    
+    
     NSDictionary  *direction = (NSDictionary*)weatherModel.Wind[@"Direction"];
     float degrees = [[direction valueForKey:@"Degrees"] floatValue];
     NSString *DirectionLoclized = [direction valueForKey:@"Localized"];
     
     NSDictionary *speed  = (NSDictionary *)weatherModel.Wind[@"Speed"];
-    float speedvalue = [[speed valueForKey:@"Value"] floatValue];
+    
+    float speedvalue =[FIshUnitTransTool meterpersecondfromnileperhour:[[speed valueForKey:@"Value"] floatValue]];
+    
+    
     NSString *speedunit = [speed valueForKey:@"Unit"];
-//    self.window.transform = CGAffineTransformIdentity;
+    self.windIconView.transform = CGAffineTransformIdentity;
     float radians = (degrees-45)/180.0*M_PI;
     self.windIconView.transform = CGAffineTransformMakeRotation(radians);
-    self.windLabel.text = [NSString stringWithFormat:@"%@ %0.1f%@",DirectionLoclized,speedvalue,speedunit];
+    self.windLabel.text = [NSString stringWithFormat:@"%@ %0.1f米/秒",DirectionLoclized,speedvalue];
     
     self.probilityLabel.text = [NSString stringWithFormat:@"%d%@",weatherModel.RainProbability,@"%"];
     
+    
     NSDictionary *totoalliquid = weatherModel.TotalLiquid;
-    self.intensityLabel.text = [NSString stringWithFormat:@"%@ %@",totoalliquid[@"Value"],totoalliquid[@"Unit"]];
+    float intensity = [FIshUnitTransTool mmtransfrominches:[totoalliquid[@"Value"] floatValue]];
+    self.intensityLabel.text = [NSString stringWithFormat:@"%0.1f毫米",intensity];
 
     self.timeLabel.text = isDay?@"白天":@"夜晚";
     

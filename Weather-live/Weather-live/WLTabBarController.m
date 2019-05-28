@@ -14,6 +14,7 @@
 #import "WLMineViewController.h"
 #import "WLCartViewController.h"
 #import "ColorSizeMacro.h"
+#import "WLDayWeatherViewController.h"
 
 
 @interface WLTabBarController ()
@@ -30,9 +31,15 @@
     WLWeatherViewController *weathervc = [[WLWeatherViewController alloc] init];
     WLNavigationController *weathernav = [[WLNavigationController alloc] initWithRootViewController:weathervc];
     
-    UITabBarItem *item1 = [[UITabBarItem alloc] initWithTitle:@"天气预报" image:[[UIImage imageNamed: @"tab_weather_normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed: @"tab_weather_select"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-    weathervc.tabBarItem = item1;
+    UITabBarItem *item0 = [[UITabBarItem alloc] initWithTitle:@"当前天气" image:[[UIImage imageNamed: @"tab_weather_normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed: @"tab_weather_select"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    weathervc.tabBarItem = item0;
     
+    
+    WLDayWeatherViewController *dayvc = [[WLDayWeatherViewController alloc] init];
+    WLNavigationController *daynav = [[WLNavigationController alloc] initWithRootViewController:dayvc];
+    
+    UITabBarItem *item1 = [[UITabBarItem alloc] initWithTitle:@"逐日天气" image:[[UIImage imageNamed: @"tab_daily_normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed: @"tab_daily_select"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    dayvc.tabBarItem = item1;
     
 
     
@@ -61,21 +68,16 @@
     shoppingvc.tabBarItem = item3;
     
     
-     WLCartViewController *cartvc = [[WLCartViewController alloc] init];
-    WLNavigationController *cartnav = [[WLNavigationController alloc] initWithRootViewController:cartvc];
-    
-    UITabBarItem *item4 = [[UITabBarItem alloc] initWithTitle:@"购物车" image:[[UIImage imageNamed: @"tab_solunar_normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed: @"tab_solunar_select"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-    cartvc.tabBarItem = item4;
     
     
     WLMineViewController *minevc = [[WLMineViewController alloc] init];
     WLNavigationController *minenav = [[WLNavigationController alloc] initWithRootViewController:minevc];
     
-    UITabBarItem *item5 = [[UITabBarItem alloc] initWithTitle:@"我的设置" image:[[UIImage imageNamed: @"tab_mine_normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed: @"tab_mine_select"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-    minevc.tabBarItem = item5;
+    UITabBarItem *item4 = [[UITabBarItem alloc] initWithTitle:@"我的设置" image:[[UIImage imageNamed: @"tab_mine_normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed: @"tab_mine_select"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    minevc.tabBarItem = item4;
     
     
-    self.viewControllers = @[weathernav,indexnav,shopingnav,cartnav,minenav];
+    self.viewControllers = @[weathernav,daynav,indexnav,shopingnav,minenav];
     
     
     [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:UIColorFromRGB(0x666666), NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
