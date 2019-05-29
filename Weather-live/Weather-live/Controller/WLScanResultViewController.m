@@ -7,8 +7,8 @@
 //
 
 #import "WLScanResultViewController.h"
-#import "FishAliHandler.h"
-#import "FishCouponItemModel.h"
+#import "WLAliHandler.h"
+#import "WLCouponItemModel.h"
 #import "Masonry.h"
 #import "WLTaobaoCouponCell.h"
 
@@ -67,7 +67,7 @@
         cell = [[WLTaobaoCouponCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
     }
     
-    FishCouponItemModel *model = self.dataArray[indexPath.row];
+    WLCouponItemModel *model = self.dataArray[indexPath.row];
     [cell configWithCoupon:model];
     
     return cell;
@@ -76,13 +76,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    FishCouponItemModel *model = self.dataArray[indexPath.row];
+    WLCouponItemModel *model = self.dataArray[indexPath.row];
     
     if (![model.coupon_share_url hasPrefix:@"http"]) {
         model.coupon_share_url = [@"https:" stringByAppendingString:model.coupon_share_url];
     }
     
-    [FishAliHandler viewController:self openWithUrl:model.coupon_share_url success:^(AlibcTradeResult * _Nonnull result) {
+    [WLAliHandler viewController:self openWithUrl:model.coupon_share_url success:^(AlibcTradeResult * _Nonnull result) {
         
         
         

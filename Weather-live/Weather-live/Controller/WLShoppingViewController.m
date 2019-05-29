@@ -9,9 +9,9 @@
 #import "WLShoppingViewController.h"
 #import "ColorSizeMacro.h"
 #import "WLAliSearchController.h"
-#import "FishNetworkFirstHandler.h"
+#import "WLNetworkFirstHandler.h"
 #import "WLShoppingSubViewController.h"
-#import "FishCateModel.h"
+#import "WLCateModel.h"
 #import "YYModel.h"
 #import "WXPErrorTipView.h"
 
@@ -80,9 +80,9 @@
 
 - (void)loadCate {
     
-    [FishNetworkFirstHandler xunquancateWithparamater:nil success:^(NSURLResponse *response, id data) {
+    [WLNetworkFirstHandler xunquancateWithparamater:nil success:^(NSURLResponse *response, id data) {
         
-        NSArray *array = [NSArray yy_modelArrayWithClass:[FishCateModel class] json:data];
+        NSArray *array = [NSArray yy_modelArrayWithClass:[WLCateModel class] json:data];
         if (array && array.count) {
             
             self.dataArray = array;
@@ -123,7 +123,7 @@
 
 - (NSString *)pageController:(WMPageController *)pageController titleAtIndex:(NSInteger)index {
     
-    FishCateModel *cate = self.dataArray[index];
+    WLCateModel *cate = self.dataArray[index];
     return cate.name;
 }
 
@@ -138,7 +138,7 @@
 }
 
 - (CGFloat)menuView:(WMMenuView *)menu widthForItemAtIndex:(NSInteger)index {
-FishCateModel *cate= self.dataArray[index];
+WLCateModel *cate= self.dataArray[index];
     
     CGFloat width = cate.name.length *14;
     return width +25;
@@ -162,7 +162,7 @@ FishCateModel *cate= self.dataArray[index];
     
     WLShoppingSubViewController *subcontroller = (WLShoppingSubViewController*)viewController;
     
-    FishCateModel *cate = self.dataArray[subcontroller.index];
+    WLCateModel *cate = self.dataArray[subcontroller.index];
     
     [subcontroller configCateModel:cate];
     

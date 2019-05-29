@@ -11,11 +11,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 
-@class FishCouponItemModel;
+@class WLCouponItemModel;
 
 @interface WLTaobaoCouponCell : UITableViewCell
 
-- (void)configWithCoupon:(FishCouponItemModel *)coupon;
+- (void)configWithCoupon:(WLCouponItemModel *)coupon;
 
 
 

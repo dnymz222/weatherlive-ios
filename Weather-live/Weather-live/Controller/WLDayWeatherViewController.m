@@ -11,7 +11,7 @@
 #import "ColorSizeMacro.h"
 #import "LBKeyMacro.h"
 #import "STLocationModel.h"
-#import "FishNetworkFirstHandler.h"
+#import "WLNetworkFirstHandler.h"
 #import "WLWeatherLocationHandler.h"
 #import <CoreLocation/CoreLocation.h>
 #import "STAcuuWeatherDailyModel.h"
@@ -32,6 +32,9 @@
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,copy)NSString *locationKey;
 @property(nonatomic,assign)NSInteger dayTime;
+@property(nonatomic,copy)NSString *day;
+
+@property(nonatomic,strong)NSDateFormatter *dayFomatter;
 @property(nonatomic,assign)NSInteger lastDayTime;
 
 @end
@@ -57,8 +60,49 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivelocationkeyChanged:) name:loctionkeygetkey object:nil];
     
+    self.dayFomatter = [[NSDateFormatter alloc] init];
+    [self.dayFomatter setDateFormat:@"yyyy-MM-dd"];
     // Do any additional setup after loading the view.
 }
+
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    if (!self.dayTime) {
+        
+    } else {
+        
+        
+        NSDate *date = [NSDate date];
+        NSInteger now  = [date timeIntervalSince1970];
+        
+        NSString *nowday = [self.dayFomatter stringFromDate:date];
+        
+        BOOL sameday = [nowday isEqualToString:self.day];
+        if (sameday) {
+            if (now - self.lastDayTime > 6*3600) {
+                [self requestWeather];
+            }
+            
+        } else {
+            if (now - self.lastDayTime > 3600) {
+                [self requestWeather];
+            }
+        }
+        
+       
+        
+        
+    }
+    
+}
+
+
+
+
+
+
 
 - (void)receivelocationkeyChanged:(NSNotification *)note {
     
@@ -88,7 +132,7 @@
     
     
     NSInteger timestamp = [[NSDate date] timeIntervalSince1970];
-    NSInteger total = [FishNetwork cacluteTotalWithLat:latitude lon:longtitude time:timestamp];
+    NSInteger total = [WLNetwork cacluteTotalWithLat:latitude lon:longtitude time:timestamp];
     
     NSDictionary *dict = @{@"lat":latitude,
                            @"lng":longtitude,
@@ -98,7 +142,7 @@
                            @"language":@"zh-cn"
                            };
     
-    [FishNetworkFirstHandler acuuWeatherWithparamater:dict success:^(NSURLResponse *response, id data) {
+    [WLNetworkFirstHandler acuuWeatherWithparamater:dict success:^(NSURLResponse *response, id data) {
         
         NSDictionary *dataDict  =(NSDictionary *)data;
         NSArray *array = [NSArray yy_modelArrayWithClass:[STAcuuWeatherDailyModel class] json:dataDict[@"DailyForecasts"]];
@@ -110,6 +154,7 @@
             });
             STAcuuWeatherDailyModel *firstmodel = array[0];
             self.dayTime =firstmodel.EpochDate;
+            self.day = [self.dayFomatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:self.dayTime]];
             
             self.lastDayTime = [[NSDate date] timeIntervalSince1970];
         

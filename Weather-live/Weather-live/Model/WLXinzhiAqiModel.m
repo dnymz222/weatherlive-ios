@@ -13,7 +13,7 @@
 
 - (void)calcaulteType {
     
-    float value = [self.quality floatValue];
+    float value = [self.aqi floatValue];
     if (value < 50) {
         self.type = WLXinzhiAqiTypeExcellent;
         self.aqiGrade = @"优";
@@ -21,7 +21,7 @@
     } else if (value < 100) {
         self.type  =WLXinzhiAqiTypeGood;
         self.aqiGrade = @"良";
-        self.valueColor = UIColorFromRGB(0xfeff00);
+        self.valueColor = UIColorFromRGB(0xf9dd64);
     } else if (value < 150) {
         self.type = WLXinzhiAqiTypeMild;
         self.aqiGrade = @"轻度污染";

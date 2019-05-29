@@ -45,7 +45,7 @@
     
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self.contentView addSubview:self.titleLabel];
         [self.contentView addSubview:self.valueLabel];
         [self.contentView addSubview:self.Pm25Label];

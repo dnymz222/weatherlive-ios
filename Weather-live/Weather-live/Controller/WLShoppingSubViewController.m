@@ -7,12 +7,12 @@
 //
 
 #import "WLShoppingSubViewController.h"
-#import "FishCateModel.h"
+#import "WLCateModel.h"
 #import "Masonry.h"
-#import "FishNetworkFirstHandler.h"
+#import "WLNetworkFirstHandler.h"
 #import "WLTaobaoCouponCell.h"
-#import "FishCouponItemModel.h"
-#import "FishAliHandler.h"
+#import "WLCouponItemModel.h"
+#import "WLAliHandler.h"
 #import "YYModel.h"
 #import "MJRefresh.h"
 #import "WLXunquanBannerModel.h"
@@ -22,6 +22,7 @@
 #import "WLXunquanColumnCell.h"
 #import "WLItemShoppingViewController.h"
 #import "WLAliWebController.h"
+
 
 
 
@@ -45,7 +46,7 @@ typedef NS_ENUM(NSInteger,WLShoppingSubCellType) {
 
 @property(nonatomic,assign)BOOL hasData;
 
-@property(nonatomic,strong)FishCateModel *cate;
+@property(nonatomic,strong)WLCateModel *cate;
 
 @property(nonatomic,copy)NSArray *bannerArray;
 @property(nonatomic,copy)NSArray *itemArray;
@@ -92,15 +93,15 @@ typedef NS_ENUM(NSInteger,WLShoppingSubCellType) {
     // Do any additional setup after loading the view.
 }
 
-- (void)configCateModel:(FishCateModel *)cate {
+- (void)configCateModel:(WLCateModel *)cate {
     
     _cate  =cate;
     if (!_hasData) {
         _page = 1;
         NSDictionary *dict = @{@"page":@(_page)};
         NSString *path = [NSString stringWithFormat:@"/xunquan/cat/%@",cate.cateId];
-        [FishNetworkFirstHandler xunquancatCouponWithPath:path paramater:dict success:^(NSURLResponse *response, id data) {
-            NSArray *array = [NSArray yy_modelArrayWithClass:[FishCouponItemModel class] json:data];
+        [WLNetworkFirstHandler xunquancatCouponWithPath:path paramater:dict success:^(NSURLResponse *response, id data) {
+            NSArray *array = [NSArray yy_modelArrayWithClass:[WLCouponItemModel class] json:data];
             if (array && array.count) {
                 self.hasData = YES;
                 self.tableView.mj_footer.hidden = NO;
@@ -114,7 +115,7 @@ typedef NS_ENUM(NSInteger,WLShoppingSubCellType) {
         }];
         if (0 == _index) {
             
-            [FishNetworkFirstHandler   xunquancolumnWithparamater:nil success:^(NSURLResponse *response, id data) {
+            [WLNetworkFirstHandler   xunquancolumnWithparamater:nil success:^(NSURLResponse *response, id data) {
 
                 NSDictionary *dataDict  = (NSDictionary *)data;
                 NSArray *bannerArray = [NSArray yy_modelArrayWithClass:[WLXunquanBannerModel class] json:dataDict[@"bannerList"]];
@@ -230,7 +231,7 @@ typedef NS_ENUM(NSInteger,WLShoppingSubCellType) {
         if (cell == nil) {
             cell = [[WLTaobaoCouponCell  alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
         }
-        FishCouponItemModel *coupon = self.dataArray[indexPath.row];
+        WLCouponItemModel *coupon = self.dataArray[indexPath.row];
         [cell configWithCoupon:coupon];
         
         return cell;
@@ -253,13 +254,13 @@ typedef NS_ENUM(NSInteger,WLShoppingSubCellType) {
        
     } else {
         
-        FishCouponItemModel *model = self.dataArray[indexPath.row];
+        WLCouponItemModel *model = self.dataArray[indexPath.row];
         
         if (![model.coupon_share_url hasPrefix:@"http"]) {
             model.coupon_share_url = [@"https:" stringByAppendingString:model.coupon_share_url];
         }
         
-        [FishAliHandler viewController:self openWithUrl:model.coupon_share_url success:^(AlibcTradeResult * _Nonnull result) {
+        [WLAliHandler viewController:self openWithUrl:model.coupon_share_url success:^(AlibcTradeResult * _Nonnull result) {
             
             
             
@@ -287,10 +288,10 @@ typedef NS_ENUM(NSInteger,WLShoppingSubCellType) {
      NSString *path = [NSString stringWithFormat:@"/xunquan/cat/%@",_cate.cateId];
     
     __weak typeof(self) wself =self;
-    [FishNetworkFirstHandler xunquancatCouponWithPath:path paramater:dict.copy success:^(NSURLResponse *response, id data) {
+    [WLNetworkFirstHandler xunquancatCouponWithPath:path paramater:dict.copy success:^(NSURLResponse *response, id data) {
         
         
-        NSArray *array= [NSArray yy_modelArrayWithClass:[FishCouponItemModel class] json:data];
+        NSArray *array= [NSArray yy_modelArrayWithClass:[WLCouponItemModel class] json:data];
         
         if (array.count) {
             [self.dataArray removeAllObjects];
@@ -326,9 +327,9 @@ typedef NS_ENUM(NSInteger,WLShoppingSubCellType) {
 //    }
     __weak typeof(self) wself = self;
     NSString *path = [NSString stringWithFormat:@"/xunquan/cat/%@",_cate.cateId];
-    [FishNetworkFirstHandler xunquancatCouponWithPath:path paramater:dic success:^(NSURLResponse *response, id data) {
+    [WLNetworkFirstHandler xunquancatCouponWithPath:path paramater:dic success:^(NSURLResponse *response, id data) {
         
-        NSArray *dataArray = [NSArray yy_modelArrayWithClass:[FishCouponItemModel class] json:data];
+        NSArray *dataArray = [NSArray yy_modelArrayWithClass:[WLCouponItemModel class] json:data];
         if (dataArray.count) {
             [self.dataArray addObjectsFromArray:dataArray];
             [wself.tableView reloadData];
@@ -367,7 +368,7 @@ typedef NS_ENUM(NSInteger,WLShoppingSubCellType) {
 //
 //        }];
 //
-        [FishAliHandler viewController:self openWithUrl:model.url success:^(AlibcTradeResult * _Nonnull result) {
+        [WLAliHandler viewController:self openWithUrl:model.url success:^(AlibcTradeResult * _Nonnull result) {
             
         } failed:^(NSError * _Nonnull error) {
             
@@ -383,7 +384,7 @@ typedef NS_ENUM(NSInteger,WLShoppingSubCellType) {
     
     WLXunquanBannerModel *banner  = self.bannerArray[index];
     if (2 == banner.type) {
-        [FishAliHandler viewController:self openWithUrl:banner.bannerUrl success:^(AlibcTradeResult * _Nonnull result) {
+        [WLAliHandler viewController:self openWithUrl:banner.bannerUrl success:^(AlibcTradeResult * _Nonnull result) {
             
             
             

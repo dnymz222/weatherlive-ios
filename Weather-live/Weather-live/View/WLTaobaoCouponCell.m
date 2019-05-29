@@ -9,7 +9,7 @@
 #import "WLTaobaoCouponCell.h"
 #import "Masonry.h"
 #import "ColorSizeMacro.h"
-#import "FishCouponItemModel.h"
+#import "WLCouponItemModel.h"
 #import "UIImageView+WebCache.h"
 #import "WXPFloat.h"
 
@@ -34,7 +34,7 @@
 
 @property(nonatomic,copy)NSDictionary *couponAttrsDict;
 
-@property(nonatomic,strong)FishCouponItemModel *itemModel;
+@property(nonatomic,strong)WLCouponItemModel *itemModel;
 
 
 
@@ -180,7 +180,7 @@
     
 }
 
-- (void)configWithCoupon:(FishCouponItemModel *)coupon {
+- (void)configWithCoupon:(WLCouponItemModel *)coupon {
     
     
     if (coupon) {

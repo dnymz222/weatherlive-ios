@@ -7,11 +7,11 @@
 //
 
 #import "WLJSWebViewController.h"
-#import "FishNetworkFirstHandler.h"
+#import "WLNetworkFirstHandler.h"
 #import "ColorSizeMacro.h"
 #import "Masonry.h"
-#import "FishAliHandler.h"
-#import "FishCouponItemModel.h"
+#import "WLAliHandler.h"
+#import "WLCouponItemModel.h"
 #import "YYModel.h"
 #import "UIColor+WXP.h"
 #import "WLScanResultViewController.h"
@@ -102,11 +102,11 @@ _Pragma("clang diagnostic pop") \
     _couponArray   = [NSMutableArray array];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.rightButton];
-    self.rightButton.hidden = YES;
+    self.rightButton.enabled = NO;
     
     //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivePOpOutNote:) name:JSwebControllerPopoutKey object:nil];
     
-    [FishAliHandler jsWebOpenMyCartWithViewController:self success:^(AlibcTradeResult * _Nonnull result) {
+    [WLAliHandler jsWebOpenMyCartWithViewController:self success:^(AlibcTradeResult * _Nonnull result) {
         
     } failed:^(NSError * _Nonnull error) {
         
@@ -161,8 +161,11 @@ _Pragma("clang diagnostic pop") \
         NSDictionary *dict = @{NSFontAttributeName:[UIFont systemFontOfSize:13.f],
                                NSForegroundColorAttributeName:[UIColor whiteColor]
                                };
-        NSAttributedString *attrs = [[NSAttributedString alloc] initWithString:@"去领券" attributes:dict];
-        [_rightButton setAttributedTitle:attrs forState:UIControlStateNormal];
+        NSAttributedString *attrs = [[NSAttributedString alloc] initWithString:@"请稍候" attributes:dict];
+        [_rightButton setAttributedTitle:attrs forState:UIControlStateDisabled];
+        
+        NSAttributedString *goattrs = [[NSAttributedString alloc] initWithString:@"去领券" attributes:dict];
+        [_rightButton setAttributedTitle:goattrs forState:UIControlStateNormal];
         //        [_rightButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         
         
@@ -171,7 +174,14 @@ _Pragma("clang diagnostic pop") \
         //_rightButton.backgroundColor = UIColorFromRGB(0xcd31fe);
         _rightButton.layer.cornerRadius =12;
         _rightButton.layer.masksToBounds = YES;
-        _rightButton.backgroundColor = [UIColor setGradualChangingColor:CGRectMake(0, 0, 56, 24) fromColor:UIColorFromRGB(0xfc9926) toColor:UIColorFromRGB(0xfc4b36)];
+//        UIColor *color = [UIColor setGradualChangingColor:CGRectMake(0, 0, 56, 24) fromColor:UIColorFromRGB(0xfc9926) toColor:UIColorFromRGB(0xfc4b36)];
+        
+        [_rightButton setBackgroundImage:[self createImageWithColor:UIColorFromRGB(0xfc4b36)] forState:UIControlStateNormal];
+        
+        [_rightButton setBackgroundImage:[self createImageWithColor:UIColorFromRGB(0x7d8284)] forState:UIControlStateDisabled];
+        
+        
+        
         
         [_rightButton addTarget:self action:@selector(rightButtonClick) forControlEvents:UIControlEventTouchUpInside];
         
@@ -181,6 +191,18 @@ _Pragma("clang diagnostic pop") \
     
     return _rightButton;
     
+}
+
+- (UIImage*) createImageWithColor: (UIColor*) color
+{
+    CGRect rect=CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    UIImage *theImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return theImage;
 }
 
 - (void)rightButtonClick {
@@ -211,7 +233,7 @@ _Pragma("clang diagnostic pop") \
 //
 //        }];
 //
-        [FishAliHandler viewController:self openWithUrl:urlstring success:^(AlibcTradeResult * _Nonnull result) {
+        [WLAliHandler viewController:self openWithUrl:urlstring success:^(AlibcTradeResult * _Nonnull result) {
             
         } failed:^(NSError * _Nonnull error) {
             
@@ -387,12 +409,12 @@ _Pragma("clang diagnostic pop") \
     
     NSDictionary *dict = self.itemArray[self.scanindex];
     
-    [FishNetworkFirstHandler xunquansearchCheckWithparamater:dict success:^(NSURLResponse *response, id data) {
+    [WLNetworkFirstHandler xunquansearchCheckWithparamater:dict success:^(NSURLResponse *response, id data) {
         
         self.hasScanCount = self.hasScanCount + 1;
         
         if (data) {
-            FishCouponItemModel *model = [FishCouponItemModel yy_modelWithJSON:data];
+            WLCouponItemModel *model = [WLCouponItemModel yy_modelWithJSON:data];
             [self.couponArray addObject:model];
             self.couponCount  =self.couponCount + 1;
             self.couponAmount = self.couponAmount + model.coupon_amount;
@@ -428,7 +450,9 @@ _Pragma("clang diagnostic pop") \
 - (void)showRight {
     
     if (self.couponCount > 0) {
+        self.rightButton.enabled = YES;
         self.rightButton.hidden = NO;
+        
     } else {
         
         self.rightButton.hidden = YES;

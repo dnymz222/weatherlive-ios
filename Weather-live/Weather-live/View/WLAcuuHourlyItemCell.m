@@ -10,7 +10,7 @@
 #import "Masonry.h"
 #import "ColorSizeMacro.h"
 #import "WLAccuHourlyModel.h"
-#import "FIshUnitTransTool.h"
+#import "WLUnitTransTool.h"
 
 @interface WLAcuuHourlyItemCell ()
 
@@ -164,7 +164,7 @@
     UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"%02d",model.WeatherIcon]];
     [self.iconView setImage:image];
     NSDictionary *temperatureDict = model.Temperature;
-    float temperature = [FIshUnitTransTool nieshitransfromhuashi:[temperatureDict[@"Value"] floatValue] ];
+    float temperature = [WLUnitTransTool nieshitransfromhuashi:[temperatureDict[@"Value"] floatValue] ];
     self.tempratureLabel.text = [NSString stringWithFormat:@"%0.1f°C",temperature];
     
     NSDictionary  *direction = (NSDictionary*)model.Wind[@"Direction"];
@@ -173,7 +173,7 @@
     
     NSDictionary *speed  = (NSDictionary *)model.Wind[@"Speed"];
     
-    float speedvalue =[FIshUnitTransTool meterpersecondfromnileperhour:[[speed valueForKey:@"Value"] floatValue]];
+    float speedvalue =[WLUnitTransTool meterpersecondfromnileperhour:[[speed valueForKey:@"Value"] floatValue]];
     
     
 //    NSString *speedunit = [speed valueForKey:@"Unit"];

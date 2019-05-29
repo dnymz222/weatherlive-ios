@@ -9,15 +9,15 @@
 #import "WLAliSearchController.h"
 #import "ColorSizeMacro.h"
 #import "Masonry.h"
-#import "FishCouponCollectionViewCell.h"
-#import "FishCouponItemModel.h"
+#import "WLCouponCollectionViewCell.h"
+#import "WLCouponItemModel.h"
 #import "MJRefresh.h"
-#import "FishNetworkFirstHandler.h"
+#import "WLNetworkFirstHandler.h"
 #import "YYModel.h"
 #import "FishToast.h"
 
 #import "LBKeyMacro.h"
-#import "FishAliHandler.h"
+#import "WLAliHandler.h"
 #import "WXPSortHeaderView.h"
 
 @interface WLAliSearchController ()<UISearchBarDelegate,UICollectionViewDelegateFlowLayout,UICollectionViewDataSource,UICollectionViewDelegate,WXPSortHeaderViewDelegate>
@@ -44,7 +44,7 @@
 
 
 @end
-static NSString *const FishSearchCouponCellIdentifier = @"FishSearchCouponCellIdentifier";
+
 @implementation WLAliSearchController
 
 - (void)viewDidLoad {
@@ -108,7 +108,7 @@ static NSString *const FishSearchCouponCellIdentifier = @"FishSearchCouponCellId
     _collectionView.dataSource = self;
     _collectionView.backgroundColor =UIColorFromRGB(0xeeeeee);
     
-    [_collectionView registerClass:[FishCouponCollectionViewCell class] forCellWithReuseIdentifier:FishSearchCouponCellIdentifier];
+    [_collectionView registerClass:[WLCouponCollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
     
     [_collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.view);
@@ -153,7 +153,7 @@ static NSString *const FishSearchCouponCellIdentifier = @"FishSearchCouponCellId
 
 - (void)addSearchButtonItem {
     _cancelButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(cancelAction)];
-    [_cancelButtonItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:14.f],NSFontAttributeName,UIColorFromRGB(0xffffff),NSForegroundColorAttributeName,nil] forState:UIControlStateNormal];
+    [_cancelButtonItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:14.f],NSFontAttributeName,UIColorFromRGB(Themecolor),NSForegroundColorAttributeName,nil] forState:UIControlStateNormal];
     UIBarButtonItem *navigativeSpacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     if ([[UIDevice currentDevice].systemVersion floatValue] > 9.9f) {
         navigativeSpacer.width = [UIScreen mainScreen].bounds.size.width < 375? 6: -6;;
@@ -266,11 +266,11 @@ static NSString *const FishSearchCouponCellIdentifier = @"FishSearchCouponCellId
     
     __weak typeof(self) wself = self;
     
-    [FishNetworkFirstHandler lamasearchWithPath:path
+    [WLNetworkFirstHandler lamasearchWithPath:path
                                       paramater:dict
                                         success:^(NSURLResponse *response, id data) {
                                             
-                                            NSArray *dataArray = [NSArray yy_modelArrayWithClass:[FishCouponItemModel class] json:data];
+                                            NSArray *dataArray = [NSArray yy_modelArrayWithClass:[WLCouponItemModel class] json:data];
                                             if (dataArray.count) {
                                                 [wself.dataSource addObjectsFromArray:dataArray];
                                                 [wself.collectionView reloadData];
@@ -367,9 +367,9 @@ static NSString *const FishSearchCouponCellIdentifier = @"FishSearchCouponCellId
     
     __weak typeof(self)  wself = self;
    
-    [FishNetworkFirstHandler lamasearchWithPath:path paramater:dict success:^(NSURLResponse *response, id data) {
+    [WLNetworkFirstHandler lamasearchWithPath:path paramater:dict success:^(NSURLResponse *response, id data) {
         
-        NSArray *array = [NSArray yy_modelArrayWithClass:[FishCouponItemModel class] json:data];
+        NSArray *array = [NSArray yy_modelArrayWithClass:[WLCouponItemModel class] json:data];
         
         [self.dataSource addObjectsFromArray:array];
         
@@ -426,9 +426,9 @@ static NSString *const FishSearchCouponCellIdentifier = @"FishSearchCouponCellId
 {
     
     
-    FishCouponCollectionViewCell *cell  =[collectionView dequeueReusableCellWithReuseIdentifier:FishSearchCouponCellIdentifier  forIndexPath:indexPath];
+    WLCouponCollectionViewCell *cell  =[collectionView dequeueReusableCellWithReuseIdentifier:@"cell"  forIndexPath:indexPath];
     
-    FishCouponItemModel     *model = self.dataSource[indexPath.row];
+    WLCouponItemModel     *model = self.dataSource[indexPath.row];
     [cell congfigWithModel:model];
     
     return cell;
@@ -476,7 +476,7 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
     //
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     
-    FishCouponItemModel *model = self.dataSource[indexPath.row];
+    WLCouponItemModel *model = self.dataSource[indexPath.row];
 //    if ([FishAliUser shareInstance].showdetail) {
 //
 //        FishDetailController *detailVc = [[FishDetailController alloc] init];
@@ -486,7 +486,7 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
         if (![model.coupon_share_url hasPrefix:@"http"]) {
             model.coupon_share_url = [@"https:" stringByAppendingString:model.coupon_share_url];
         }
-        [FishAliHandler viewController:self openWithUrl:model.coupon_share_url success:^(AlibcTradeResult * _Nonnull result) {
+        [WLAliHandler viewController:self openWithUrl:model.coupon_share_url success:^(AlibcTradeResult * _Nonnull result) {
             
         } failed:^(NSError * _Nonnull error) {
             

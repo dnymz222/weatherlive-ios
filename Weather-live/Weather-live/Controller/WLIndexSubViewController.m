@@ -9,8 +9,9 @@
 #import "WLIndexSubViewController.h"
 #import "WLAccuIndexDetailCell.h"
 #import "Masonry.h"
+#import "WLAccuFooterReusableView.h"
 
-@interface WLIndexSubViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+@interface WLIndexSubViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,WLAccuFooterReusableViewDelegate>
 
 @property(nonatomic,copy)NSArray *dataArray;
 
@@ -29,8 +30,11 @@
     [super viewDidLoad];
     self.screenwidth  = [UIScreen mainScreen].bounds.size.width;
     [self.view addSubview:self.collectionView];
+    CGFloat bottom = [ [UIDevice currentDevice].systemVersion floatValue] < 11 ? -49:0;
+    
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.top.bottom.equalTo(self.view);
+        make.left.right.top.equalTo(self.view);
+        make.bottom.equalTo(self.view).offset(bottom);
     }];
     // Do any additional setup after loading the view.
 }
@@ -44,6 +48,7 @@
         _collectionView.delegate = self;
         _collectionView.backgroundColor = [UIColor groupTableViewBackgroundColor];
         [_collectionView registerClass:[WLAccuIndexDetailCell class] forCellWithReuseIdentifier:@"cell"];
+        [_collectionView registerClass:[WLAccuFooterReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter  withReuseIdentifier:@"footer"];
     }
     
     return _collectionView;
@@ -69,12 +74,12 @@
     
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
-    return CGSizeZero;
-}
--(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
-    return CGSizeZero;
-}
+//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
+//    return CGSizeZero;
+//}
+//-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
+//    return CGSizeZero;
+//}
 
 
 
@@ -86,6 +91,44 @@
     [cell configIndexModel:model];
     
     return cell;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
+    
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    return CGSizeMake(width, 44);
+    
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
+    return CGSizeZero;
+}
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
+    
+    
+    
+    if ([kind isEqualToString:UICollectionElementKindSectionHeader]){
+      
+        return nil;
+        
+    }
+    else if ([kind isEqualToString:UICollectionElementKindSectionFooter]){
+        WLAccuFooterReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"footer" forIndexPath:indexPath];
+        view.delegate = self;
+        return view;
+        
+    }
+    
+    return nil;
+ 
+}
+
+- (void)AcuuWeatherFooterViewClickButtonLink {
+    
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"http://www.accuweather.com"]]) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.accuweather.com"]];
+    }
 }
 
 - (void)configDataArray:(NSArray *)dataArray {

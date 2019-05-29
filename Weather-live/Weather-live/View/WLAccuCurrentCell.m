@@ -10,7 +10,7 @@
 #import "ColorSizeMacro.h"
 #import "Masonry.h"
 #import "WLAccuCurrentModel.h"
-#import "FIshUnitTransTool.h"
+#import "WLUnitTransTool.h"
 
 @interface WLAccuCurrentCell ()
 
@@ -355,7 +355,7 @@
     
     float radians = (degree-45)/180.0*M_PI;
     self.windIconView.transform = CGAffineTransformMakeRotation(radians);
-    float windmerterperhour = [FIshUnitTransTool meterpersecondfromkilometerhour:[windSpeedMetricDict[@"Value"] floatValue]];
+    float windmerterperhour = [WLUnitTransTool meterpersecondfromkilometerhour:[windSpeedMetricDict[@"Value"] floatValue]];
     
     
     

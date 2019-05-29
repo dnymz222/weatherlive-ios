@@ -10,7 +10,7 @@
 #import "ColorSizeMacro.h"
 #import "Masonry.h"
 #import "STAcuuWeatherDailyModel.h"
-#import "FIshUnitTransTool.h"
+#import "WLUnitTransTool.h"
 
 @interface STAcuuWeatherHeaderView ()
 
@@ -386,8 +386,8 @@
     NSDictionary *maxtemperatureDict = [model.Temperature valueForKey:@"Maximum"];
     NSDictionary *mintemperatureDict = [model.Temperature  valueForKey:@"Minimum"];
     
-    float mintemprature = [FIshUnitTransTool nieshitransfromhuashi:[mintemperatureDict[@"Value"] floatValue]];
-    float maxtemprature = [FIshUnitTransTool nieshitransfromhuashi:[maxtemperatureDict[@"Value"] floatValue]];
+    float mintemprature = [WLUnitTransTool nieshitransfromhuashi:[mintemperatureDict[@"Value"] floatValue]];
+    float maxtemprature = [WLUnitTransTool nieshitransfromhuashi:[maxtemperatureDict[@"Value"] floatValue]];
     
     
     self.tempratureLabel.text = [NSString stringWithFormat:@"%0.1f°C-%0.1f°C",mintemprature,maxtemprature];

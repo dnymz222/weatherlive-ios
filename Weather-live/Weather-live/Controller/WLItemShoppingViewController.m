@@ -9,10 +9,10 @@
 #import "WLItemShoppingViewController.h"
 #import "ColorSizeMacro.h"
 #import "Masonry.h"
-#import "FishNetworkFirstHandler.h"
-#import "FishCateModel.h"
+#import "WLNetworkFirstHandler.h"
+#import "WLCateModel.h"
 #import "YYModel.h"
-#import "FishMuyinSubController.h"
+#import "WLItemShoppingSubController.h"
 
 @interface WLItemShoppingViewController ()
 
@@ -55,9 +55,9 @@
 
 - (void)loadCate {
     
-    [FishNetworkFirstHandler xunquancatCouponWithPath:_urlPath paramater:nil success:^(NSURLResponse *response, id data) {
+    [WLNetworkFirstHandler xunquancatCouponWithPath:_urlPath paramater:nil success:^(NSURLResponse *response, id data) {
 
-        NSArray *array = [NSArray yy_modelArrayWithClass:[FishCateModel class] json:data];
+        NSArray *array = [NSArray yy_modelArrayWithClass:[WLCateModel class] json:data];
         if (array && array.count) {
             
             self.dataArray = array;
@@ -80,13 +80,13 @@
 
 - (NSString *)pageController:(WMPageController *)pageController titleAtIndex:(NSInteger)index {
     
-    FishCateModel *cate = self.dataArray[index];
+    WLCateModel *cate = self.dataArray[index];
     return cate.name;
 }
 
 - (UIViewController *)pageController:(WMPageController *)pageController viewControllerAtIndex:(NSInteger)index {
     
-    FishMuyinSubController *subController = [[FishMuyinSubController alloc] init];
+    WLItemShoppingSubController *subController = [[WLItemShoppingSubController alloc] init];
     
     subController.index = index;
     
@@ -95,7 +95,7 @@
 }
 
 - (CGFloat)menuView:(WMMenuView *)menu widthForItemAtIndex:(NSInteger)index {
-    FishCateModel *cate= self.dataArray[index];
+    WLCateModel *cate= self.dataArray[index];
     
     CGFloat width = cate.name.length *14;
     return width +25;
@@ -117,9 +117,9 @@
 
 - (void)pageController:(WMPageController *)pageController didEnterViewController:(__kindof UIViewController *)viewController withInfo:(NSDictionary *)info {
     
-    FishMuyinSubController *subcontroller = (FishMuyinSubController*)viewController;
+    WLItemShoppingSubController *subcontroller = (WLItemShoppingSubController*)viewController;
 
-    FishCateModel *cate = self.dataArray[subcontroller.index];
+    WLCateModel *cate = self.dataArray[subcontroller.index];
 
     subcontroller.url = cate.url;
     

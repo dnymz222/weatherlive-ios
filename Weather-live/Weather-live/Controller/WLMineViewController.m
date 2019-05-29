@@ -10,11 +10,11 @@
 #import "ColorSizeMacro.h"
 #import "Masonry.h"
 #import "WLAliWebController.h"
-#import "FishAliHandler.h"
+#import "WLAliHandler.h"
 #include <AlibabaAuthSDK/ALBBSession.h>
 #import <AlibabaAuthSDK/ALBBSDK.h>
 #import "SDImageCache.h"
-#import "FishNetworkFirstHandler.h"
+#import "WLNetworkFirstHandler.h"
 #import "WLXunquanConfigModel.h"
 #import "YYModel.h"
 #import "WLJSWebViewController.h"
@@ -46,7 +46,12 @@
         make.left.right.top.bottom.equalTo(self.view);
         
     }];
-    [self requestConfig];
+    
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"tbopen://"]] || [[ALBBSession sharedInstance]  isLogin]) {
+         [self requestConfig];
+    }
+    
+   
     // Do any additional setup after loading the view.
 }
 
@@ -61,7 +66,7 @@
 
 
 - (void)requestConfig {
-    [FishNetworkFirstHandler configWithparamater:nil success:^(NSURLResponse *response, id data) {
+    [WLNetworkFirstHandler configWithparamater:nil success:^(NSURLResponse *response, id data) {
         
         WLXunquanConfigModel *config  = [WLXunquanConfigModel yy_modelWithJSON:data];
         if (config) {
@@ -179,7 +184,7 @@
     
     if (0 == indexPath.section) {
         if (0 == indexPath.row) {
-            [FishAliHandler openMyOrderFromViewController:self success:^(AlibcTradeResult * _Nonnull result) {
+            [WLAliHandler openMyOrderFromViewController:self success:^(AlibcTradeResult * _Nonnull result) {
                 
             } failed:^(NSError * _Nonnull error) {
                 
@@ -193,7 +198,7 @@
             } else{
             
             
-                [FishAliHandler openMyCartFromViewController:self success:^(AlibcTradeResult * _Nonnull result) {
+                [WLAliHandler openMyCartFromViewController:self success:^(AlibcTradeResult * _Nonnull result) {
                     
                 } failed:^(NSError * _Nonnull error) {
                     
@@ -251,7 +256,7 @@ else {
         } else if(2 == indexPath.row) {
 
             WLAliWebController *aliwebvc = [[WLAliWebController alloc] init];
-            aliwebvc.urlString = @"https://www.xunquan.shop/h5/fishinghelper/privacy";
+            aliwebvc.urlString = @"https://www.xunquan.shop/h5/weatherlive/privacy";
             [self.navigationController pushViewController:aliwebvc animated:YES];
 
         } else {

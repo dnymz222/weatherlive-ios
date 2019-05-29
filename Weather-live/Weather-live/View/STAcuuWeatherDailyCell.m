@@ -10,7 +10,7 @@
 #import "STAcuuWeatherDailyModel.h"
 #import "Masonry.h"
 #import "ColorSizeMacro.h"
-#import "FIshUnitTransTool.h"
+#import "WLUnitTransTool.h"
 
 
 
@@ -293,7 +293,7 @@
     
     NSDictionary *speed  = (NSDictionary *)weatherModel.Wind[@"Speed"];
     
-    float speedvalue =[FIshUnitTransTool meterpersecondfromnileperhour:[[speed valueForKey:@"Value"] floatValue]];
+    float speedvalue =[WLUnitTransTool meterpersecondfromnileperhour:[[speed valueForKey:@"Value"] floatValue]];
     
     
     NSString *speedunit = [speed valueForKey:@"Unit"];
@@ -306,7 +306,7 @@
     
     
     NSDictionary *totoalliquid = weatherModel.TotalLiquid;
-    float intensity = [FIshUnitTransTool mmtransfrominches:[totoalliquid[@"Value"] floatValue]];
+    float intensity = [WLUnitTransTool mmtransfrominches:[totoalliquid[@"Value"] floatValue]];
     self.intensityLabel.text = [NSString stringWithFormat:@"%0.1f毫米",intensity];
 
     self.timeLabel.text = isDay?@"白天":@"夜晚";

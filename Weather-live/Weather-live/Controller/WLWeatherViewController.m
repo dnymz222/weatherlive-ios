@@ -14,7 +14,7 @@
 #if __IPHONE_10_0
 #import<CoreTelephony/CTCellularData.h>
 #endif
-#import "FishNetworkFirstHandler.h"
+#import "WLNetworkFirstHandler.h"
 #import "WLWeatherLocationHandler.h"
 #import <CoreLocation/CoreLocation.h>
 #import "STAcuuWeatherDailyModel.h"
@@ -42,8 +42,11 @@
 #import <AlibcTradeSDK/AlibcTradeSDK.h>
 #import "WLXunquanBannerModel.h"
 #import "LBBannerCell.h"
-#import "FishAliHandler.h"
+#import "WLAliHandler.h"
 #import "WLAliWebController.h"
+#if __IPHONE_10_3
+#import <StoreKit/StoreKit.h>
+#endif
 
 
 
@@ -163,11 +166,6 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
         acuulocation.Key = self.locationKey;
         [WLWeatherLocationHandler sharehanlder].accuLoctionModel = acuulocation;
         [self requestWeatherFromNewkey:YES];
-
-        
-        
-        
-        
         
     } else {
         
@@ -175,6 +173,7 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
         
         [self locationrefresh];
     }
+    
     
     
     UIButton *mapbutton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -226,8 +225,37 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
         
     });
     
+    
+    
+    NSInteger times = [[NSUserDefaults standardUserDefaults] integerForKey:showapptimeskey]?:0;
+    if (times < 100) {
+        times  = times +1;
+        [[NSUserDefaults standardUserDefaults] setInteger:times forKey:showapptimeskey];
+    }
+    
+    if (times > 10) {
+        if (![[NSUserDefaults standardUserDefaults] boolForKey:hasShowscoreKey]) {
+            
+#if __IPHONE_10_3
+            [self loadAppStoreController];
+#endif
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:hasShowscoreKey];
+        }
+    }
+    
+    
     // Do any additional setup after loading the view.
 }
+
+#if __IPHONE_10_3
+- (void)loadAppStoreController{
+    
+    [SKStoreReviewController requestReview];
+    
+
+}
+#endif
+
 
 - (void)checkData {
     
@@ -357,6 +385,11 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
 
 - (void)mapSelectPositionViewControllerDidSelected:(STLocationModel *)loction {
     
+    CLLocation *loc = loction.location;
+    
+    [[NSUserDefaults standardUserDefaults] setDouble:loc.coordinate.latitude forKey:latitudekey ];
+    
+    [[NSUserDefaults standardUserDefaults] setDouble:loc.coordinate.longitude forKey:longtitudekey];
     
     [WLWeatherLocationHandler sharehanlder].locationModel = loction;
     
@@ -422,7 +455,7 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
     
     
 //    [self ];
-    [self requestBanner];
+   // [self requestBanner];
     
     if ([WLWeatherLocationHandler sharehanlder].locationModel) {
         [self requestLocationKey];
@@ -447,7 +480,7 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
 - (void)requestConfig {
     
     
-    [FishNetworkFirstHandler configWithparamater:@{} success:^(NSURLResponse *response, id data) {
+    [WLNetworkFirstHandler configWithparamater:@{} success:^(NSURLResponse *response, id data) {
         
         
        
@@ -573,7 +606,7 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
     
     
     NSInteger timestamp = [[NSDate date] timeIntervalSince1970];
-    NSInteger total = [FishNetwork cacluteTotalWithLat:latitude lon:longtitude time:timestamp];
+    NSInteger total = [WLNetwork cacluteTotalWithLat:latitude lon:longtitude time:timestamp];
     
     NSDictionary *dict = @{@"lat":latitude,
                            @"lng":longtitude,
@@ -582,20 +615,22 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
                            @"language":@"zh-cn"
                            };
     
-    [FishNetworkFirstHandler acuuloctationKeyWithparamater:dict success:^(NSURLResponse *response, id data) {
+    [WLNetworkFirstHandler acuuloctationKeyWithparamater:dict success:^(NSURLResponse *response, id data) {
         
         
-        self.acculoction =[WLAccuLocationModel yy_modelWithJSON:data];
+        WLAccuLocationModel *acuulocatoion =[WLAccuLocationModel yy_modelWithJSON:data];
         
-        if (self.acculoction ) {
+        if (acuulocatoion ) {
+            
             
             if (!self.locationKey) {
                 [WXPErrorTipView removeErrorviewInView:self.view];
+                
             }
             
-            BOOL newkey = ![self.acculoction.Key isEqualToString:self.locationKey];
+            BOOL newkey = ![self.locationKey isEqualToString:acuulocatoion.Key];
             
-            
+            self.acculoction  = acuulocatoion;
             self.locationKey = self.acculoction.Key;
             [WLWeatherLocationHandler sharehanlder].accuLoctionModel = self.acculoction;
             
@@ -669,7 +704,7 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
         
         
         
-        if (self.fialedTimes > 10) {
+        if (self.fialedTimes > 5) {
             self.failedLimitTime = [[NSDate date] timeIntervalSince1970];
             return;
         }
@@ -722,7 +757,7 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
     
     
     NSInteger timestamp = [[NSDate date] timeIntervalSince1970];
-    NSInteger total = [FishNetwork cacluteTotalWithLat:latitude lon:longtitude time:timestamp];
+    NSInteger total = [WLNetwork cacluteTotalWithLat:latitude lon:longtitude time:timestamp];
     
     NSDictionary *dict = @{@"lat":latitude,
                            @"lng":longtitude,
@@ -732,7 +767,7 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
                            @"language":@"zh-cn"
                            };
     
-    [FishNetworkFirstHandler accuCurrentWithparamater:dict success:^(NSURLResponse *response, id data) {
+    [WLNetworkFirstHandler accuCurrentWithparamater:dict success:^(NSURLResponse *response, id data) {
         
         self.lastCurrentTime = [[NSDate date] timeIntervalSince1970];
         NSArray *dataArray = (NSArray *)data;
@@ -763,7 +798,7 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
     
     
     NSInteger timestamp = [[NSDate date] timeIntervalSince1970];
-    NSInteger total = [FishNetwork cacluteTotalWithLat:latitude lon:longtitude time:timestamp];
+    NSInteger total = [WLNetwork cacluteTotalWithLat:latitude lon:longtitude time:timestamp];
     
     NSDictionary *dict = @{@"lat":latitude,
                            @"lng":longtitude,
@@ -773,7 +808,7 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
                            @"language":@"zh-cn"
                            };
     
-    [FishNetworkFirstHandler accuHourlyWithparamater:dict success:^(NSURLResponse *response, id data) {
+    [WLNetworkFirstHandler accuHourlyWithparamater:dict success:^(NSURLResponse *response, id data) {
         
         NSArray *array = [NSArray yy_modelArrayWithClass:[WLAccuHourlyModel class] json:data];
         self.lasthourRequestTime =[[NSDate date] timeIntervalSince1970];
@@ -807,7 +842,7 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
     
     
     NSInteger timestamp = [[NSDate date] timeIntervalSince1970];
-    NSInteger total = [FishNetwork cacluteTotalWithLat:latitude lon:longtitude time:timestamp];
+    NSInteger total = [WLNetwork cacluteTotalWithLat:latitude lon:longtitude time:timestamp];
     
     NSDictionary *dict = @{@"lat":latitude,
                            @"lng":longtitude,
@@ -819,7 +854,7 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
                            
                            };
     
-    [FishNetworkFirstHandler accuRadarWithparamater:dict success:^(NSURLResponse *response, id data) {
+    [WLNetworkFirstHandler accuRadarWithparamater:dict success:^(NSURLResponse *response, id data) {
           self.lastRadarTime = [[NSDate date] timeIntervalSince1970];
         NSDictionary *dataDict = (NSDictionary *)data;
         NSDictionary *Satellite = [dataDict valueForKey:@"Satellite"];
@@ -873,7 +908,7 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
     
     
     NSInteger timestamp = [[NSDate date] timeIntervalSince1970];
-    NSInteger total = [FishNetwork cacluteTotalWithLat:latitude lon:longtitude time:timestamp];
+    NSInteger total = [WLNetwork cacluteTotalWithLat:latitude lon:longtitude time:timestamp];
     
     NSDictionary *dict = @{@"lat":latitude,
                            @"lng":longtitude,
@@ -883,7 +918,7 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
                            @"language":@"zh-cn"
                            };
     
-    [FishNetworkFirstHandler xinzhiAqiWithparamater:dict success:^(NSURLResponse *response, id data) {
+    [WLNetworkFirstHandler xinzhiAqiWithparamater:dict success:^(NSURLResponse *response, id data) {
         self.lastAqiTime = [[NSDate date] timeIntervalSince1970];
         NSDictionary *dataDict = (NSDictionary *)data;
         NSDictionary *airDict= [dataDict valueForKey:@"air"];
@@ -918,7 +953,7 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
 
 - (void)requestBanner {
     
-    [FishNetworkFirstHandler xunquanbannerWithparamater:nil success:^(NSURLResponse *response, id data) {
+    [WLNetworkFirstHandler xunquanbannerWithparamater:nil success:^(NSURLResponse *response, id data) {
         
         NSArray *bannerArry = [NSArray yy_modelArrayWithClass:[WLXunquanBannerModel class] json:data];
         if (bannerArry && bannerArry.count) {
@@ -940,7 +975,7 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
     
     
     NSInteger timestamp = [[NSDate date] timeIntervalSince1970];
-    NSInteger total = [FishNetwork cacluteTotalWithLat:latitude lon:longtitude time:timestamp];
+    NSInteger total = [WLNetwork cacluteTotalWithLat:latitude lon:longtitude time:timestamp];
     
     NSDictionary *dict = @{@"lat":latitude,
                            @"lng":longtitude,
@@ -950,7 +985,7 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
                            @"language":@"zh-cn"
                            };
     
-    [FishNetworkFirstHandler accuAlarmsWithparamater:dict success:^(NSURLResponse *response, id data) {
+    [WLNetworkFirstHandler accuAlarmsWithparamater:dict success:^(NSURLResponse *response, id data) {
         
         self.alarmsArray  = [NSArray yy_modelArrayWithClass:[WLAccuAlarmsModel class] json:data];
         if (self.alarmsArray ) {
@@ -1221,7 +1256,7 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
     
     WLXunquanBannerModel *banner  = self.bannerArray[index];
     if (2 == banner.type) {
-        [FishAliHandler viewController:self openWithUrl:banner.bannerUrl success:^(AlibcTradeResult * _Nonnull result) {
+        [WLAliHandler viewController:self openWithUrl:banner.bannerUrl success:^(AlibcTradeResult * _Nonnull result) {
             
             
             

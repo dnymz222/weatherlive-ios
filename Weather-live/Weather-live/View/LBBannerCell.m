@@ -25,7 +25,6 @@
 
 @end
 
-static NSString *const LBBannerItemCellID = @"LBBannerItemCellID";
 
 @implementation LBBannerCell
 
@@ -63,7 +62,7 @@ static NSString *const LBBannerItemCellID = @"LBBannerItemCellID";
         pagerView.dataSource = self;
         pagerView.delegate = self;
         // registerClass or registerNib
-        [pagerView registerClass:[LBImagItemCell class] forCellWithReuseIdentifier:LBBannerItemCellID];
+        [pagerView registerClass:[LBImagItemCell class] forCellWithReuseIdentifier:@"item"];
         _pageContentView  = pagerView;
         
         
@@ -113,7 +112,7 @@ static NSString *const LBBannerItemCellID = @"LBBannerItemCellID";
 }
 
 - (UICollectionViewCell *)pagerView:(TYCyclePagerView *)pagerView cellForItemAtIndex:(NSInteger)index {
-    LBImagItemCell *cell = [pagerView dequeueReusableCellWithReuseIdentifier:LBBannerItemCellID forIndex:index];
+    LBImagItemCell *cell = [pagerView dequeueReusableCellWithReuseIdentifier:@"item" forIndex:index];
     
     NSString *image = self.imageArray[index];
     if (![image hasPrefix:@"http"]) {

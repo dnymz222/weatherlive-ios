@@ -26,7 +26,7 @@
 
 @end
 
-static NSString *const WXPCITEMVIEWIDENTIFIER = @"WXPITEMVIEWIDENTIFIER";
+
 
 @implementation WLXunquanColumnCell
 
@@ -51,7 +51,7 @@ static NSString *const WXPCITEMVIEWIDENTIFIER = @"WXPITEMVIEWIDENTIFIER";
         _collectionView.scrollEnabled = NO;
         
         
-        [_collectionView registerClass:[WLXunquanCloumnItemCell class] forCellWithReuseIdentifier:WXPCITEMVIEWIDENTIFIER ];
+        [_collectionView registerClass:[WLXunquanCloumnItemCell class] forCellWithReuseIdentifier:@"item" ];
         
         [_collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.top.bottom.equalTo(self.contentView);
@@ -109,7 +109,7 @@ static NSString *const WXPCITEMVIEWIDENTIFIER = @"WXPITEMVIEWIDENTIFIER";
 {
     
     
-    WLXunquanCloumnItemCell *itemview =[collectionView dequeueReusableCellWithReuseIdentifier:WXPCITEMVIEWIDENTIFIER  forIndexPath:indexPath];
+    WLXunquanCloumnItemCell *itemview =[collectionView dequeueReusableCellWithReuseIdentifier:@"item" forIndexPath:indexPath];
     WLXunquanColumnModel *model = self.itemList[indexPath.row];
     [itemview   configColumn:model];
     

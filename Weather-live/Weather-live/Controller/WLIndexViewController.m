@@ -10,7 +10,7 @@
 #import "WLAccuIndexGroupModel.h"
 #import "WLAccuIndexModel.h"
 #import "WLWeatherLocationHandler.h"
-#import "FishNetworkFirstHandler.h"
+#import "WLNetworkFirstHandler.h"
 #import "STLocationModel.h"
 #import "YYModel.h"
 #import "WLAccuIndexModel.h"
@@ -27,11 +27,14 @@
 
 @property(nonatomic,strong)NSDateFormatter *dayformatter;
 
+@property(nonatomic,copy)NSString *day;
+
 @property(nonatomic,copy)NSArray *dayArray;
 
 @property(nonatomic,copy)NSString *locationKey;
 
 @property(nonatomic,assign)NSInteger indexTime;
+@property(nonatomic,strong)NSDateFormatter *dayfomatter;
 
 @property(nonatomic,assign)NSInteger lastIndexTime;
 
@@ -70,7 +73,6 @@
     self.navigationItem.title = @"生活指数";
     
     
-    
     if ([WLWeatherLocationHandler sharehanlder].accuLoctionModel) {
         self.locationKey = [WLWeatherLocationHandler sharehanlder].accuLoctionModel.Key;
         self.navigationItem.title  = [WLWeatherLocationHandler sharehanlder].accuLoctionModel.LocalizedName;
@@ -83,10 +85,35 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveLocationKeyChange:) name:loctionkeygetkey object:nil];
     
     
+    self.dayfomatter = [[NSDateFormatter  alloc] init];
+    [self.dayfomatter   setDateFormat:@"yyyy-MM-dd"];
     
     
     
     // Do any additional setup after loading the view.
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (!self.indexTime) {
+        
+    } else {
+        NSDate *date = [NSDate date];
+        NSInteger now = [date timeIntervalSince1970];
+        NSString *nowday = [self.dayfomatter stringFromDate:date];
+        BOOL sameday  =[nowday isEqualToString:self.day];
+        if (sameday) {
+            if (now-_lastIndexTime > 6*3600) {
+                [self requestIndex];
+            }
+            
+        } else {
+            if (now- _lastIndexTime > 3600) {
+                [self requestIndex];
+            }
+        }
+        
+    }
 }
 
 - (void)receiveLocationKeyChange:(NSNotification *)note{
@@ -104,7 +131,7 @@
     
     
     NSInteger timestamp = [[NSDate date] timeIntervalSince1970];
-    NSInteger total = [FishNetwork cacluteTotalWithLat:latitude lon:longtitude time:timestamp];
+    NSInteger total = [WLNetwork cacluteTotalWithLat:latitude lon:longtitude time:timestamp];
     
     NSDictionary *dict = @{@"lat":latitude,
                            @"lng":longtitude,
@@ -114,7 +141,7 @@
                            @"language":@"zh-cn"
                            };
     
-    [FishNetworkBaseHandler requestAcuuIndexWithParamaters:dict success:^(NSURLResponse *response, id data) {
+    [WLNetworkBaseHandler requestAcuuIndexWithParamaters:dict success:^(NSURLResponse *response, id data) {
       
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -161,7 +188,10 @@
                 WLAccuIndexModel *model  =[self.dataArray firstObject];
                 self.indexTime = model.EpochDateTime;
                 
+                self.day = [self.dayfomatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:self.indexTime]];
                 self.lastIndexTime = [[NSDate date] timeIntervalSince1970];
+                
+                
                 
             }
             
