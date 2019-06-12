@@ -10,9 +10,9 @@
 #import "WLNavigationController.h"
 #import "WLWeatherViewController.h"
 #import "WLIndexViewController.h"
-#import "WLShoppingViewController.h"
+
 #import "WLMineViewController.h"
-#import "WLCartViewController.h"
+
 #import "ColorSizeMacro.h"
 #import "WLDayWeatherViewController.h"
 
@@ -60,13 +60,13 @@
     //    tidevc.tabBarItem = item3;
     
     
-    
-    WLShoppingViewController *shoppingvc = [[WLShoppingViewController alloc] init];
-    WLNavigationController *shopingnav = [[WLNavigationController alloc] initWithRootViewController:shoppingvc];
-    
-    UITabBarItem *item3 = [[UITabBarItem alloc] initWithTitle:@"优惠商城" image:[[UIImage imageNamed: @"tab_shop_normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed: @"tab_shop_select"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-    shoppingvc.tabBarItem = item3;
-    
+//
+//    WLShoppingViewController *shoppingvc = [[WLShoppingViewController alloc] init];
+//    WLNavigationController *shopingnav = [[WLNavigationController alloc] initWithRootViewController:shoppingvc];
+//
+//    UITabBarItem *item3 = [[UITabBarItem alloc] initWithTitle:@"优惠商城" image:[[UIImage imageNamed: @"tab_shop_normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed: @"tab_shop_select"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+//    shoppingvc.tabBarItem = item3;
+//
     
     
     
@@ -77,7 +77,7 @@
     minevc.tabBarItem = item4;
     
     
-    self.viewControllers = @[weathernav,daynav,indexnav,shopingnav,minenav];
+    self.viewControllers = @[weathernav,daynav,indexnav,minenav];
     
     
     [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:UIColorFromRGB(0x666666), NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];

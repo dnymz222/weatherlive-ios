@@ -62,7 +62,7 @@
         }];
         
         [self.windIconView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.contentView  ).offset(8);
+            make.left.equalTo(self.contentView  ).offset(6);
             make.top.equalTo(self.tempratureLabel.mas_bottom).offset(5);
             make.height.equalTo(@16);
             make.width.equalTo(@16);
@@ -70,7 +70,7 @@
         
         [self.windLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.windIconView.mas_right).offset(2);
-            make.right.equalTo(self.contentView).offset(-5);
+            make.right.equalTo(self.contentView).offset(-1);
             make.height.equalTo(@16);
             make.centerY.equalTo(self.windIconView);
         }];
@@ -175,7 +175,7 @@
     
     float speedvalue =[WLUnitTransTool meterpersecondfromnileperhour:[[speed valueForKey:@"Value"] floatValue]];
     
-    
+//    speedvalue = 12.6;
 //    NSString *speedunit = [speed valueForKey:@"Unit"];
     self.windIconView.transform = CGAffineTransformIdentity;
     float radians = (degrees-45)/180.0*M_PI;

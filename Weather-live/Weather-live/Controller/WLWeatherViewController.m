@@ -39,14 +39,13 @@
 #import "WLXinzhiAqiModel.h"
 #import "WLXinzhiAqiCell.h"
 #import "WXPErrorTipView.h"
-#import <AlibcTradeSDK/AlibcTradeSDK.h>
+
 #import "WLXunquanBannerModel.h"
 #import "LBBannerCell.h"
-#import "WLAliHandler.h"
 #import "WLAliWebController.h"
-#if __IPHONE_10_3
+//#if __IPHONE_10_3
 #import <StoreKit/StoreKit.h>
-#endif
+//#endif
 
 
 
@@ -64,7 +63,7 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
 
 
 
-@interface WLWeatherViewController ()<CLLocationManagerDelegate,UITableViewDelegate,UITableViewDataSource,STAcuuWeatherFooterViewDelegate,FishMapSelectPositionViewControllerDelegate,WXPErrorTipViewDelegate,LBBannerCellDelegate>
+@interface WLWeatherViewController ()<CLLocationManagerDelegate,UITableViewDelegate,UITableViewDataSource,STAcuuWeatherFooterViewDelegate,FishMapSelectPositionViewControllerDelegate,WXPErrorTipViewDelegate,LBBannerCellDelegate,SKStoreProductViewControllerDelegate>
 
 @property(nonatomic,strong)STLocationModel *location;
 
@@ -112,7 +111,7 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
 
 @property(nonatomic,assign)NSInteger failedLimitTime;
 
-@property(nonatomic,strong)NSArray *bannerArray;
+@property(nonatomic,strong)NSMutableArray *bannerArray;
 
 @property(nonatomic,assign)BOOL ShowBanner;
 
@@ -130,6 +129,7 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
      self.sectionArray = [NSMutableArray array];
+    self.bannerArray = [NSMutableArray array];
 //    self.dataArray = [NSMutableArray array];
     
     [self.view addSubview:self.tableView];
@@ -233,7 +233,7 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
         [[NSUserDefaults standardUserDefaults] setInteger:times forKey:showapptimeskey];
     }
     
-    if (times > 10) {
+    if (times > 5) {
         if (![[NSUserDefaults standardUserDefaults] boolForKey:hasShowscoreKey]) {
             
 #if __IPHONE_10_3
@@ -461,14 +461,7 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
         [self requestLocationKey];
     }
     
-    [[AlibcTradeSDK sharedInstance] asyncInitWithSuccess:^{
-        
-        
-        
-    } failure:^(NSError *error) {
-        
-    }];
-    
+
     
     
     
@@ -664,11 +657,7 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
 - (void)errorviewTapinView:(WXPErrorTipView *)errorView {
     
     [self requestBanner];
-    [[AlibcTradeSDK sharedInstance]asyncInitWithSuccess:^{
-        
-    } failure:^(NSError *error) {
-        
-    }];
+
     if (!self.locationKey) {
          [self requestLocationKey];
     } else {
@@ -957,7 +946,20 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
         
         NSArray *bannerArry = [NSArray yy_modelArrayWithClass:[WLXunquanBannerModel class] json:data];
         if (bannerArry && bannerArry.count) {
-            self.bannerArray = bannerArry;
+            [self.bannerArray removeAllObjects];
+            for (WLXunquanBannerModel *model in bannerArry) {
+                if (0 == model.type) {
+                    if (![[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:model.activeUrl]])  {
+                        [self.bannerArray addObject:model];
+                    }
+                } else {
+                    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:model.activeUrl]])  {
+                        [self.bannerArray addObject:model];
+                    }
+                    
+                }
+            }
+           // self.bannerArray = bannerArry;
             [self.tableView reloadData];
         }
         
@@ -1051,7 +1053,7 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
         [self.sectionArray addObject:@(WLWeatherSectionTypeAqi)];
     }
     
-    if (self.cuurrentModel && self.hourArray && self.aqiModel && self.bannerArray && self.ShowBanner ) {
+    if (self.cuurrentModel && self.hourArray && self.aqiModel &&  self.bannerArray.count && self.ShowBanner ) {
         [self.sectionArray addObject:@(WLWeatherSectionTypeBanner)];
     }
     
@@ -1150,7 +1152,7 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
             cell.delegate = self;
         }
         
-        [cell configImageArray:[self.bannerArray valueForKey:@"imageUrl"]];
+        [cell configImageArray:[self.bannerArray valueForKey:@"image"]];
         
         return cell;
     }
@@ -1255,35 +1257,35 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
 - (void)lbBannerCellClickImageAtIndex:(NSInteger)index {
     
     WLXunquanBannerModel *banner  = self.bannerArray[index];
-    if (2 == banner.type) {
-        [WLAliHandler viewController:self openWithUrl:banner.bannerUrl success:^(AlibcTradeResult * _Nonnull result) {
-            
-            
-            
-        } failed:^(NSError * _Nonnull error) {
-            
-        }];
-    } else if(1 == banner.type) {
-        WLAliWebController *webvc = [[WLAliWebController alloc] init];
-        webvc.urlString = banner.bannerUrl;
-        
-        [self.navigationController pushViewController:webvc animated:YES];
-        
+    
+    if (1 == banner.type) {
+          [[UIApplication sharedApplication] openURL:[NSURL URLWithString:banner.welfareUrl]];
     } else {
         
-        if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:banner.title]]) {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:banner.title]];
-        } else {
-            WLAliWebController *webvc = [[WLAliWebController alloc] init];
-            webvc.urlString = banner.bannerUrl;
+        
+        SKStoreProductViewController *controller  = [[SKStoreProductViewController alloc] init];
+        controller.delegate = self;
+        
+        [self.navigationController  presentViewController:controller animated:YES  completion:^{
             
-            [self.navigationController pushViewController:webvc animated:YES];
+            [controller loadProductWithParameters:@{SKStoreProductParameterITunesItemIdentifier:banner.welfareUrl} completionBlock:^(BOOL result, NSError * _Nullable error) {
+                
+            }];
             
-        }
+        }];
+        
         
     }
-    
+  
 }
+
+- (void)productViewControllerDidFinish:(SKStoreProductViewController *)viewController {
+    
+    [viewController dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+}
+
 
 - (void)dealloc {
     

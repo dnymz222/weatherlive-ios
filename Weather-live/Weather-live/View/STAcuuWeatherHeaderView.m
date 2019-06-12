@@ -117,9 +117,9 @@
         
         
         [self.moonphaseLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(self.contentView).offset(-8);
+            make.right.equalTo(self.contentView).offset(-5);
             make.centerY.equalTo(self.sunriseIconView);
-            make.width.equalTo(@110);
+            make.width.equalTo(@115);
             make.height.equalTo(@20);
         }];
         

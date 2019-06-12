@@ -95,8 +95,13 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
     
-    CGFloat width = [UIScreen mainScreen].bounds.size.width;
-    return CGSizeMake(width, 44);
+    if (self.dataArray && self.dataArray.count) {
+        CGFloat width = [UIScreen mainScreen].bounds.size.width;
+        return CGSizeMake(width, 44);
+    } else {
+        return CGSizeZero;
+    }
+    
     
 }
 
@@ -114,9 +119,14 @@
         
     }
     else if ([kind isEqualToString:UICollectionElementKindSectionFooter]){
-        WLAccuFooterReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"footer" forIndexPath:indexPath];
-        view.delegate = self;
-        return view;
+        
+        if (self.dataArray && self.dataArray.count) {
+            WLAccuFooterReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"footer" forIndexPath:indexPath];
+            view.delegate = self;
+            return view;
+        } else {
+            return nil;
+        }
         
     }
     

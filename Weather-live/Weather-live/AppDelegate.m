@@ -9,7 +9,6 @@
 #import "AppDelegate.h"
 #import "WLTabBarController.h"
 #import "UMMobClick/MobClick.h"
-#import <AlibcTradeSDK/AlibcTradeSDK.h>
 #import "WLWeatherLocationHandler.h"
 
 
@@ -34,14 +33,7 @@
     self.window.rootViewController = tab;
     [self.window makeKeyAndVisible];
     
-    [[AlibcTradeSDK sharedInstance] asyncInitWithSuccess:^{
-        
-        
-    
-    } failure:^(NSError *error) {
-        
-    }];
-    
+  
     
     
 #if DEBUG
@@ -107,10 +99,7 @@
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary*)options{
     
-    BOOL isHandler = [[AlibcTradeSDK sharedInstance] application:app openURL:url options:options  ];;
-    if(isHandler){
-        return YES;
-    }
+    
     
     return YES;
     
@@ -118,10 +107,7 @@
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
     
     
-    BOOL isHandler = [[AlibcTradeSDK sharedInstance] application:application openURL:url sourceApplication:sourceApplication annotation:annotation ];;
-    if (isHandler){
-        return YES;
-    }
+  
     return YES;
 }
 

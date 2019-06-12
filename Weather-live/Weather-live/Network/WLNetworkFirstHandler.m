@@ -20,7 +20,7 @@
 #define lamaconfigPath  @"/lama/new/item/config"
 #define lamaratePath @"/xunquan/detail/rate"
 #define lamaimagetranspath @"/xunquan/image/trans"
-#define xunquanbannerpath @"/xunquan/banner"
+#define xunquanbannerpath @"/xunquan/welfare"
 #define xunquansearchcheckpath @"/xunquan/search/check"
 #define xunquancolumnpath @"/xunquan/column"
 

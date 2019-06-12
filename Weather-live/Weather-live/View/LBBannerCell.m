@@ -58,7 +58,8 @@
         TYCyclePagerView *pagerView = [[TYCyclePagerView alloc]init];
         //        pagerView.layer.borderWidth = 1;
         pagerView.isInfiniteLoop = YES;
-        pagerView.autoScrollInterval = 3.0;
+//        pagerView.autoScrollInterval = 3.0;
+        
         pagerView.dataSource = self;
         pagerView.delegate = self;
         // registerClass or registerNib
@@ -103,6 +104,10 @@
     [self.pageContentView reloadData];
     
     self.pageControl.numberOfPages = imageArray.count;
+    
+    if (imageArray.count  > 1) {
+        self.pageContentView.autoScrollInterval = 3;
+    }
     
 }
 

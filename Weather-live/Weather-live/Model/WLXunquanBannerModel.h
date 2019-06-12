@@ -12,12 +12,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface WLXunquanBannerModel : NSObject
 
-@property(nonatomic,copy)NSString *title;
-@property(nonatomic,copy)NSString *imageUrl;
-@property(nonatomic,copy)NSString *specialId;
-@property(nonatomic,copy)NSString *bannerUrl;
-@property(nonatomic,copy)NSString *bannerId;
-@property(nonatomic,assign)NSInteger type;//1.网页 2.淘宝 3.跳转;
+@property(nonatomic,copy)NSString *name;
+@property(nonatomic,copy)NSString *welfareId;
+@property(nonatomic,copy)NSString *status;
+@property(nonatomic,copy)NSString *onTime;
+@property(nonatomic,copy)NSString *image;
+@property(nonatomic,copy)NSString *endTime;
+@property(nonatomic,copy)NSString *activeUrl;
+@property(nonatomic,copy)NSString *welfareUrl;
+@property(nonatomic,assign)NSInteger type;//0.没有安装去推广 1.已经安装了打开链接
 
 @end
 
