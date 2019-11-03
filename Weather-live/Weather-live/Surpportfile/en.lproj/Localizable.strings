@@ -1,0 +1,105 @@
+/* 
+  Localizable.strings
+  Weather-live
+
+  Create/Users/xuepingd by xueping on 2019/8/26.
+  Copyright © 2019 xueping. All rights reserved.
+*/
+
+
+"language" = "en-us";
+"unit type" = "Imperial";
+"is metric" = "false";
+
+
+
+"current" = "Current";
+"daily" ="Day";
+"indices" ="Indices";
+"mine" ="Mine";
+"di" ="DI";
+"di title" = "Indoor Discomfort Index";
+
+
+"current weather" = "Current weather";
+"houly weather" = "%d hour forecast";
+"imagery" = "Imagery";
+"air quality" = "Air quality";
+"air quality index" = "Air quality index";
+"ad" = "Ad";
+
+"moon age" = "Moon age";
+
+"input tip" ="Enter city name or district name";
+
+"real feel"  = "Real feel";
+"uv index" = "UV Index";
+"humidity" = "Humidity";
+"humidity use" = "Humidity(%)";
+"temperature" = "Temperature";
+"temperature use" ="Temperature(°C)";
+"air pressure" = "Air Pressure";
+"dewpoint" = "Dewpoint";
+
+"day" = "Day";
+"night" = "Night";
+
+"monday" = "Monday";
+"tuesday" = "Tuesday";
+"wednesday" = "Wednesday";
+"thursday" = "Thursday";
+"friday" = "Friday";
+"saturday" =  "Saturday";
+"sunday" = "Sunday";
+
+
+"days" = "days";
+
+"rate on the App Store" = "Rate on the App Store";
+"version" = "Version";
+"share to friends"="Share to Friends";
+"privacy" = "Privacy Policy";
+"privacy url" = "http://www.weatherindices.net/h5/weatherlive/privacy/en";
+
+
+"select location" = "Select location";
+"add location" = "Add location";
+
+"delete" =  "Delete";
+
+"cancel" = "Cancel";
+
+
+
+"a" = "Excellent";
+"b" =  "Good";
+"c" = "Mild";
+"d" = "Moderate";
+"e" = "Severe";
+"f" = "Extreme";
+
+
+
+"load failed" = "Load failed, please tap to retry";
+"select two items" = "Select two items";
+"select tips" = "1. The two selected items will appear on the home page and in the widget.\n2. Select up to two items\n3. You can click the cell again to cancel the selected item, then select another item.";
+
+"address tip" = "No address, need to set";
+
+"select note" = "No selected item, click here to set";
+
+"level 0" = "Cold";
+"level 1" = "Chilly";
+"level 2" = "No discomfort";
+"level 3" = "Comfortable";
+"level 4" = "Not hot";
+"level 5" = "Slightly hot";
+"level 6" = "Hot and sweaty";
+"level 7" = "It's hot and irresistible";
+
+
+
+
+
+
+

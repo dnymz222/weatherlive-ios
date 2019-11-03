@@ -97,7 +97,7 @@
     
     if (self.dataArray && self.dataArray.count) {
         CGFloat width = [UIScreen mainScreen].bounds.size.width;
-        return CGSizeMake(width, 44);
+        return CGSizeMake(width, 40);
     } else {
         return CGSizeZero;
     }

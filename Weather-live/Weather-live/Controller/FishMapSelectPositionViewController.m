@@ -12,6 +12,7 @@
 #import <MapKit/MapKit.h>
 #import "LBKeyMacro.h"
 #import "STLocationModel.h"
+#import "GPSCorrect.h"
 
 
 @interface FishMapSelectPositionViewController ()<MKMapViewDelegate,UISearchBarDelegate,UITableViewDelegate,UITableViewDataSource>
@@ -66,14 +67,14 @@
     self.searchBar.barTintColor =[UIColor whiteColor];
     self.searchBar.searchBarStyle = UISearchBarStyleMinimal;
     
-    UITextField *textfield = [self.searchBar valueForKey:@"_searchField"];
-    textfield.font = [UIFont systemFontOfSize:13.f];
-    textfield.textColor = UIColorFromRGB(0x666666);
-    [textfield setValue:UIColorFromRGB(0x999999) forKeyPath:@"_placeholderLabel.textColor"];
- 
-    [textfield setValue:[UIFont systemFontOfSize:12.f] forKeyPath:@"_placeholderLabel.font"];
+//    UITextField *textfield = [self.searchBar valueForKey:@"_searchField"];
+//    textfield.font = [UIFont systemFontOfSize:13.f];
+//    textfield.textColor = UIColorFromRGB(0x666666);
+//    [textfield setValue:UIColorFromRGB(0x999999) forKeyPath:@"_placeholderLabel.textColor"];
+// 
+//    [textfield setValue:[UIFont systemFontOfSize:12.f] forKeyPath:@"_placeholderLabel.font"];
     
-    self.searchBar.placeholder  =@"输入城市名或区县名";
+    self.searchBar.placeholder  = NSLocalizedString(@"input tip", nil);
     
     
     self.navigationItem.titleView = view;
@@ -90,11 +91,15 @@
     _tableView.dataSource = self;
     _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
+    
+    
+    
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.view);
         make.bottom.equalTo(self.view).offset(bottom);
         make.top.equalTo(self.view.mas_centerY).offset(60);
     }];
+    
     
     // Do any additional setup after loading the view.
 }
@@ -109,7 +114,7 @@
 
 
 - (void)addSearchButtonItem {
-    _cancelButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(cancelAction)];
+    _cancelButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"cancel", nil) style:UIBarButtonItemStylePlain target:self action:@selector(cancelAction)];
     [_cancelButtonItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:14.f],NSFontAttributeName,UIColorFromRGB(Themecolor),NSForegroundColorAttributeName,nil] forState:UIControlStateNormal];
     UIBarButtonItem *navigativeSpacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     if ([[UIDevice currentDevice].systemVersion floatValue] > 9.9f) {
@@ -225,14 +230,22 @@
     
     MKMapItem *item = [self.mapItems objectAtIndex:indexPath.row];
     
-    NSLog(@"location:%@",item.placemark.location);
+//    NSLog(@"location:%@",item.placemark.location);
     
     CLLocation *location = item.placemark.location;
-    STLocationModel *model  = [[STLocationModel alloc] initWithClLocation:location];
-    if (self.delegate && [self.delegate respondsToSelector:@selector(mapSelectPositionViewControllerDidSelected:)]) {
-        [_delegate mapSelectPositionViewControllerDidSelected:model];
-        [self.navigationController popViewControllerAnimated:YES];
-    }
+    
+    CLLocation *nwLocation =  [GPSCorrect transformLocation:location];
+    
+    STLocationModel *model  = [[STLocationModel alloc] initWithClLocation:nwLocation];
+    
+    __weak typeof(self) weakself = self;
+    [model reverseGeocodeCompleted:^(NSString * _Nonnull name) {
+        if (weakself.delegate ) {
+            [weakself.delegate mapSelectPositionViewControllerDidSelected:model];
+            [weakself.navigationController popViewControllerAnimated:YES];
+        }
+    }];
+    
     
 }
 

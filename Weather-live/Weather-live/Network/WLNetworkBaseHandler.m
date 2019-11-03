@@ -35,7 +35,8 @@
 #if DEBUG
     NSLog(@"urlstring:%@",urlString);
 #endif
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    
+    //[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
     NSURL *url  = [NSURL  URLWithString:urlString];
     
@@ -52,7 +53,7 @@
     
     __block NSURLSessionDataTask *task  = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+       // [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         
         if (error) {
             failedBlock(error);
@@ -128,7 +129,7 @@
         NSString *string = [NSString stringWithFormat:@"%@=%@&",key,[paramaters valueForKey:key]];
         bodystring  = [bodystring    stringByAppendingString:string];
     }
-    bodystring = [bodystring stringByAppendingString:[NSString stringWithFormat:@"appVersion=%@&day=%@&source=%@&sysv=%@&os=iOS&adzoneId=%@",[WLNetwork shareInstance].sourceVersion,[WLNetwork shareInstance].dateString,@"lamabiji",[WLNetwork shareInstance].sysVersion,adzone_id]];
+    bodystring = [bodystring stringByAppendingString:[NSString stringWithFormat:@"appVersion=%@&day=%@&source=%@&sysv=%@&os=iOS&adzoneId=%@",[WLNetwork shareInstance].sourceVersion,[WLNetwork shareInstance].dateString,@"weatherlive",[WLNetwork shareInstance].sysVersion,adzone_id]];
     request.HTTPBody = [bodystring dataUsingEncoding:NSUTF8StringEncoding];
     
 #if DEBUG
@@ -221,7 +222,7 @@
     
     
     
-   urlString  = [urlString stringByAppendingString:[NSString stringWithFormat:@"appVersion=%@&day=%@&source=%@&sysv=%@&os=iOS&adzoneId=%@",[WLNetwork shareInstance].sourceVersion,[WLNetwork shareInstance].dateString,@"lamabiji",[WLNetwork shareInstance].sysVersion,adzone_id]];
+   urlString  = [urlString stringByAppendingString:[NSString stringWithFormat:@"appVersion=%@&day=%@&source=%@&sysv=%@&os=iOS&adzoneId=%@",[WLNetwork shareInstance].sourceVersion,[WLNetwork shareInstance].dateString,@"weatherlive",[WLNetwork shareInstance].sysVersion,adzone_id]];
     
     urlString = [urlString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^@,{}\"[]|\\<> "].invertedSet];
     
@@ -243,7 +244,7 @@
 #if DEBUG
     NSLog(@"urlstring:%@",urlString);
 #endif
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+   // [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
     NSURL *url  = [NSURL  URLWithString:urlString];
     
@@ -260,7 +261,7 @@
     
     __block NSURLSessionDataTask *task  = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+       // [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         
         if (error) {
             failedBlock(error);

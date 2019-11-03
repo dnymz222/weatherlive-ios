@@ -1,0 +1,10 @@
+/* 
+  InfoPlist.strings
+  Weather-live
+
+  Created by xueping on 2019/8/26.
+  Copyright © 2019 xueping. All rights reserved.
+*/
+
+CFBundleDisplayName = "Weather Indices";
+NSLocationWhenInUseUsageDescription  = "Weather Indices needs to access your location information, get the latitude and longitude to request weather";

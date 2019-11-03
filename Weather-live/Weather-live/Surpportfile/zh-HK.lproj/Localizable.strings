@@ -1,0 +1,96 @@
+/* 
+  Localizable.strings
+  Weather-live
+
+  Created by xueping on 2019/8/26.
+  Copyright © 2019 xueping. All rights reserved.
+*/
+
+
+"language" = "zh-hk";
+"unit type" = "Metric";
+"is metric" = "true";
+
+
+"current" = "當前天氣";
+"daily" ="逐日天氣";
+"indices" ="生活指數";
+"mine" ="我的設定";
+"di" ="不適指數";
+"di title" = "室內不適指數";
+
+
+"current weather" = "實況天氣";
+"houly weather" = "%d 小時預報";
+"imagery" = "氣象雷達";
+"air quality" = "空氣質量";
+"air quality index" = "空氣質量指數";
+"ad" = "廣告";
+
+"moon age" = "月齡";
+"input tip" ="輸入城市名或區縣名";
+
+"real feel"  = "體感溫度";
+"uv index" = "紫外線指數";
+"humidity" = "濕度";
+"humidity use" = "濕度(%)";
+"temperature" = "溫度";
+"temperature use" ="溫度(°C)";
+"air pressure" = "大氣壓";
+"dewpoint" = "露點";
+
+"day" = "白天";
+"night" = "夜晚";
+
+"monday" = "星期一";
+"tuesday" = "星期二";
+"wednesday" = "星期三";
+"thursday" = "星期四";
+"friday" = "星期五";
+"saturday" =  "星期六";
+"sunday" = "星期日";
+
+
+"days" = "天";
+
+"rate on the App Store" = "在 App Store 評價";
+"version" = "版本";
+"share to friends"="分享給好友";
+"privacy" = "隱私政策";
+"privacy url" = "http://www.weatherindices.net/h5/weatherlive/privacy/en";
+
+
+"select location" = "選擇地點";
+"add location" = "添加地點";
+
+"delete" =  "刪除";
+"cancel" = "取消";
+
+
+
+"a" = "優";
+"b" =  "良";
+"c" = "輕度污染";
+"d" = "中度污染";
+"e" = "重度污染";
+"f" = "極度污染";
+
+"load failed" = "加載失敗，請點擊重試";
+
+"select two items" = "選擇兩項";
+
+"select tips" = "1. 選中的兩項會出現在首頁和小組件中。\n2. 最多選擇兩項。\n3. 你可以重新點擊單元格取消選中的項，然後選擇其他項。";
+
+"address tip" = "沒有地址，需要去設置";
+
+"select note" = "沒有選中項，點此去設置";
+
+"level 0" = "寒冷，冷";
+"level 1" = "涼";
+"level 2" = "沒有不適感";
+"level 3" = "舒適";
+"level 4" = "不熱";
+"level 5" = "有點熱";
+"level 6" = "熱得出汗";
+"level 7" = "熱得受不了";
+

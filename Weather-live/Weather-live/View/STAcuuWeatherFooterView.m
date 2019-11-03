@@ -31,15 +31,15 @@
         [self.linkButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(self.contentView).offset(50);
             make.centerY.equalTo(self.contentView);
-            make.width.equalTo(@198);
-            make.height.equalTo(@28);
+            make.width.equalTo(@170);
+            make.height.equalTo(@24);
         }];
         
         [self.powerLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(self.linkButton.mas_left).offset(-5);
             make.left.equalTo(self.contentView).offset(10);
             make.centerY.equalTo(self.contentView);
-            make.height.equalTo(@30);
+            make.height.equalTo(@26);
         }];
 
     }
@@ -73,7 +73,7 @@
 
 -(void)buttonClick:(UIButton *)button {
     
-    if (self.delegate && [self.delegate respondsToSelector:@selector(AcuuWeatherFooterViewClickButtonLink)]) {
+    if (self.delegate ) {
         [self.delegate AcuuWeatherFooterViewClickButtonLink];
     }
     

@@ -20,13 +20,27 @@
 #define longtitudekey @"longtitudekey"
 #define altitudekey @"altitudekey"
 #define refreshkey  @"refreshkey"
-#define locationkey @"locationkey"
+#define locationkey_key @"locationkey"
 #define localizenamekey @"localizenamekey"
 
 #define requestWeatherDoneKey @"requestWeatherDoneKey"
 
 
 #define locationchangednoteKey @"locationchangednoteKey"
+
+#define Appgroupkey  @"group.com.xueping.weatherlive"
+#define AppgroupLoctionkeyKey @"AppgroupLoctionkeyKey"
+#define AppgroupLoctionNameKey @"AppgroupLoctionNameKey"
+#define AppgroupIndiciesSelect1Key @"AppgroupIndicesSelect1Key"
+#define AppgroupIndiciesSelect2Key @"AppgroupIndicesSelect2Key"
+
+#define AppgroupIndiciesChangedKey @"AppgroupIndiciesChangedKey"
+
+#define AppgroupOldKey @"AppgroupOldKey"
+#define AppgroupIndexTimeKey @"AppgroupIndexTimeKey"
+#define AppgroupLastIndexTimekey @"AppgroupLastIndexTimekey"
+#define AppgroupOldDayKey @"AppgroupOldDayKey"
+
 
 
 

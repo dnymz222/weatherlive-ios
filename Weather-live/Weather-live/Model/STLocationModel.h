@@ -14,7 +14,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 @property(nonatomic,strong)CLLocation *location;
+
 @property(nonatomic,copy)NSString *name;
+
+
+@property(nonatomic,copy)NSString *locationkey;
 
 
 - (instancetype)initWithClLocation:(CLLocation *)location;

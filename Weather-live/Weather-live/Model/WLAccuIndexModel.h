@@ -26,6 +26,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic,copy)NSString *Day;
 
+@property(nonatomic,assign)NSInteger selectType;//0:无 1: 2
+
 
 - (void)caculateDay;
 

@@ -1,0 +1,105 @@
+/* 
+  Localizable.strings
+  Weather-live
+
+  Create/Users/xuepingd by xueping on 2019/8/26.
+  Copyright © 2019 xueping. All rights reserved.
+*/
+
+
+"language" = "ja-jp";
+"unit type" = "Metric";
+"is metric" = "true";
+
+
+
+"current" = "現在の";
+"daily" ="日々";
+"indices" ="生活指数";
+"mine" ="私の設定";
+"di" ="不快指数";
+"di title" = "室内不快指数";
+
+
+"current weather" = "現在の天気";
+"houly weather" = "%d 時間予報";
+"imagery" = "Imagery";
+"air quality" = "空気質";
+"air quality index" = "大気質指標";
+"ad" = "Ad";
+
+"moon age" = "月齢";
+
+"input tip" ="都市名または県名を入力します。";
+
+"real feel"  = "実感温度";
+"uv index" = "紫外線指数";
+"humidity" = "湿度";
+"humidity use" = "湿度(%)";
+"temperature" = "温度";
+"temperature use" ="温度(°C)";
+"air pressure" = "大気圧";
+"dewpoint" = "露点";
+
+"day" = "昼間";
+"night" = "夜";
+
+"monday" = "月曜";
+"tuesday" = "火曜日";
+"wednesday" = "水曜日";
+"thursday" = "木曜日";
+"friday" = "金曜日";
+"saturday" =  "土曜日";
+"sunday" = "日曜日";
+
+
+"days" = "日数";
+
+"rate on the App Store" = "APP Storeで評価する";
+"version" = "バージョン";
+"share to friends"="友達にシェアする";
+"privacy" = "プライバシーポリシー";
+"privacy url" = "http://www.weatherindices.net/h5/weatherlive/privacy/en";
+
+
+"select location" = "場所を選択";
+"add location" = "場所を追加";
+
+"delete" =  "削除する";
+
+"cancel" = "キャンセル";
+
+
+
+"a" = "Excellent";
+"b" =  "Good";
+"c" = "Mild";
+"d" = "Moderate";
+"e" = "Severe";
+"f" = "Extreme";
+
+
+
+"load failed" = "読み込みに失敗しました。もう一度クリックしてください";
+"select two items" = "2つのアイテムを選択";
+"select tips" = "1.選択した2つのアイテムがホームページとウィジェットに表示されます。\ n2。 最大2つのアイテムを選択します\ n3。 セルをもう一度クリックして、選択したアイテムをキャンセルしてから、別のアイテムを選択できます。";
+
+"address tip" = "アドレスなし、設定する必要があります";
+
+"select note" = "選択されたアイテムはありません。ここをクリックして設定してください";
+
+"level 0" = "寒い";
+"level 1" = "肌寒い";
+"level 2" = "何も感じない";
+"level 3" = "快い";
+"level 4" = "暑くない";
+"level 5" = "やや暑い";
+"level 6" = "暑くて汗が出る";
+"level 7" = "暑くてたまらない";
+
+
+
+
+
+
+

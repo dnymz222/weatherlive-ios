@@ -28,24 +28,24 @@
 #import "WLAccuHourlyModel.h"
 #import "WLAccuHourlyCell.h"
 #import "WLAccuNormalHeaderView.h"
-#import "WLAccuAlarmsModel.h"
-#import "WLAccuAlarmsCell.h"
+
 #import "WLAccuLocationModel.h"
-#import "WLAccuRadarCell.h"
-#import "WLAccuuRadarModel.h"
-#import "SDWebImageDownloader.h"
-#import "SDWebImageManager.h"
+
 #import "FishMapSelectPositionViewController.h"
+#import "WLAddressListViewController.h"
 #import "WLXinzhiAqiModel.h"
 #import "WLXinzhiAqiCell.h"
 #import "WXPErrorTipView.h"
 
-#import "WLXunquanBannerModel.h"
-#import "LBBannerCell.h"
 #import "WLAliWebController.h"
-//#if __IPHONE_10_3
+#if __IPHONE_10_3
 #import <StoreKit/StoreKit.h>
-//#endif
+#endif
+
+#import "WLAccuIndexModel.h"
+#import "WLIndexCell.h"
+#import "WLIndexSelectViewController.h"
+
 
 
 
@@ -53,9 +53,11 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
     WLWeatherSectionTypeCurrent=0,
     WLWeatherSectionTypeHour,
     WLWeatherSectionTypeAqi,
-    WLWeatherSectionTypeBanner,
-    WLWeatherSectionTypeRadar,
-    WLWeatherSectionTypeAlarms,
+//    WLWeatherSectionTypeBanner,
+//    WLWeatherSectionTypeRadar,
+//    WLWeatherSectionTypeAlarms,
+    WLWeatherSectionTypeIndices,
+    
     
     
 };
@@ -63,7 +65,7 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
 
 
 
-@interface WLWeatherViewController ()<CLLocationManagerDelegate,UITableViewDelegate,UITableViewDataSource,STAcuuWeatherFooterViewDelegate,FishMapSelectPositionViewControllerDelegate,WXPErrorTipViewDelegate,LBBannerCellDelegate,SKStoreProductViewControllerDelegate>
+@interface WLWeatherViewController ()<CLLocationManagerDelegate,UITableViewDelegate,UITableViewDataSource,STAcuuWeatherFooterViewDelegate,FishMapSelectPositionViewControllerDelegate,WXPErrorTipViewDelegate,SKStoreProductViewControllerDelegate,UIAlertViewDelegate,WLAddressListViewControllerDelegate>
 
 @property(nonatomic,strong)STLocationModel *location;
 
@@ -111,11 +113,26 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
 
 @property(nonatomic,assign)NSInteger failedLimitTime;
 
-@property(nonatomic,strong)NSMutableArray *bannerArray;
-
-@property(nonatomic,assign)BOOL ShowBanner;
+//@property(nonatomic,strong)NSMutableArray *bannerArray;
+//
+//@property(nonatomic,assign)BOOL ShowBanner;
 
 @property(nonatomic,strong)NSDateFormatter   *formatter;
+
+
+@property(nonatomic,copy)NSArray *indexArray;
+@property(nonatomic,copy)NSArray *dayArray;
+
+@property(nonatomic,assign)NSInteger indexTime;
+@property(nonatomic,strong)NSDateFormatter *dayfomatter;
+@property(nonatomic,copy)NSString *day;
+
+@property(nonatomic,assign)NSInteger lastIndexTime;
+
+@property(nonatomic,copy)NSString *someDay;
+
+
+@property(nonatomic,strong)NSUserDefaults *userDefaults;
 
 
 
@@ -129,7 +146,7 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
      self.sectionArray = [NSMutableArray array];
-    self.bannerArray = [NSMutableArray array];
+//    self.bannerArray = [NSMutableArray array];
 //    self.dataArray = [NSMutableArray array];
     
     [self.view addSubview:self.tableView];
@@ -144,13 +161,18 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
     self.aqiTime = 0;
     self.failedLimitTime = 0;
     
+    self.dayfomatter = [[NSDateFormatter  alloc] init];
+       [self.dayfomatter   setDateFormat:@"MM-dd"];
+    
+    self.userDefaults = [[NSUserDefaults alloc] initWithSuiteName:Appgroupkey];
+    
     
     self.formatter = [[NSDateFormatter alloc] init];
     [self.formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss Z"];
     
     
     
-    if ([[NSUserDefaults standardUserDefaults] valueForKey:locationkey]) {
+    if ([[NSUserDefaults standardUserDefaults] valueForKey:locationkey_key]) {
         
         double latitude  = [[NSUserDefaults standardUserDefaults] doubleForKey:latitudekey];
         double longtitude = [[NSUserDefaults standardUserDefaults] doubleForKey:longtitudekey];
@@ -158,7 +180,7 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
         CLLocation  *location = [[CLLocation alloc] initWithLatitude:latitude longitude:longtitude];
         STLocationModel *model = [[STLocationModel alloc] initWithClLocation:location];
         [WLWeatherLocationHandler sharehanlder].locationModel = model;
-        self.locationKey = [[NSUserDefaults standardUserDefaults] valueForKey:locationkey];
+        self.locationKey = [[NSUserDefaults standardUserDefaults] valueForKey:locationkey_key];
         NSString *localizedName = [[NSUserDefaults standardUserDefaults] valueForKey:localizenamekey];
         self.navigationItem.title = localizedName;
         WLAccuLocationModel *acuulocation = [[WLAccuLocationModel alloc] init];
@@ -166,6 +188,11 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
         acuulocation.Key = self.locationKey;
         [WLWeatherLocationHandler sharehanlder].accuLoctionModel = acuulocation;
         [self requestWeatherFromNewkey:YES];
+        if (![self.userDefaults valueForKey:AppgroupLoctionkeyKey]) {
+            [self.userDefaults setObject:self.locationKey forKey:AppgroupLoctionkeyKey];
+            [self.userDefaults setObject:localizedName forKey:AppgroupLoctionNameKey];
+        }
+        
         
     } else {
         
@@ -196,22 +223,24 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
     
     
     
-#if __IPHONE_10_0
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"HasAllowNetworkKey"]) {
+
+    if (@available(iOS 10.0, *)) {
+       if (![[NSUserDefaults standardUserDefaults] boolForKey:@"HasAllowNetworkKey"]) {
         [self networkStatusListen];
+       }
     }
 
     
-#endif
+
     
-    [self requestBanner];
+//    [self requestBanner];
     
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"showbanner"]) {
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"showbanner"];
-        self.ShowBanner = NO;
-    } else {
-        self.ShowBanner = YES;
-    }
+//    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"showbanner"]) {
+//        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"showbanner"];
+//        self.ShowBanner = NO;
+//    } else {
+//        self.ShowBanner = YES;
+//    }
 
      
      
@@ -233,7 +262,7 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
         [[NSUserDefaults standardUserDefaults] setInteger:times forKey:showapptimeskey];
     }
     
-    if (times > 5) {
+    if (times > 6) {
         if (![[NSUserDefaults standardUserDefaults] boolForKey:hasShowscoreKey]) {
             
 #if __IPHONE_10_3
@@ -244,18 +273,33 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
     }
     
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveIndeicesChangeNote) name:AppgroupIndiciesChangedKey object:nil];
+    
     // Do any additional setup after loading the view.
 }
 
 #if __IPHONE_10_3
+
+
 - (void)loadAppStoreController{
     
-    [SKStoreReviewController requestReview];
-    
+    if (@available(iOS 10.3, *)) {
+        [SKStoreReviewController requestReview];
+    } else {
+        // Fallback on earlier versions
+    }
+
 
 }
 #endif
 
+
+
+- (void)receiveIndeicesChangeNote {
+    
+    [self.tableView reloadData];
+    
+}
 
 - (void)checkData {
     
@@ -271,12 +315,16 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
         [self requestHourly];
     }
     
-    if (!self.radarArray) {
-        [self requestRadar];
-    }
+//    if (!self.radarArray) {
+//        [self requestRadar];
+//    }
     
     if (!self.aqiModel) {
         [self requestAqi];
+    }
+    
+    if (!self.indexArray) {
+        [self requestIndex];
     }
     
 }
@@ -298,11 +346,11 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
         [self requestWeatherFromNewkey:NO];
     }
     
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"showbanner"]) {
-        self.ShowBanner = YES;
-    }
+//    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"showbanner"]) {
+//        self.ShowBanner = YES;
+//    }
     
-    [self requestBanner];
+//    [self requestBanner];
     
     [self addTimer];
 }
@@ -373,17 +421,23 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
 //    mapselectController.delegate = self;
 //    [self.navigationController pushViewController:mapselectController animated:YES];
     
-    FishMapSelectPositionViewController *mapController = [[FishMapSelectPositionViewController alloc] init];
-    mapController.delegate = self;
-    [self.navigationController pushViewController:mapController animated:YES];
+//    FishMapSelectPositionViewController *mapController = [[FishMapSelectPositionViewController alloc] init];
+//    mapController.delegate = self;
+//    [self.navigationController pushViewController:mapController animated:YES];
     
     
+    WLAddressListViewController *addressListController = [[WLAddressListViewController alloc] init];
+    addressListController.delegate  = self;
+    
+    [self.navigationController pushViewController:addressListController animated:YES];
     
     
     
 }
 
-- (void)mapSelectPositionViewControllerDidSelected:(STLocationModel *)loction {
+- (void)addresslistSelectlocation:(STLocationModel *)loction
+
+{
     
     CLLocation *loc = loction.location;
     
@@ -470,23 +524,6 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
 #endif
 
 
-- (void)requestConfig {
-    
-    
-    [WLNetworkFirstHandler configWithparamater:@{} success:^(NSURLResponse *response, id data) {
-        
-        
-       
-        
-        
-        
-    } failed:^(NSError *error) {
-        
-    }];
-    
-    
-    
-}
 
 - (void)locationrefresh
 {
@@ -508,7 +545,7 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"refreshed"]) {
             if (kCLAuthorizationStatusDenied == status || kCLAuthorizationStatusRestricted == status ) {
                 UIAlertView *alert =[[UIAlertView alloc]initWithTitle:NSLocalizedString(@"note", nil) message:NSLocalizedString(@"location service", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", nil) otherButtonTitles:NSLocalizedString(@"go to setting", nil),nil];
-                
+                alert.tag = 0;
                 [alert show];
                 
                 
@@ -537,14 +574,31 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex  {
     
     [alertView dismissWithClickedButtonIndex:buttonIndex animated:YES];
-    if (buttonIndex ) {
+    if ( buttonIndex ) {
         
-        NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-        if([[UIApplication sharedApplication] canOpenURL:url]) {
-            NSURL*url =[NSURL URLWithString:UIApplicationOpenSettingsURLString];
-            //此处可以做一下版本适配，至于为何要做版本适配，大家应该很清楚
-            [[UIApplication sharedApplication] openURL:url];
+        if (0 == alertView.tag) {
+            NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+            if([[UIApplication sharedApplication] canOpenURL:url]) {
+                NSURL*url =[NSURL URLWithString:UIApplicationOpenSettingsURLString];
+                //此处可以做一下版本适配，至于为何要做版本适配，大家应该很清楚
+                [[UIApplication sharedApplication] openURL:url];
+            }
+            
+        } else {
+            
+            [alertView dismissWithClickedButtonIndex:buttonIndex animated:YES];
+            if (buttonIndex) {
+                NSString *urlStr = [NSString
+                                    
+                                    stringWithFormat:@"https://itunes.apple.com/us/app/itunes-u/id%@?action=write-review&mt=8",
+                                    
+                                    @"1451403745"];
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
+                
+            }
         }
+        
+       
     }
 }
 
@@ -605,7 +659,7 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
                            @"lng":longtitude,
                            @"time":[NSString stringWithFormat:@"%ld",timestamp],
                            @"total":[NSString stringWithFormat:@"%ld",total],
-                           @"language":@"zh-cn"
+                           @"language":NSLocalizedString(@"language", nil)
                            };
     
     [WLNetworkFirstHandler acuuloctationKeyWithparamater:dict success:^(NSURLResponse *response, id data) {
@@ -628,10 +682,12 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
             [WLWeatherLocationHandler sharehanlder].accuLoctionModel = self.acculoction;
             
             if (newkey) {
-                [[NSUserDefaults standardUserDefaults] setObject:self.locationKey forKey:locationkey];
+                [[NSUserDefaults standardUserDefaults] setObject:self.locationKey forKey:locationkey_key];
                 [[NSUserDefaults standardUserDefaults] setObject:self.acculoction.LocalizedName forKey:localizenamekey];
                 self.navigationItem.title = self.acculoction.LocalizedName;
                 [[NSNotificationCenter defaultCenter] postNotificationName:loctionkeygetkey object:nil];
+                [self.userDefaults setObject:self.locationKey forKey:AppgroupLoctionkeyKey];
+                [self.userDefaults setObject:self.acculoction.LocalizedName  forKey:AppgroupLoctionNameKey];
             }
            
            
@@ -656,7 +712,7 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
 
 - (void)errorviewTapinView:(WXPErrorTipView *)errorView {
     
-    [self requestBanner];
+//    [self requestBanner];
 
     if (!self.locationKey) {
          [self requestLocationKey];
@@ -670,6 +726,10 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
 - (void)requestWeatherFromNewkey:(BOOL)newkey {
     
     NSInteger nowtime =[[ NSDate date] timeIntervalSince1970];
+    
+    self.day = [self.dayfomatter stringFromDate:[NSDate date]];
+    
+ 
     if (newkey) {
         
         self.fialedTimes = 0;
@@ -680,8 +740,13 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
         });
         
      
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self requestAqi];
+        });
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.7 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self requestIndex];
+            
         });
         
         
@@ -711,20 +776,47 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
         
         
         if (nowtime-self.aqiTime > 3600  && (nowtime-self.lastAqiTime > 300)) {
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self requestAqi];
             });
         }
         
+        
+        
+//        if (!self.indexTime) {
+//
+//        } else {
+            NSDate *date = [NSDate date];
+            NSInteger now = [date timeIntervalSince1970];
+            NSString *nowday = [self.dayfomatter stringFromDate:date];
+            BOOL sameday  =[nowday isEqualToString:self.day];
+            if (sameday && self.indexTime) {
+                if (now-_lastIndexTime > 6*3600) {
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                       [self requestIndex];
+                    });
+                }
+                
+            } else {
+                if (now- _lastIndexTime > 600) {
+                    
+                   dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                       [self requestIndex];
+                    });
+                }
+            }
+            
+//        }
+        
     }
  
     
-    if (nowtime - self.radarTime > 900  && (nowtime -self.lastRadarTime > 300)) {
-       
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self requestRadar];
-        });
-    }
+//    if (nowtime - self.radarTime > 900  && (nowtime -self.lastRadarTime > 300)) {
+//
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            [self requestRadar];
+//        });
+//    }
    
     
     
@@ -753,7 +845,7 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
                            @"time":[NSString stringWithFormat:@"%ld",timestamp],
                            @"total":[NSString stringWithFormat:@"%ld",total],
                            @"locationkey":self.locationKey,
-                           @"language":@"zh-cn"
+                           @"language":NSLocalizedString(@"language", nil)
                            };
     
     [WLNetworkFirstHandler accuCurrentWithparamater:dict success:^(NSURLResponse *response, id data) {
@@ -794,7 +886,8 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
                            @"time":[NSString stringWithFormat:@"%ld",timestamp],
                            @"total":[NSString stringWithFormat:@"%ld",total],
                            @"locationkey":self.locationKey,
-                           @"language":@"zh-cn"
+                           @"metric":NSLocalizedString(@"is metric", nil),
+                           @"language":NSLocalizedString(@"language", nil)
                            };
     
     [WLNetworkFirstHandler accuHourlyWithparamater:dict success:^(NSURLResponse *response, id data) {
@@ -824,74 +917,77 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
     }];;
 }
 
-- (void)requestRadar {
-    
-    NSString   *latitude = [NSString stringWithFormat:@"%0.4f",[WLWeatherLocationHandler sharehanlder].locationModel.location.coordinate.latitude];
-    NSString  *longtitude = [NSString stringWithFormat:@"%0.4f",[WLWeatherLocationHandler sharehanlder].locationModel.location.coordinate.longitude];
-    
-    
-    NSInteger timestamp = [[NSDate date] timeIntervalSince1970];
-    NSInteger total = [WLNetwork cacluteTotalWithLat:latitude lon:longtitude time:timestamp];
-    
-    NSDictionary *dict = @{@"lat":latitude,
-                           @"lng":longtitude,
-                           @"time":[NSString stringWithFormat:@"%ld",timestamp],
-                           @"total":[NSString stringWithFormat:@"%ld",total],
-                           @"locationkey":self.locationKey,
-                           @"language":@"zh-cn",
-                           @"image":@"480x480"
-                           
-                           };
-    
-    [WLNetworkFirstHandler accuRadarWithparamater:dict success:^(NSURLResponse *response, id data) {
-          self.lastRadarTime = [[NSDate date] timeIntervalSince1970];
-        NSDictionary *dataDict = (NSDictionary *)data;
-        NSDictionary *Satellite = [dataDict valueForKey:@"Satellite"];
-        if (Satellite) {
-            NSArray *images = [Satellite valueForKey:@"Images"];
-            NSArray *array = [NSArray yy_modelArrayWithClass:[WLAccuuRadarModel class] json:images];
-            if (array && array.count) {
-                self.radarArray = array;
-                [WXPErrorTipView removeErrorviewInView:self.view];
-                
-                WLAccuuRadarModel *lastmodel  = [self.radarArray lastObject];
-                NSString *string = [lastmodel.Date stringByReplacingOccurrencesOfString:@"T" withString:@" "];
-                string = [string stringByReplacingOccurrencesOfString:@"+" withString:@" +"];
-                NSDate *date = [self.formatter dateFromString:string];
-                self.radarTime = [date timeIntervalSince1970];
-              
-                
-            __block NSInteger count = 0;
-            __weak typeof(self) wself = self;
-            for (WLAccuuRadarModel *model in self.radarArray) {
-               
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [[SDWebImageManager sharedManager].imageDownloader downloadImageWithURL:[NSURL URLWithString:model.Url] options:SDWebImageDownloaderHighPriority|SDWebImageDownloaderUseNSURLCache progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
-                        
-                    } completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {
-                        count =  count +1;
-                        if (count > wself.radarArray.count -1) {
-                            [wself.tableView reloadData];
-                        }
-                    }];
-                });
-            }
-            }
-            
-            
-        }
-        
-        
-    } failed:^(NSError *error) {
-        self.lastRadarTime = [[NSDate date] timeIntervalSince1970];
-        self.fialedTimes = self.fialedTimes +1;
-        [self checkeFialed];
-        
-    }];
-}
+//- (void)requestRadar {
+//
+//    NSString   *latitude = [NSString stringWithFormat:@"%0.4f",[WLWeatherLocationHandler sharehanlder].locationModel.location.coordinate.latitude];
+//    NSString  *longtitude = [NSString stringWithFormat:@"%0.4f",[WLWeatherLocationHandler sharehanlder].locationModel.location.coordinate.longitude];
+//
+//
+//    NSInteger timestamp = [[NSDate date] timeIntervalSince1970];
+//    NSInteger total = [WLNetwork cacluteTotalWithLat:latitude lon:longtitude time:timestamp];
+//
+//    NSDictionary *dict = @{@"lat":latitude,
+//                           @"lng":longtitude,
+//                           @"time":[NSString stringWithFormat:@"%ld",timestamp],
+//                           @"total":[NSString stringWithFormat:@"%ld",total],
+//                           @"locationkey":self.locationKey,
+//                           @"language":NSLocalizedString(@"language", nil),
+//                           @"image":@"480x480"
+//
+//                           };
+//
+//    [WLNetworkFirstHandler accuRadarWithparamater:dict success:^(NSURLResponse *response, id data) {
+//          self.lastRadarTime = [[NSDate date] timeIntervalSince1970];
+//        NSDictionary *dataDict = (NSDictionary *)data;
+//        NSDictionary *Satellite = [dataDict valueForKey:@"Satellite"];
+//        if (Satellite) {
+//            NSArray *images = [Satellite valueForKey:@"Images"];
+//            NSArray *array = [NSArray yy_modelArrayWithClass:[WLAccuuRadarModel class] json:images];
+//            if (array && array.count) {
+//                self.radarArray = array;
+//                [WXPErrorTipView removeErrorviewInView:self.view];
+//
+//                WLAccuuRadarModel *lastmodel  = [self.radarArray lastObject];
+//                NSString *string = [lastmodel.Date stringByReplacingOccurrencesOfString:@"T" withString:@" "];
+//                string = [string stringByReplacingOccurrencesOfString:@"+" withString:@" +"];
+//                NSDate *date = [self.formatter dateFromString:string];
+//                self.radarTime = [date timeIntervalSince1970];
+//
+//
+//            __block NSInteger count = 0;
+//            __weak typeof(self) wself = self;
+//            for (WLAccuuRadarModel *model in self.radarArray) {
+//
+//                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                    [[SDWebImageManager sharedManager].imageDownloader downloadImageWithURL:[NSURL URLWithString:model.Url] options:SDWebImageDownloaderHighPriority|SDWebImageDownloaderUseNSURLCache progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
+//
+//                    } completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {
+//                        count =  count +1;
+//                        if (count > wself.radarArray.count -1) {
+//                            [wself.tableView reloadData];
+//                        }
+//                    }];
+//                });
+//            }
+//            }
+//
+//
+//        }
+//
+//
+//    } failed:^(NSError *error) {
+//        self.lastRadarTime = [[NSDate date] timeIntervalSince1970];
+//        self.fialedTimes = self.fialedTimes +1;
+//        [self checkeFialed];
+//
+//    }];
+//}
 
 - (void)requestAqi{
-    
+//#if DEBUG
+//    return;
+//#endif
+//    
     NSString   *latitude = [NSString stringWithFormat:@"%0.4f",[WLWeatherLocationHandler sharehanlder].locationModel.location.coordinate.latitude];
     NSString  *longtitude = [NSString stringWithFormat:@"%0.4f",[WLWeatherLocationHandler sharehanlder].locationModel.location.coordinate.longitude];
     
@@ -904,7 +1000,7 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
                            @"time":[NSString stringWithFormat:@"%ld",timestamp],
                            @"total":[NSString stringWithFormat:@"%ld",total],
                            @"locationkey":self.locationKey,
-                           @"language":@"zh-cn"
+                           @"language":NSLocalizedString(@"language", nil),
                            };
     
     [WLNetworkFirstHandler xinzhiAqiWithparamater:dict success:^(NSURLResponse *response, id data) {
@@ -940,66 +1036,36 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
     
 }
 
-- (void)requestBanner {
-    
-    [WLNetworkFirstHandler xunquanbannerWithparamater:nil success:^(NSURLResponse *response, id data) {
-        
-        NSArray *bannerArry = [NSArray yy_modelArrayWithClass:[WLXunquanBannerModel class] json:data];
-        if (bannerArry && bannerArry.count) {
-            [self.bannerArray removeAllObjects];
-            for (WLXunquanBannerModel *model in bannerArry) {
-                if (0 == model.type) {
-                    if (![[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:model.activeUrl]])  {
-                        [self.bannerArray addObject:model];
-                    }
-                } else {
-                    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:model.activeUrl]])  {
-                        [self.bannerArray addObject:model];
-                    }
-                    
-                }
-            }
-           // self.bannerArray = bannerArry;
-            [self.tableView reloadData];
-        }
-        
-    } failed:^(NSError *error) {
-        
-        
-    }];
-}
+//- (void)requestBanner {
+//
+//    [WLNetworkFirstHandler xunquanbannerWithparamater:nil success:^(NSURLResponse *response, id data) {
+//
+//        NSArray *bannerArry = [NSArray yy_modelArrayWithClass:[WLXunquanBannerModel class] json:data];
+//        if (bannerArry && bannerArry.count) {
+//            [self.bannerArray removeAllObjects];
+//            for (WLXunquanBannerModel *model in bannerArry) {
+//                if (0 == model.type) {
+//                    if (![[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:model.activeUrl]])  {
+//                        [self.bannerArray addObject:model];
+//                    }
+//                } else {
+//                    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:model.activeUrl]])  {
+//                        [self.bannerArray addObject:model];
+//                    }
+//
+//                }
+//            }
+//           // self.bannerArray = bannerArry;
+//            [self.tableView reloadData];
+//        }
+//
+//    } failed:^(NSError *error) {
+//
+//
+//    }];
+//}
 
 
-- (void)requestAlarms {
-    
-    NSString   *latitude = [NSString stringWithFormat:@"%0.4f",[WLWeatherLocationHandler sharehanlder].locationModel.location.coordinate.latitude];
-    NSString  *longtitude = [NSString stringWithFormat:@"%0.4f",[WLWeatherLocationHandler sharehanlder].locationModel.location.coordinate.longitude];
-    
-    
-    NSInteger timestamp = [[NSDate date] timeIntervalSince1970];
-    NSInteger total = [WLNetwork cacluteTotalWithLat:latitude lon:longtitude time:timestamp];
-    
-    NSDictionary *dict = @{@"lat":latitude,
-                           @"lng":longtitude,
-                           @"time":[NSString stringWithFormat:@"%ld",timestamp],
-                           @"total":[NSString stringWithFormat:@"%ld",total],
-                           @"locationkey":self.locationKey,
-                           @"language":@"zh-cn"
-                           };
-    
-    [WLNetworkFirstHandler accuAlarmsWithparamater:dict success:^(NSURLResponse *response, id data) {
-        
-        self.alarmsArray  = [NSArray yy_modelArrayWithClass:[WLAccuAlarmsModel class] json:data];
-        if (self.alarmsArray ) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.tableView reloadData];
-            });
-        }
-        
-    } failed:^(NSError *error) {
-        
-    }];
-}
 
 //- (void)requestWeather {
 //
@@ -1053,30 +1119,34 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
         [self.sectionArray addObject:@(WLWeatherSectionTypeAqi)];
     }
     
-    if (self.cuurrentModel && self.hourArray && self.aqiModel &&  self.bannerArray.count && self.ShowBanner ) {
-        [self.sectionArray addObject:@(WLWeatherSectionTypeBanner)];
-    }
-    
-    if (self.radarArray && self.radarArray.count) {
-        [self.sectionArray addObject:@(WLWeatherSectionTypeRadar)];
-    }
-    
+//    if (self.cuurrentModel && self.hourArray && self.aqiModel &&  self.bannerArray.count && self.ShowBanner ) {
+//        [self.sectionArray addObject:@(WLWeatherSectionTypeBanner)];
+//    }
+//
+//    if (self.radarArray && self.radarArray.count) {
+//        [self.sectionArray addObject:@(WLWeatherSectionTypeRadar)];
+//    }
+//
 //    if (self.alarmsArray ) {
 //        [self.sectionArray addObject:@(WLWeatherSectionTypeAlarms)];
 //
 //    }
 //
+    
+    if (self.indexArray && self.indexArray.count) {
+        [self.sectionArray addObject:@(WLWeatherSectionTypeIndices)];
+    }
+    
+    
     return self.sectionArray.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-     WLWeatherSectionType type =(WLWeatherSectionType)[self.sectionArray[section] integerValue];
-    if (WLWeatherSectionTypeAlarms == type) {
-        return self.alarmsArray.count;
-    } else {
+    
+   
         return 1;
-    }
+   
     
 }
 
@@ -1086,21 +1156,14 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
     if (WLWeatherSectionTypeCurrent == type) {
         return 156;
     } else if (WLWeatherSectionTypeHour == type) {
-        return 140;
-    } else if (WLWeatherSectionTypeRadar == type) {
-        CGFloat width = [UIScreen mainScreen].bounds.size.width;
-        return width + 56;
-    } else if (WLWeatherSectionTypeBanner == type) {
-        CGFloat width = [UIScreen mainScreen].bounds.size.width;
-        return width/440.f*180.f;
-    }
-    
+        return 166;
+    } 
     else if (WLWeatherSectionTypeAqi == type) {
         
         return 80;
     }
     else {
-        return 90;
+        return 94;
     }
 }
 
@@ -1127,17 +1190,20 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
         [cell configHourArray:self.hourArray];
         return cell;
        
-    } else if (WLWeatherSectionTypeRadar == type) {
-        WLAccuRadarCell *cell = [tableView dequeueReusableCellWithIdentifier:@"radar"];
-        if (cell == nil) {
-            cell = [[WLAccuRadarCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"radar"];
-        }
-        
-        [cell configRadarArray:self.radarArray time:self.radarTime];
-        
-        return cell;
-        
-    } else if (WLWeatherSectionTypeAqi == type) {
+    }
+    
+//    else if (WLWeatherSectionTypeRadar == type) {
+//        WLAccuRadarCell *cell = [tableView dequeueReusableCellWithIdentifier:@"radar"];
+//        if (cell == nil) {
+//            cell = [[WLAccuRadarCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"radar"];
+//        }
+//
+//        [cell configRadarArray:self.radarArray time:self.radarTime];
+//
+//        return cell;
+//
+//    }
+    else if (WLWeatherSectionTypeAqi == type) {
         
         WLXinzhiAqiCell *cell = [tableView dequeueReusableCellWithIdentifier:@"aqi"];
         if (cell == nil) {
@@ -1145,26 +1211,37 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
         }
         [cell configAqiModel:self.aqiModel];
         return cell;
-    } else if (WLWeatherSectionTypeBanner == type) {
-        LBBannerCell *cell = [tableView dequeueReusableCellWithIdentifier:@"banner"];
-        if (cell == nil) {
-            cell = [[LBBannerCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"banner"];
-            cell.delegate = self;
-        }
-        
-        [cell configImageArray:[self.bannerArray valueForKey:@"image"]];
-        
-        return cell;
     }
+//    else if (WLWeatherSectionTypeBanner == type) {
+//        LBBannerCell *cell = [tableView dequeueReusableCellWithIdentifier:@"banner"];
+//        if (cell == nil) {
+//            cell = [[LBBannerCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"banner"];
+//            cell.delegate = self;
+//        }
+//
+//        [cell configImageArray:[self.bannerArray valueForKey:@"image"]];
+//
+//        return cell;
+//    }
     
     else {
-        WLAccuAlarmsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+        WLIndexCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
         if (cell == nil ) {
             
-            cell = [[WLAccuAlarmsCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
+            cell = [[WLIndexCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
         }
-        WLAccuAlarmsModel *model = self.alarmsArray[indexPath.row];
-        [cell configAlarms:model];
+//        WLAccuAlarmsModel *model = self.alarmsArray[indexPath.row];
+//        [cell configAlarms:model];
+        
+        NSString *day = self.day;
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"Day=%@",day];
+        NSArray *dataArray =[self.indexArray filteredArrayUsingPredicate:predicate];
+        
+        [cell configDataArray:dataArray];
+        
+        
+        
+      
         
         
         return cell;
@@ -1174,7 +1251,7 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 28;
+    return 32;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -1185,7 +1262,7 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
         return 0.001f;
     }
     
-    return 44;
+    return 40;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -1193,24 +1270,30 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
     WLWeatherSectionType type =(WLWeatherSectionType)[self.sectionArray[section] integerValue];
     
     WLAccuNormalHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"header"];
+    
     if (headerView == nil) {
         headerView = [[WLAccuNormalHeaderView alloc] initWithReuseIdentifier:@"header"];
     }
         
     if (WLWeatherSectionTypeCurrent == type) {
-        headerView.titleLabel.text = @"实况天气";
+        headerView.titleLabel.text = NSLocalizedString(@"current weather", nil);
+        headerView.button.hidden  = YES;
     } else if(WLWeatherSectionTypeHour == type) {
-            headerView.titleLabel.text =@"24小时预报";
-    } else if(WLWeatherSectionTypeRadar == type  ){
-        headerView.titleLabel.text =@"气象雷达";
-    } else if (WLWeatherSectionTypeAqi == type) {
-        headerView.titleLabel.text = @"空气质量";
-    } else if (WLWeatherSectionTypeBanner == type) {
-        headerView.titleLabel.text = @"广告";
+        headerView.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"houly weather", nil),self.hourArray.count];
+        headerView.button.hidden  = YES;
     }
-    
-    else {
-        headerView.titleLabel.text =self.alarmsArray.count?@"天气预警":@"天气预警(无)";
+//    else if(WLWeatherSectionTypeRadar == type  ){
+//        headerView.titleLabel.text = NSLocalizedString(@"imagery", nil);
+//    }
+    else if (WLWeatherSectionTypeAqi == type) {
+        headerView.titleLabel.text = NSLocalizedString(@"air quality", nil);
+        headerView.button.hidden  = YES;
+    }
+
+    else if(WLWeatherSectionTypeIndices == type){
+        headerView.titleLabel.text = NSLocalizedString(@"indices", nil);
+        headerView.button.hidden = NO;
+        [headerView.button addTarget:self action:@selector(shezhibuttonClick:) forControlEvents:UIControlEventTouchUpInside];
     }
         
     return headerView;
@@ -1219,6 +1302,19 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
     
     
 
+}
+
+- (void)shezhibuttonClick:(UIButton *)button {
+    
+    
+       NSString *day = self.dayArray[0];
+       NSPredicate *predicate = [NSPredicate predicateWithFormat:@"Day=%@",day];
+       NSArray *dataArray =[self.indexArray filteredArrayUsingPredicate:predicate];
+       
+    WLIndexSelectViewController *selectVc = [[WLIndexSelectViewController alloc] init];
+    selectVc.dataArray = dataArray;
+    [self.navigationController pushViewController:selectVc animated:YES];
+    
 }
 
 
@@ -1239,6 +1335,20 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
     return footrView;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSInteger type =[ [self.sectionArray objectAtIndex:indexPath.section] integerValue];
+    if (type == WLWeatherSectionTypeIndices ) {
+        NSString *day = self.dayArray[0];
+           NSPredicate *predicate = [NSPredicate predicateWithFormat:@"Day=%@",day];
+           NSArray *dataArray =[self.indexArray filteredArrayUsingPredicate:predicate];
+           
+        WLIndexSelectViewController *selectVc = [[WLIndexSelectViewController alloc] init];
+        selectVc.dataArray = dataArray;
+        [self.navigationController pushViewController:selectVc animated:YES];
+    }
+}
+
 - (void)AcuuWeatherFooterViewClickButtonLink {
     
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"http://www.accuweather.com"]]) {
@@ -1254,30 +1364,30 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
     }
 }
 
-- (void)lbBannerCellClickImageAtIndex:(NSInteger)index {
-    
-    WLXunquanBannerModel *banner  = self.bannerArray[index];
-    
-    if (1 == banner.type) {
-          [[UIApplication sharedApplication] openURL:[NSURL URLWithString:banner.welfareUrl]];
-    } else {
-        
-        
-        SKStoreProductViewController *controller  = [[SKStoreProductViewController alloc] init];
-        controller.delegate = self;
-        
-        [self.navigationController  presentViewController:controller animated:YES  completion:^{
-            
-            [controller loadProductWithParameters:@{SKStoreProductParameterITunesItemIdentifier:banner.welfareUrl} completionBlock:^(BOOL result, NSError * _Nullable error) {
-                
-            }];
-            
-        }];
-        
-        
-    }
-  
-}
+//- (void)lbBannerCellClickImageAtIndex:(NSInteger)index {
+//
+//    WLXunquanBannerModel *banner  = self.bannerArray[index];
+//
+//    if (1 == banner.type) {
+//          [[UIApplication sharedApplication] openURL:[NSURL URLWithString:banner.welfareUrl]];
+//    } else {
+//
+//
+//        SKStoreProductViewController *controller  = [[SKStoreProductViewController alloc] init];
+//        controller.delegate = self;
+//
+//        [self.navigationController  presentViewController:controller animated:YES  completion:^{
+//
+//            [controller loadProductWithParameters:@{SKStoreProductParameterITunesItemIdentifier:banner.welfareUrl} completionBlock:^(BOOL result, NSError * _Nullable error) {
+//
+//            }];
+//
+//        }];
+//
+//
+//    }
+//
+//}
 
 - (void)productViewControllerDidFinish:(SKStoreProductViewController *)viewController {
     
@@ -1285,6 +1395,101 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
         
     }];
 }
+
+
+- (void)requestIndex {
+    
+    
+    NSString   *latitude = [NSString stringWithFormat:@"%0.4f",[WLWeatherLocationHandler sharehanlder].locationModel.location.coordinate.latitude];
+    NSString  *longtitude = [NSString stringWithFormat:@"%0.4f",[WLWeatherLocationHandler sharehanlder].locationModel.location.coordinate.longitude];
+    
+    
+    NSInteger timestamp = [[NSDate date] timeIntervalSince1970];
+    NSInteger total = [WLNetwork cacluteTotalWithLat:latitude lon:longtitude time:timestamp];
+    
+    NSDictionary *dict = @{@"lat":latitude,
+                           @"lng":longtitude,
+                           @"time":[NSString stringWithFormat:@"%ld",timestamp],
+                           @"total":[NSString stringWithFormat:@"%ld",total],
+                           @"locationkey":self.locationKey,
+                           @"language":NSLocalizedString(@"language", nil)
+                           };
+    
+    [WLNetworkBaseHandler requestAcuuIndexWithParamaters:dict success:^(NSURLResponse *response, id data) {
+      
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSArray *dataArray = [NSArray yy_modelArrayWithClass:[WLAccuIndexModel class] json:data];
+            
+            if (dataArray && dataArray.count) {
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                    [WXPErrorTipView removeErrorviewInView:self.view];
+//                });
+                
+                dataArray = [dataArray sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+                    if (((WLAccuIndexModel *)obj1).EpochDateTime > ((WLAccuIndexModel *)obj2).EpochDateTime) {
+                        return NSOrderedDescending;
+                    }else {
+                        return NSOrderedAscending;
+                    }
+                }];
+                
+                self.indexArray = dataArray;
+                
+                
+                
+                NSMutableArray *dayArray = [NSMutableArray array];
+                NSInteger count = dataArray.count;
+                for (int i = 0; i <count; i ++) {
+                    WLAccuIndexModel *model = dataArray[i];
+                    [model caculateDay];
+                    if (0 == i) {
+                        [dayArray addObject:model.Day];
+                    } else {
+                        WLAccuIndexModel *lastmodel = dataArray[i-1];
+                        if (![model.Day isEqualToString:lastmodel.Day]) {
+                            [dayArray addObject:model.Day];
+                        }
+                    }
+                    
+                }
+                
+                self.dayArray = dayArray.copy;
+                
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.tableView reloadData];
+                });
+                
+                WLAccuIndexModel *model  =[dataArray firstObject];
+                self.indexTime = model.EpochDateTime;
+                
+                self.day = [self.dayfomatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:self.indexTime]];
+                self.lastIndexTime = [[NSDate date] timeIntervalSince1970];
+                
+                
+                
+            }
+            
+            
+            
+            
+        });
+        
+        
+       
+    
+        
+        
+    } failed:^(NSError *error) {
+        
+        self.lastIndexTime =[[NSDate date] timeIntervalSince1970];
+        
+     
+        
+    }];
+}
+
 
 
 - (void)dealloc {

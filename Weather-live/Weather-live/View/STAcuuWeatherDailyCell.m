@@ -293,23 +293,23 @@
     
     NSDictionary *speed  = (NSDictionary *)weatherModel.Wind[@"Speed"];
     
-    float speedvalue =[WLUnitTransTool meterpersecondfromnileperhour:[[speed valueForKey:@"Value"] floatValue]];
+    float speedvalue =[[speed valueForKey:@"Value"] floatValue];
     
     
     NSString *speedunit = [speed valueForKey:@"Unit"];
     self.windIconView.transform = CGAffineTransformIdentity;
     float radians = (degrees-45)/180.0*M_PI;
     self.windIconView.transform = CGAffineTransformMakeRotation(radians);
-    self.windLabel.text = [NSString stringWithFormat:@"%@ %0.1f米/秒",DirectionLoclized,speedvalue];
+    self.windLabel.text = [NSString stringWithFormat:@"%@ %0.1f %@",DirectionLoclized,speedvalue,speedunit];
     
     self.probilityLabel.text = [NSString stringWithFormat:@"%d%@",weatherModel.RainProbability,@"%"];
     
     
     NSDictionary *totoalliquid = weatherModel.TotalLiquid;
-    float intensity = [WLUnitTransTool mmtransfrominches:[totoalliquid[@"Value"] floatValue]];
-    self.intensityLabel.text = [NSString stringWithFormat:@"%0.1f毫米",intensity];
+    float intensity = [totoalliquid[@"Value"] floatValue];
+    self.intensityLabel.text = [NSString stringWithFormat:@"%0.1f %@",intensity,totoalliquid[@"Unit"]];
 
-    self.timeLabel.text = isDay?@"白天":@"夜晚";
+    self.timeLabel.text = isDay?NSLocalizedString(@"day", nil):NSLocalizedString(@"night", nil);
     
     
 }

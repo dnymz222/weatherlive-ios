@@ -24,6 +24,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)BOOL becomeActive;
 
 
+@property(nonatomic,copy)NSArray *indexArray;
+
+
 
 + (WLWeatherLocationHandler *)sharehanlder;
 

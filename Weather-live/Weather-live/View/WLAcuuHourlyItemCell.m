@@ -23,6 +23,8 @@
 @property(nonatomic,strong)UILabel *windLabel;
 @property(nonatomic,strong)UILabel *pricipeLabel;
 
+@property(nonatomic,strong)UILabel *uvIndexLabel;
+
 
 
 
@@ -40,6 +42,7 @@
         [self.contentView addSubview:self.windIconView];
         [self.contentView addSubview:self.windLabel];
         [self.contentView addSubview:self.pricipeLabel];
+        [self.contentView addSubview:self.uvIndexLabel];
        // self.userInteractionEnabled  = NO;
         
         [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -63,7 +66,7 @@
         
         [self.windIconView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.contentView  ).offset(6);
-            make.top.equalTo(self.tempratureLabel.mas_bottom).offset(5);
+            make.top.equalTo(self.tempratureLabel.mas_bottom).offset(8);
             make.height.equalTo(@16);
             make.width.equalTo(@16);
         }];
@@ -77,6 +80,13 @@
         
         [self.pricipeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.windLabel.mas_bottom).offset(8);
+            make.height.equalTo(@16);
+            make.left.right.equalTo(self.contentView);
+            
+        }];
+        
+        [self.uvIndexLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.pricipeLabel.mas_bottom).offset(8);
             make.height.equalTo(@16);
             make.left.right.equalTo(self.contentView);
             
@@ -132,6 +142,7 @@
         _windLabel = [[UILabel alloc] init];
         _windLabel.textAlignment = NSTextAlignmentLeft;
         _windLabel.font = [UIFont systemFontOfSize:14.f];
+        _windLabel.adjustsFontSizeToFitWidth = YES;
         _windLabel.textColor = UIColorFromRGB(0x666666);
     }
     
@@ -158,14 +169,23 @@
     return _pricipeLabel;
 }
 
+- (UILabel *)uvIndexLabel {
+    if (!_uvIndexLabel) {
+        _uvIndexLabel = [[UILabel alloc] init];
+        _uvIndexLabel.textAlignment = NSTextAlignmentCenter;
+    }
+    
+    return _uvIndexLabel;
+}
+
 - (void)configHourlyModel:(WLAccuHourlyModel *)model {
     
     self.timeLabel.text = [model.DateTime substringWithRange:NSMakeRange(11, 5)];
     UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"%02d",model.WeatherIcon]];
     [self.iconView setImage:image];
     NSDictionary *temperatureDict = model.Temperature;
-    float temperature = [WLUnitTransTool nieshitransfromhuashi:[temperatureDict[@"Value"] floatValue] ];
-    self.tempratureLabel.text = [NSString stringWithFormat:@"%0.1f°C",temperature];
+    float temperature = [temperatureDict[@"Value"] floatValue] ;
+    self.tempratureLabel.text = [NSString stringWithFormat:@"%0.1f°%@",temperature,temperatureDict[@"Unit"]];
     
     NSDictionary  *direction = (NSDictionary*)model.Wind[@"Direction"];
     float degrees = [[direction valueForKey:@"Degrees"] floatValue];
@@ -173,14 +193,14 @@
     
     NSDictionary *speed  = (NSDictionary *)model.Wind[@"Speed"];
     
-    float speedvalue =[WLUnitTransTool meterpersecondfromnileperhour:[[speed valueForKey:@"Value"] floatValue]];
+    float speedvalue =[[speed valueForKey:@"Value"] floatValue];
     
 //    speedvalue = 12.6;
 //    NSString *speedunit = [speed valueForKey:@"Unit"];
     self.windIconView.transform = CGAffineTransformIdentity;
     float radians = (degrees-45)/180.0*M_PI;
     self.windIconView.transform = CGAffineTransformMakeRotation(radians);
-    self.windLabel.text = [NSString stringWithFormat:@"%0.1f m/s",speedvalue];
+    self.windLabel.text = [NSString stringWithFormat:@"%0.1f %@",speedvalue,speed[@"Unit"]];
     
 
     NSDictionary *attrsDict = @{NSForegroundColorAttributeName:UIColorFromRGB(0x666666),
@@ -197,6 +217,18 @@
     NSAttributedString *pricipeattrs = [[NSAttributedString alloc] initWithString:pricipestring attributes:attrsDict];
     [attrs appendAttributedString:pricipeattrs];
     self.pricipeLabel.attributedText = attrs;
+    
+    
+    NSMutableAttributedString *uvattrs = [[NSMutableAttributedString alloc] initWithString:@"" attributes:attrsDict];
+    NSTextAttachment    *uvattach = [[NSTextAttachment alloc] init];
+    uvattach.image = [UIImage imageNamed:@"uvindex"];
+    uvattach.bounds = CGRectMake(0, 0, 15, 15);
+    NSAttributedString *uvattachattrs = [NSAttributedString attributedStringWithAttachment:uvattach];
+    [uvattrs appendAttributedString:uvattachattrs];
+    NSString *uvstring  =[NSString stringWithFormat:@" %d",model.UVIndex];
+    NSAttributedString *uvindexattrs = [[NSAttributedString alloc] initWithString:uvstring attributes:attrsDict];
+    [uvattrs appendAttributedString:uvindexattrs];
+    self.uvIndexLabel.attributedText = uvattrs ;
     
     
     

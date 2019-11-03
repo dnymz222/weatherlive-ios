@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  Weather-live
+
+  Created by xueping on 2019/8/26.
+  Copyright © 2019 xueping. All rights reserved.
+*/
+CFBundleDisplayName = "天氣預報";
+NSLocationWhenInUseUsageDescription  = "天氣預報需要訪問你的位置信息，獲取經緯度請求天氣數據";

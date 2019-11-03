@@ -139,7 +139,8 @@
                            @"time":[NSString stringWithFormat:@"%ld",timestamp],
                            @"total":[NSString stringWithFormat:@"%ld",total],
                            @"locationkey":self.locationKey,
-                           @"language":@"zh-cn"
+                           @"metric":NSLocalizedString(@"is metric", nil),
+                           @"language":NSLocalizedString(@"language", nil)
                            };
     
     [WLNetworkFirstHandler acuuWeatherWithparamater:dict success:^(NSURLResponse *response, id data) {
@@ -232,7 +233,7 @@
         return 0.001f;
     }
     
-    return 44;
+    return 40;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {

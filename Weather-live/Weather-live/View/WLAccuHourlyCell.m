@@ -10,6 +10,7 @@
 #import "WLAcuuHourlyItemCell.h"
 #import "WLAccuHourlyModel.h"
 #import "Masonry.h"
+#import "WLColor.h"
 
 
 @interface WLAccuHourlyCell ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
@@ -64,7 +65,8 @@
         _collectionView = [[UICollectionView alloc] initWithFrame:self.frame collectionViewLayout:layout];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
-        _collectionView.backgroundColor = [UIColor whiteColor];
+//        _collectionView.backgroundColor = [UIColor whiteColor];
+        _collectionView.backgroundColor = [WLColor viewColor];
         _collectionView.scrollEnabled   = NO;
         [_collectionView registerClass:[WLAcuuHourlyItemCell class] forCellWithReuseIdentifier:@"cell"];
         
@@ -83,7 +85,8 @@
 - (UIScrollView *)scrollView {
     if (!_scrollView) {
         _scrollView = [[UIScrollView alloc] init];
-        _scrollView.backgroundColor = [UIColor whiteColor];
+//        _scrollView.backgroundColor = [UIColor whiteColor];
+        _scrollView.backgroundColor = [WLColor viewColor];
     }
     
     return _scrollView;
@@ -95,6 +98,10 @@
     self.hourArray = hourArray;
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        CGFloat height = self.frame.size.height;
+        
+        self.scrollView.contentSize = CGSizeMake(hourArray.count*80, height);
+         self.collectionView.frame = CGRectMake(0, 0, hourArray.count*80, height);
         [self.collectionView reloadData];
     });
     

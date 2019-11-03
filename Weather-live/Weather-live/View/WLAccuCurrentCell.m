@@ -78,7 +78,7 @@
         [self.pricipeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.iconView.mas_right).offset(60);
             make.top.equalTo(self.contentView).offset(3);
-            make.width.equalTo(@160);
+            make.right.equalTo(self.contentView).offset(-10);
             make.height.equalTo(@20);
             
         }];
@@ -86,7 +86,7 @@
         [self.uvindexLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.pricipeLabel);
             make.top.equalTo(self.pricipeLabel.mas_bottom).offset(6);
-            make.width.equalTo(@160);
+            make.right.equalTo(self.contentView).offset(-10);
             make.height.equalTo(@20);
             
         }];
@@ -94,7 +94,7 @@
         [self.humilityLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.pricipeLabel);
             make.top.equalTo(self.uvindexLabel.mas_bottom).offset(6);
-            make.width.equalTo(@120);
+            make.right.equalTo(self.contentView).offset(-10);
             make.height.equalTo(@20);
             
         }];
@@ -102,7 +102,7 @@
         [self.pressureLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.pricipeLabel);
             make.top.equalTo(self.humilityLabel.mas_bottom).offset(6);
-            make.width.equalTo(@160);
+            make.right.equalTo(self.contentView).offset(-10);
             make.height.equalTo(@20);
             
         }];
@@ -118,7 +118,7 @@
         [self.windLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.windIconView.mas_right).offset(2);
             make.centerY.equalTo(self.windIconView);
-            make.width.equalTo(@160);
+            make.right.equalTo(self.contentView).offset(-10);
             make.height.equalTo(@20);
             
         }];
@@ -126,7 +126,7 @@
         [self.dewLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.pricipeLabel);
             make.top.equalTo(self.windLabel.mas_bottom).offset(6);
-            make.width.equalTo(@160);
+            make.right.equalTo(self.contentView).offset(-10);
             make.height.equalTo(@20);
         }];
         
@@ -302,27 +302,27 @@
     [self.iconView setImage:image];
     
     NSDictionary *temparature = model.Temperature;
-    NSDictionary *tempmetric = [temparature valueForKey:@"Metric"];
-    self.tempratureLabel.text = [NSString stringWithFormat:@"%0.1f°C",[tempmetric[@"Value"] floatValue]];
+    NSDictionary *tempmetric = [temparature valueForKey:NSLocalizedString(@"unit type", nil)];
+    self.tempratureLabel.text = [NSString stringWithFormat:@"%0.1f °%@",[tempmetric[@"Value"] floatValue],tempmetric[@"Unit"]];
     
 //    NSDictionary *pricipedic = model.Precip1hr;
 //    NSDictionary *pricipemetricDict = [pricipedic valueForKey:@"Metric"];
     
     NSDictionary *realfeelTempdict = model.RealFeelTemperature;
-    NSDictionary *relafelltempmetric = [realfeelTempdict valueForKey:@"Metric"];
+    NSDictionary *relafelltempmetric = [realfeelTempdict valueForKey:NSLocalizedString(@"unit type", nil)];
     
-    self.pricipeLabel.text =[NSString stringWithFormat:@"体感温度:%0.1f°C",[relafelltempmetric[@"Value"] floatValue]] ;
+    self.pricipeLabel.text =[NSString stringWithFormat:@"%@:%0.1f °%@",NSLocalizedString(@"real feel", nil),[relafelltempmetric[@"Value"] floatValue],relafelltempmetric[@"Unit"]] ;
     
-    self.humilityLabel.text = [NSString stringWithFormat:@"湿度:%d%@",model.RelativeHumidity,@"%"];
+    self.humilityLabel.text = [NSString stringWithFormat:@"%@:%d%@",NSLocalizedString(@"humidity", nil),model.RelativeHumidity,@"%"];
     
     NSDictionary *presuureDict = model.Pressure;
-    NSDictionary *pressureMetricDict = [presuureDict valueForKey:@"Metric"];
+    NSDictionary *pressureMetricDict = [presuureDict valueForKey:NSLocalizedString(@"unit type", nil)];
     
     NSDictionary *PressureTendencyDict = model.PressureTendency;
     NSDictionary *attrsDict = @{NSFontAttributeName:[UIFont systemFontOfSize:14.f],
                                 NSForegroundColorAttributeName:UIColorFromRGB(0x666666)
                                 };
-    NSString *pressureString = [NSString stringWithFormat:@"大气压:%@ hpa",pressureMetricDict[@"Value"]];
+    NSString *pressureString = [NSString stringWithFormat:@"%@:%@ %@",NSLocalizedString(@"air pressure", nil),pressureMetricDict[@"Value"],pressureMetricDict[@"Unit"]];
     NSMutableAttributedString *attrs = [[NSMutableAttributedString alloc] initWithString:pressureString attributes:attrsDict];
     NSString *code = [PressureTendencyDict valueForKey:@"Code"];
     if ([code isEqualToString:@"R"]) {
@@ -349,23 +349,23 @@
     NSDictionary *windDict = model.Wind;
     NSDictionary *windDirectionDict = [windDict valueForKey:@"Direction"];
     NSDictionary *windSpeedDict = [windDict valueForKey:@"Speed"];
-    NSDictionary *windSpeedMetricDict = [windSpeedDict valueForKey:@"Metric"];
+    NSDictionary *windSpeedMetricDict = [windSpeedDict valueForKey:NSLocalizedString(@"unit type", nil)];
     NSInteger degree =[ [windDirectionDict valueForKey:@"Degrees"] integerValue];
     NSString *direction = [windDirectionDict valueForKey:@"Localized"];
     
     float radians = (degree-45)/180.0*M_PI;
     self.windIconView.transform = CGAffineTransformMakeRotation(radians);
-    float windmerterperhour = [WLUnitTransTool meterpersecondfromkilometerhour:[windSpeedMetricDict[@"Value"] floatValue]];
+    float windmerterperhour = [windSpeedMetricDict[@"Value"] floatValue];
     
     
     
-    self.windLabel.text= [NSString stringWithFormat:@"%@ %0.1f米/秒",direction,windmerterperhour,windSpeedMetricDict[@"Unit"]];
+    self.windLabel.text= [NSString stringWithFormat:@"%@ %0.1f %@",direction,windmerterperhour,windSpeedMetricDict[@"Unit"]];
     
-    self.uvindexLabel.text = [NSString stringWithFormat:@"紫外线指数:%d",model.UVIndex];
+    self.uvindexLabel.text = [NSString stringWithFormat:@"%@:%d",NSLocalizedString(@"uv index", nil),model.UVIndex];
     
     NSDictionary *dewpoint = model.DewPoint;
-    NSDictionary *dewpointmetric = [dewpoint valueForKey:@"Metric"];
-    self.dewLabel.text = [NSString stringWithFormat:@"露点：%0.1f°C",[dewpointmetric[@"Value"] floatValue]];
+    NSDictionary *dewpointmetric = [dewpoint valueForKey:NSLocalizedString(@"unit type", nil)];
+    self.dewLabel.text = [NSString stringWithFormat:@"%@：%0.1f° %@",NSLocalizedString(@"dewpoint", nil),[dewpointmetric[@"Value"] floatValue],dewpointmetric[@"Unit"]];
     
     
     

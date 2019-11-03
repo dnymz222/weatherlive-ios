@@ -58,7 +58,7 @@
         [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.contentView).offset(10);
             make.top.equalTo(self.contentView).offset(5);
-            make.width.equalTo(@100);
+            make.width.equalTo(@120);
             make.height.equalTo(@20);
         }];
         
@@ -141,7 +141,7 @@
         _titleLabel.textAlignment = NSTextAlignmentLeft;
         _titleLabel.textColor = UIColorFromRGB(0x333333);
         _titleLabel.font = [UIFont systemFontOfSize:15.f];
-        _titleLabel.text = @"空气质量指数";
+        _titleLabel.text = NSLocalizedString(@"air quality index", nil);
         
     }
     return _titleLabel;

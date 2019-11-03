@@ -18,7 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationBar.barTintColor = UIColorFromRGB(0xededed);
-    self.navigationBar.tintColor = UIColorFromRGB(0xededed);
+    self.navigationBar.tintColor = UIColorFromRGB(Themecolor);
     self.navigationBar.translucent = NO ;
     
     NSMutableDictionary *attrs = [NSMutableDictionary dictionary];

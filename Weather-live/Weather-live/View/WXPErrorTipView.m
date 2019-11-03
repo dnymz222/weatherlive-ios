@@ -68,6 +68,7 @@
         _titleLabel.textAlignment = NSTextAlignmentCenter;
         _titleLabel.textColor  = UIColorFromRGB(0x999999);
         _titleLabel.font = [UIFont systemFontOfSize:14.f];
+        _titleLabel.numberOfLines = 0;
     }
     
     return _titleLabel;
@@ -76,7 +77,7 @@
 - (void)tapIn:(UITapGestureRecognizer *)regnizer {
     
     
-    if (_delegate  && [_delegate respondsToSelector:@selector(errorviewTapinView:)]) {
+    if (_delegate  ) {
         
         NSInteger nowtime  = [[NSDate date] timeIntervalSince1970];
         if ((nowtime-self.lastTime) > 5) {
@@ -107,7 +108,7 @@
     WXPErrorTipView *erroview = [[WXPErrorTipView alloc] initWithFrame:CGRectMake(width*0.5-80, height*0.5-120, 160, 200)];
     [superView addSubview:erroview];
     erroview.delegate = delegate;
-    [erroview setImage:[UIImage imageNamed:@"loaderror"] title:@"加载失败，请点击重试"];
+    [erroview setImage:[UIImage imageNamed:@"loaderror"] title:NSLocalizedString(@"load failed", nil)];
     
 }
 

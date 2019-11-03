@@ -13,92 +13,13 @@
 
 
 
-+ (void)xunquancateWithparamater:(NSDictionary *)paramaters
-                         success:(LBSuccessBlock)successBlock
-                          failed:(LBFailedBlock)failedBlock;
-
-
-+ (void)fishcateWithparamater:(NSDictionary*)paramaters
-                      success:(LBSuccessBlock)successBlock
-                       failed:(LBFailedBlock)failedBlock;
-
-+ (void)xunquancatCouponWithPath:(NSString *)urlpath
-                    paramater:(NSDictionary *)paramaters
-                      success:(LBSuccessBlock)successBlock
-                       failed:(LBFailedBlock)failedBlock;
-
-+ (void)xunquanbannerWithparamater:(NSDictionary *)paramaters
-                           success:(LBSuccessBlock)successBlock
-                            failed:(LBFailedBlock)failedBlock;
-
-+ (void)xunquansearchCheckWithparamater:(NSDictionary *)paramaters
-                                success:(LBSuccessBlock)successBlock
-                                 failed:(LBFailedBlock)failedBlock;
-
-+ (void)xunquancolumnWithparamater:(NSDictionary *)paramaters
-                           success:(LBSuccessBlock)successBlock
-                            failed:(LBFailedBlock)failedBlock;
 
 
 
 
 
 
-//+ (void)lamacategoryWithparamater:(NSDictionary*)paramaters
-//                          success:(LBSuccessBlock)successBlock
-//                           failed:(LBFailedBlock)failedBlock;
-//
-+ (void)configWithparamater:(NSDictionary *)paramaters
-                    success:(LBSuccessBlock)successBlock
-                     failed:(LBFailedBlock)failedBlock;
 
-//
-//+ (void)scanCouponWithparamater:(NSDictionary *)paramaters
-//                    success:(LBSuccessBlock)successBlock
-//                     failed:(LBFailedBlock)failedBlock;
-//
-//+ (void)seachHintWithparamater:(NSDictionary *)paramaters
-//                       success:(LBSuccessBlock)successBlock
-//                        failed:(LBFailedBlock)failedBlock;
-//
-+ (void)lamasearchWithPath:(NSString *)path
-                 paramater:(NSDictionary *)paramaters
-                   success:(LBSuccessBlock)successBlock
-                    failed:(LBFailedBlock)failedBlock;
-//
-//+ (void)xunquansearchWithparamater:(NSDictionary *)paramaters
-//                           success:(LBSuccessBlock)successBlock
-//                            failed:(LBFailedBlock)failedBlock;
-//
-//
-//+ (void)lamacateBabyWithPath:(NSString *)urlpath
-//                   paramater:(NSDictionary *)paramaters
-//                     success:(LBSuccessBlock)successBlock
-//                      failed:(LBFailedBlock)failedBlock;
-//
-//
-//+ (void)lamaitemconfigWithparamater:(NSDictionary *)paramaters
-//                            success:(LBSuccessBlock)successBlock
-//                             failed:(LBFailedBlock)failedBlock;
-//
-+ (void)lamaDetailImagesWithItemId:(NSString *)itemId
-                         paramater:(NSDictionary *)paramaters
-                           success:(LBSuccessBlock)successBlock
-                            failed:(LBFailedBlock)failedBlock;
-//
-//+ (void)lamaRateWithparamater:(NSDictionary *)paramaters
-//                      success:(LBSuccessBlock)successBlock
-//                       failed:(LBFailedBlock)failedBlock;
-//
-//+ (void)lamaImageTransWithparamater:(NSDictionary *)paramaters
-//                            success:(LBSuccessBlock)successBlock
-//                             failed:(LBFailedBlock)failedBlock;
-//
-
-
-+ (void)getWaterWithparamater:(NSDictionary *)paramaters
-                    success:(LBSuccessBlock)successBlock
-                     failed:(LBFailedBlock)failedBlock;
 
 
 

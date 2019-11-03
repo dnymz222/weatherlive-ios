@@ -46,7 +46,9 @@
                 block(wself.name);
             } else {
                 
-                NSString *name = [NSString stringWithFormat:@"%@ %@",dict[@"City"],dict[@"SubLocality"]];
+                NSString *sublocality = dict[@"SubLocality"]?:@"";
+                
+                NSString *name = [NSString stringWithFormat:@"%@ %@",dict[@"City"],sublocality];
                 wself.name = name;
                 block(name);
             }

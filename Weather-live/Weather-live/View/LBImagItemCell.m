@@ -8,7 +8,7 @@
 
 #import "LBImagItemCell.h"
 #import "Masonry.h"
-#import "UIImageView+WebCache.h"
+//#import "UIImageView+WebCache.h"
 
 @interface LBImagItemCell ()
 
@@ -50,7 +50,7 @@
 - (void)configWithImage:(NSString *)image {
     
     
-    [self.imageView sd_setImageWithURL:[NSURL URLWithString:image]];
+//    [self.imageView sd_setImageWithURL:[NSURL URLWithString:image]];
     
 }
 @end

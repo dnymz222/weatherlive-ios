@@ -26,6 +26,10 @@
 @property(nonatomic,strong)UILabel *moonphaseLabel;
 @property(nonatomic,copy)NSDictionary *moonphaseDict;
 
+@property(nonatomic,strong)NSDateFormatter *datefomatter;
+@property(nonatomic,copy)NSArray *weekArray;
+@property(nonatomic,strong)NSCalendar *calendar;
+
 //@property(nonatomic,strong)UIImageView *moonRiseIconView;
 //@property(nonatomic,strong)UILabel *moonRiseLabel;
 //@property(nonatomic,strong)UIImageView *moonSetIconView;
@@ -143,6 +147,25 @@
                                
                                };
         
+        self.weekArray = @[NSLocalizedString(@"sunday",nil),
+                           NSLocalizedString(@"monday",nil),
+                           NSLocalizedString(@"tuesday",nil),
+                           NSLocalizedString(@"wednesday",nil),
+                           NSLocalizedString(@"thursday",nil),
+                           NSLocalizedString(@"friday",nil),
+                           NSLocalizedString(@"saturday",nil),];
+        
+        NSCalendar *calendar =  [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+        
+        self.calendar = calendar;
+        
+        NSTimeZone *timeZone = [[NSTimeZone alloc] initWithName:@"Asia/Shanghai"];
+        
+        [self.calendar setTimeZone: timeZone];
+        
+        
+        _datefomatter    = [[NSDateFormatter alloc] init];
+        [_datefomatter setDateFormat:@"yyyy-MM-dd HH:mm:ss Z"];
         
 //        
 //        [self.moonRiseIconView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -221,6 +244,7 @@
         _tempratureLabel.textAlignment = NSTextAlignmentLeft;
         _tempratureLabel.textColor = UIColorFromRGB(0x666666);
         _tempratureLabel.font = [UIFont systemFontOfSize:14.f];
+        _tempratureLabel.adjustsFontSizeToFitWidth = YES;
     }
     
     return _tempratureLabel;
@@ -286,6 +310,7 @@
         _moonphaseLabel.textColor = UIColorFromRGB(0x666666);
         _moonphaseLabel.font = [UIFont systemFontOfSize:14.f];
         _moonphaseLabel.textAlignment = NSTextAlignmentLeft;
+        _moonphaseLabel.adjustsFontSizeToFitWidth = YES;
     }
     
     return _moonphaseLabel;
@@ -382,15 +407,31 @@
 
 - (void)configWithModel:(STAcuuWeatherDailyModel *)model {
     
-    self.timeLabel.text = [model.Date substringToIndex:10];
+    //Date: "2019-06-22T07:00:00+08:00",
+    NSString *dataString  = [[[model.Date stringByReplacingOccurrencesOfString:@"T" withString:@" "] stringByReplacingOccurrencesOfString:@"+" withString:@" +"] stringByReplacingOccurrencesOfString:@"-" withString:@" -"];
+    NSDate *date = [self.datefomatter   dateFromString:dataString];
+    
+    NSString *day = [[model.Date substringToIndex:10] substringFromIndex:5];
+    NSCalendarUnit calendarUnit = NSCalendarUnitWeekday;
+    
+    NSDateComponents *theComponents = [self.calendar components:calendarUnit fromDate:date];
+    if (theComponents) {
+         self.timeLabel.text = [NSString stringWithFormat:@"%@ (%@)",day,self.weekArray[theComponents.weekday-1]];
+    } else{
+        self.timeLabel.text  =@"";
+    }
+   
+    
+    
+    
     NSDictionary *maxtemperatureDict = [model.Temperature valueForKey:@"Maximum"];
     NSDictionary *mintemperatureDict = [model.Temperature  valueForKey:@"Minimum"];
     
-    float mintemprature = [WLUnitTransTool nieshitransfromhuashi:[mintemperatureDict[@"Value"] floatValue]];
-    float maxtemprature = [WLUnitTransTool nieshitransfromhuashi:[maxtemperatureDict[@"Value"] floatValue]];
+    float mintemprature = [mintemperatureDict[@"Value"] floatValue];
+    float maxtemprature = [maxtemperatureDict[@"Value"] floatValue];
     
     
-    self.tempratureLabel.text = [NSString stringWithFormat:@"%0.1f°C-%0.1f°C",mintemprature,maxtemprature];
+    self.tempratureLabel.text = [NSString stringWithFormat:@"%0.1f °%@-%0.1f °%@",mintemprature,mintemperatureDict[@"Unit"],maxtemprature,maxtemperatureDict[@"Unit"]];
     
     NSDictionary *sundict = model.Sun;
     
@@ -432,7 +473,10 @@
     NSInteger age = [[moonDict valueForKey:@"Age"] integerValue];
     [_moonphaseView setImage:[UIImage imageNamed:[NSString stringWithFormat:@"moon%02d",age]]];
     NSString *moonphase =[moonDict valueForKey:@"Phase"];
-    _moonphaseLabel.text =[NSString stringWithFormat:@"%@(月龄:%d天)",[self.moonphaseDict valueForKey:moonphase],age];
+    _moonphaseLabel.text =[NSString stringWithFormat:@"%@:%d %@",NSLocalizedString(@"moon age", nil),age,NSLocalizedString(@"days", nil)];
+    
+    
+    
 //
 //    NSString *moonrise = [moonDict valueForKey:@"Rise"];
 //    if (moonrise  && [moonrise isKindOfClass:[NSString class]]) {

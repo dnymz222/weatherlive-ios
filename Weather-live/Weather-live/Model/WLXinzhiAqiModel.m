@@ -16,27 +16,27 @@
     float value = [self.aqi floatValue];
     if (value < 50) {
         self.type = WLXinzhiAqiTypeExcellent;
-        self.aqiGrade = @"优";
+        self.aqiGrade = NSLocalizedString(@"a", nil);
         self.valueColor = UIColorFromRGB(0x00e904);
     } else if (value < 100) {
         self.type  =WLXinzhiAqiTypeGood;
-        self.aqiGrade = @"良";
+        self.aqiGrade = NSLocalizedString(@"b", nil);;
         self.valueColor = UIColorFromRGB(0xf9dd64);
     } else if (value < 150) {
         self.type = WLXinzhiAqiTypeMild;
-        self.aqiGrade = @"轻度污染";
+        self.aqiGrade = NSLocalizedString(@"c", nil);;
         self.valueColor = UIColorFromRGB(0xff9711);
     }else if (value < 200) {
         self.type  =WLXinzhiAqiTypeModerate;
-        self.aqiGrade = @"中度污染";
+        self.aqiGrade = NSLocalizedString(@"d", nil);;
         self.valueColor = UIColorFromRGB(0xf90303);
     } else if (value < 300) {
         self.type = WLXinzhiAqiTypeSevere;
-        self.aqiGrade = @"重度污染";
+        self.aqiGrade = NSLocalizedString(@"e", nil);;
         self.valueColor = UIColorFromRGB(0x800479);
     }else {
         self.type = WLXinzhiAqiTypeSerious;
-        self.aqiGrade = @"极度污染";
+        self.aqiGrade = NSLocalizedString(@"f", nil);;
         self.valueColor = UIColorFromRGB(0x790622);
     }
     

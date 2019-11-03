@@ -13,7 +13,7 @@
 
 //#include <AlibabaAuthSDK/ALBBSession.h>
 //#import <AlibabaAuthSDK/ALBBSDK.h>
-#import "SDImageCache.h"
+
 #import "WLNetworkFirstHandler.h"
 //#import "WLXunquanConfigModel.h"
 #import "YYModel.h"
@@ -35,9 +35,9 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
-    self.navigationItem.title = @"我的设置";
+    self.navigationItem.title = NSLocalizedString(@"mine", nil);
     
-    self.dataArray = @[@"在 App Store 评分 ",@"分享给好友",@"用户隐私协议",@"版本"];
+    self.dataArray = @[NSLocalizedString(@"rate on the App Store", nil),NSLocalizedString(@"share to friends", nil),NSLocalizedString(@"privacy", nil),NSLocalizedString(@"version", nil)];
     
     
     [self.view addSubview:self.tableView];
@@ -145,13 +145,7 @@
             
         } else if (4 == indexPath.row) {
             
-            cell.accessoryType = UITableViewCellAccessoryNone;
-            NSUInteger size = [[SDImageCache sharedImageCache] getSize];
-            if (size < 1024) {
-                cell.detailTextLabel.text = @"已清空";
-            } else {
-                cell.detailTextLabel.text = [NSString stringWithFormat:@"缓存：%0.2fM",size/(1024.f*1024.f)];
-            }
+         
         }
    
     
@@ -178,18 +172,19 @@
         } else if(2 == indexPath.row) {
 
             WLAliWebController *aliwebvc = [[WLAliWebController alloc] init];
-            aliwebvc.urlString = @"https://www.xunquan.shop/h5/weatherlive/privacy";
+            
+            aliwebvc.urlString = NSLocalizedString(@"privacy url", nil);
             [self.navigationController pushViewController:aliwebvc animated:YES];
 
         } else if(4 == indexPath.row) {
             
-            NSUInteger size = [[SDImageCache sharedImageCache] getSize];
-            if (size > 1024  ) {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"清空缓存" message:@"确定要清空缓存" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-                alertView.tag = 1;
-                [alertView show];
-                
-            }
+//            NSUInteger size = [[SDImageCache sharedImageCache] getSize];
+//            if (size > 1024  ) {
+//                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"清空缓存" message:@"确定要清空缓存" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+//                alertView.tag = 1;
+//                [alertView show];
+//
+//            }
             
         }
 
@@ -254,12 +249,12 @@
 
         if (1 == buttonIndex) {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                [[SDImageCache sharedImageCache] clearDiskOnCompletion:^{
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [self.tableView reloadData];
-                    });
-                    
-                }];
+//                [[SDImageCache sharedImageCache] clearDiskOnCompletion:^{
+//                    dispatch_async(dispatch_get_main_queue(), ^{
+//                        [self.tableView reloadData];
+//                    });
+//                    
+//                }];
             });
             
         }

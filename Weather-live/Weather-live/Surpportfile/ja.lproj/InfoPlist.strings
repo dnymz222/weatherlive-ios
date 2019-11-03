@@ -1,0 +1,10 @@
+/* 
+  InfoPlist.strings
+  Weather-live
+
+  Created by xueping on 2019/8/26.
+  Copyright © 2019 xueping. All rights reserved.
+*/
+
+CFBundleDisplayName = "天気指数";
+NSLocationWhenInUseUsageDescription  = "天気指数は位置情報にアクセスし、緯度と経度を取得して天気をリクエストする必要があります";

@@ -11,6 +11,7 @@
 #import "WLAccuIndexModel.h"
 #import "ColorSizeMacro.h"
 #import "Masonry.h"
+#import "WLColor.h"
 
 
 
@@ -39,8 +40,9 @@
     
     self  = [super initWithFrame:frame];
     if (self) {
-        self.contentView.backgroundColor = [UIColor whiteColor];
-        self.backgroundColor  = [UIColor whiteColor];
+//        self.contentView.backgroundColor = [UIColor whiteColor];
+//        self.backgroundColor  = [UIColor whiteColor];
+        self.backgroundColor = [WLColor heaerviewColor];
         [self.contentView addSubview:self.titleLabel];
         [self.contentView addSubview:self.categoryLabel];
         [self.contentView addSubview:self.detailLabel];
@@ -114,6 +116,7 @@
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.textAlignment = NSTextAlignmentLeft;
         _titleLabel.font = [UIFont systemFontOfSize:14.f];
+        _titleLabel.numberOfLines = 0;
         _titleLabel.textColor = UIColorFromRGB(Themecolor);
     }
     
@@ -126,7 +129,7 @@
         _detailLabel = [[UILabel alloc] init];
         _detailLabel.textAlignment = NSTextAlignmentLeft;
         _detailLabel.numberOfLines = 2;
-        _detailLabel.textColor = UIColorFromRGB(0x666666);
+        _detailLabel.textColor = [WLColor cellTextColor];
         _detailLabel.font = [UIFont systemFontOfSize:13.f];
         _detailLabel.adjustsFontSizeToFitWidth = YES;
     }
@@ -140,7 +143,7 @@
         _categoryLabel = [[UILabel alloc] init];
         _categoryLabel.textAlignment = NSTextAlignmentLeft;
         _categoryLabel.font = [UIFont systemFontOfSize:18.f];
-        _categoryLabel.textColor = UIColorFromRGB(0x333333);
+        _categoryLabel.textColor = [WLColor boldcolor];
         
     }
     

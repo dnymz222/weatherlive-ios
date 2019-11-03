@@ -8,8 +8,11 @@
 
 #import "AppDelegate.h"
 #import "WLTabBarController.h"
-#import "UMMobClick/MobClick.h"
+//#import "UMMobClick/MobClick.h"
 #import "WLWeatherLocationHandler.h"
+
+//#import <GoogleMobileAds/GoogleMobileAds.h>
+//@import Firebase;
 
 
 #define umengkey @"5ce3cb9a4ca357102a000562"
@@ -33,31 +36,35 @@
     self.window.rootViewController = tab;
     [self.window makeKeyAndVisible];
     
+    
+//    [[GADMobileAds sharedInstance] startWithCompletionHandler:nil];
+//
+//    [FIRApp configure];
   
     
     
-#if DEBUG
-#else
-    [self umengTrack];
-#endif
+//#if DEBUG
+//#else
+//    [self umengTrack];
+//#endif
     
     return YES;
 }
 
 
-- (void)umengTrack {
-    //    [MobClick setAppVersion:XcodeAppVersion]; //参数为NSString * 类型,自定义app版本信息，如果不设置，默认从CFBundleVersion里取
-    //[MobClick setLogEnabled:YES];
-    
-    NSString *version = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleShortVersionString"];
-    [MobClick setAppVersion:version];
-    
-    UMConfigInstance.appKey = umengkey;
-    UMConfigInstance.secret = @"secretstringaldfkals";
-    //    UMConfigInstance.eSType = E_UM_GAME;
-    [MobClick startWithConfigure:UMConfigInstance];
-    [MobClick setCrashReportEnabled:NO];
-}
+//- (void)umengTrack {
+//    //    [MobClick setAppVersion:XcodeAppVersion]; //参数为NSString * 类型,自定义app版本信息，如果不设置，默认从CFBundleVersion里取
+//    //[MobClick setLogEnabled:YES];
+//    
+//    NSString *version = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleShortVersionString"];
+//    [MobClick setAppVersion:version];
+//    
+//    UMConfigInstance.appKey = umengkey;
+//    UMConfigInstance.secret = @"secretstringaldfkals";
+//    //    UMConfigInstance.eSType = E_UM_GAME;
+//    [MobClick startWithConfigure:UMConfigInstance];
+//    [MobClick setCrashReportEnabled:NO];
+//}
 
 
 

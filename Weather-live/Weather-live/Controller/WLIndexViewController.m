@@ -138,7 +138,7 @@
                            @"time":[NSString stringWithFormat:@"%ld",timestamp],
                            @"total":[NSString stringWithFormat:@"%ld",total],
                            @"locationkey":self.locationKey,
-                           @"language":@"zh-cn"
+                           @"language":NSLocalizedString(@"language", nil)
                            };
     
     [WLNetworkBaseHandler requestAcuuIndexWithParamaters:dict success:^(NSURLResponse *response, id data) {
