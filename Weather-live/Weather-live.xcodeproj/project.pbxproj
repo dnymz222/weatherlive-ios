@@ -372,7 +372,6 @@
 		19B028FC236EB4AD00BAE03D /* ViewController+MASAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ViewController+MASAdditions.h"; sourceTree = "<group>"; };
 		19B028FD236EB4AD00BAE03D /* MASViewConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASViewConstraint.m; sourceTree = "<group>"; };
 		19B028FE236EB4AD00BAE03D /* MASViewAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASViewAttribute.m; sourceTree = "<group>"; };
-		19B02920236EB58A00BAE03D /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
 		19B02921236EB58A00BAE03D /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
 		19B02922236EB58A00BAE03D /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
 		19B02923236EB58A00BAE03D /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
@@ -383,6 +382,7 @@
 		19B02928236EB58A00BAE03D /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
 		19B02929236EB58A00BAE03D /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
 		19B0292A236EB58A00BAE03D /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		19B02930236EBAFC00BAE03D /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
 		19C6E83A229943A6003A1D86 /* WLWeatherLocationHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLWeatherLocationHandler.h; sourceTree = "<group>"; };
 		19C6E83B229943A6003A1D86 /* WLWeatherLocationHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLWeatherLocationHandler.m; sourceTree = "<group>"; };
 		19C6E83D22994C28003A1D86 /* WLXinzhiAqiModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLXinzhiAqiModel.h; sourceTree = "<group>"; };
@@ -833,7 +833,7 @@
 		19B0291F236EB58A00BAE03D /* fmdb */ = {
 			isa = PBXGroup;
 			children = (
-				19B02920236EB58A00BAE03D /* FMDatabase.h */,
+				19B02930236EBAFC00BAE03D /* FMDatabase.h */,
 				19B02921236EB58A00BAE03D /* FMDatabaseQueue.m */,
 				19B02922236EB58A00BAE03D /* FMResultSet.h */,
 				19B02923236EB58A00BAE03D /* FMDatabasePool.h */,
@@ -1412,9 +1412,9 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "Weather-live/Weather-liveDebug.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = 9295SUH62C;
-				ENABLE_BITCODE = NO;
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Weather-live/Libs",
@@ -1444,9 +1444,9 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "Weather-live/Weather-liveRelease.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = 9295SUH62C;
-				ENABLE_BITCODE = NO;
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Weather-live/Libs",
@@ -1551,7 +1551,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = widget/widgetDebug.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = 9295SUH62C;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = widget/Info.plist;
@@ -1574,7 +1574,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = widget/widgetRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = 9295SUH62C;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = widget/Info.plist;
