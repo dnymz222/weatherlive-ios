@@ -577,12 +577,13 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
     if ( buttonIndex ) {
         
         if (0 == alertView.tag) {
-            NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-            if([[UIApplication sharedApplication] canOpenURL:url]) {
+
+            
                 NSURL*url =[NSURL URLWithString:UIApplicationOpenSettingsURLString];
                 //此处可以做一下版本适配，至于为何要做版本适配，大家应该很清楚
                 [[UIApplication sharedApplication] openURL:url];
-            }
+            
+
             
         } else {
             
@@ -1036,34 +1037,6 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
     
 }
 
-//- (void)requestBanner {
-//
-//    [WLNetworkFirstHandler xunquanbannerWithparamater:nil success:^(NSURLResponse *response, id data) {
-//
-//        NSArray *bannerArry = [NSArray yy_modelArrayWithClass:[WLXunquanBannerModel class] json:data];
-//        if (bannerArry && bannerArry.count) {
-//            [self.bannerArray removeAllObjects];
-//            for (WLXunquanBannerModel *model in bannerArry) {
-//                if (0 == model.type) {
-//                    if (![[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:model.activeUrl]])  {
-//                        [self.bannerArray addObject:model];
-//                    }
-//                } else {
-//                    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:model.activeUrl]])  {
-//                        [self.bannerArray addObject:model];
-//                    }
-//
-//                }
-//            }
-//           // self.bannerArray = bannerArry;
-//            [self.tableView reloadData];
-//        }
-//
-//    } failed:^(NSError *error) {
-//
-//
-//    }];
-//}
 
 
 
@@ -1351,9 +1324,9 @@ typedef NS_ENUM(NSInteger ,WLWeatherSectionType) {
 
 - (void)AcuuWeatherFooterViewClickButtonLink {
     
-    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"http://www.accuweather.com"]]) {
+
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.accuweather.com"]];
-    }
+
 }
 
 

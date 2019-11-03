@@ -272,9 +272,9 @@
 
 - (void)AcuuWeatherFooterViewClickButtonLink {
     
-    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"http://www.accuweather.com"]]) {
+
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.accuweather.com"]];
-    }
+
 }
 
 

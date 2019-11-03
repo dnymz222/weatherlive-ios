@@ -47,10 +47,7 @@
         
     }];
     
-//    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"tbopen://"]] || [[ALBBSession sharedInstance]  isLogin]) {
-//         [self requestConfig];
-//    }
-    
+
    
     // Do any additional setup after loading the view.
 }
