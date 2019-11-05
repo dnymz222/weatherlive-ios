@@ -627,7 +627,11 @@ static NSInteger const kWMControllerCountUndefined = -1;
 
 - (void)wm_growCachePolicyAfterMemoryWarning {
     self.cachePolicy = WMPageControllerCachePolicyBalanced;
-    [self performSelector:@selector(wm_growCachePolicyToHigh) withObject:nil afterDelay:2.0 inModes:@[NSRunLoopCommonModes]];
+
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self wm_growCachePolicyToHigh];
+    });
 }
 
 - (void)wm_growCachePolicyToHigh {
@@ -717,7 +721,10 @@ static NSInteger const kWMControllerCountUndefined = -1;
     
     // 如果收到内存警告次数小于 3，一段时间后切换到模式 Balanced
     if (self.memoryWarningCount < 3) {
-        [self performSelector:@selector(wm_growCachePolicyAfterMemoryWarning) withObject:nil afterDelay:3.0 inModes:@[NSRunLoopCommonModes]];
+
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self wm_growCachePolicyAfterMemoryWarning];
+        });
     }
 }
 
